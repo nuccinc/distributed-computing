@@ -16,11 +16,9 @@ folding research team that is actively processing COVID-19-specific workloads.
 
 ### The fastest and easiest way to contribute if you already have Docker installed:
 
-**Copy/paste the following one-liner to get started immediately:**
+Copy/paste the following one-liner to get started immediately:
 
-```
-docker run -d --name boinc -p 31416 -v "${HOME}/.boinc:/var/lib/boinc" -e BOINC_GUI_RPC_PASSWORD="123" -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec" boinc/client:baseimage-alpine
-```
+`docker run -d --name boinc -p 31416 -v "${HOME}/.boinc:/var/lib/boinc" -e BOINC_GUI_RPC_PASSWORD="123" -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec" boinc/client:baseimage-alpine`
 
 ## If you don't currently have Docker installed:
 
