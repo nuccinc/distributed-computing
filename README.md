@@ -59,7 +59,7 @@ The `docker run` command for Windows may be a bit different syntax-wise.  I will
 
 ---
 
-## Updates:
+### Updates:
 
 Helper scripts and further documentation will be listed here in the coming days in order to improve cross-platform compatibility.
 
