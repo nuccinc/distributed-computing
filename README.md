@@ -10,6 +10,8 @@ This project draws heavily from [BOINC's default Docker configurations](https://
 The difference is that without registering for any accounts or sharing any personal information, you will automatically be connected to NUCC's ongoing [Rosetta@home](https://boinc.bakerlab.org/)
 folding research team that is actively processing COVID-19-specific workloads.
 
+---
+
 ## The fastest and easiest way to contribute if you already have Docker installed:
 
 **Copy/paste the following one-liner to get started immediately:**
