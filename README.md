@@ -3,7 +3,7 @@
 
 # NUCC Folding via Docker
 
-** Latest Update: March 22, 2020 ***
+** Latest Update: March 22, 2020 **
 
 Join [The National Upcycled Computing Collective (NUCC)](https://www.nuccinc.org/) in a collaborative effort to combine our resources in order to aid in COVID-19 research.
 
