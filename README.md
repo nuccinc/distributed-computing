@@ -32,6 +32,10 @@ cd nucc
 ./quickstart.sh
 ```
 
+You should be squared away.
+
+---
+
 ### Other platforms, please refer to [the official Docker documentation](https://docs.docker.com/install/) for installing Docker for your particular OS:
 
 - [Windows](https://docs.docker.com/docker-for-windows/install/)
@@ -39,9 +43,7 @@ cd nucc
 - [Fedora](https://docs.docker.com/install/linux/docker-ce/fedora/)
 - UNIX: Stay tuned for full docs on how to get COVID-19 research running in a BSD jail (compatible with FreeNAS)
 
----
-
-## After installing Docker:
+### After installing Docker:
 
 - CentOS
 - RHEL
