@@ -32,7 +32,7 @@ cd nucc
 ./quickstart.sh
 ```
 
-If the script errors out after installing Docker, run it again in a new shell that recognizes your user as a member of the docker group, and you should be squared away.
+If the script errors out after installing Docker, run it again in a new login shell that recognizes your user as a member of the `docker` group, and you should be squared away.
 
 ---
 
