@@ -31,11 +31,15 @@ If running one of the supported operating systems above, you can easily install 
 
 `curl -fsSL 'https://raw.githubusercontent.com/phx/dockerinstall/master/install_docker.sh' | bash`
 
-## Other platforms, please refer to [the official Docker documentation](https://docs.docker.com/install/) for installing Docker for your particular OS:
+### Other platforms, please refer to [the official Docker documentation](https://docs.docker.com/install/) for installing Docker for your particular OS:
 
 - [Windows](https://docs.docker.com/docker-for-windows/install/)
 - [CentOS](https://docs.docker.com/install/linux/docker-ce/centos/)
 - [Fedora](https://docs.docker.com/install/linux/docker-ce/fedora/)
+
+### Unix:
+
+Stay tuned for full documentation on how to get the COVID-19 research running in a BSD jail (compatible with FreeNAS).
 
 ## After installing Docker, run the same command as above to get started with a minimal Alpine Linux-based image:
 
@@ -48,10 +52,6 @@ If you want to run the latest image, which is a bit more beefy and based on Ubun
 #### Caveats:
 
 The `docker run` command for Windows may be a bit different syntax-wise.  I will provide updates after I have tested on Windows.
-
-## Unix:
-
-Stay tuned for full documentation on how to get the COVID-19 research running in a BSD jail (compatible with FreeNAS).
 
 ## Updates:
 
