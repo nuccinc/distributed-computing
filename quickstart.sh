@@ -3,9 +3,14 @@
 IMG_ALPINE='boinc/client:baseimage-alpine'
 IMG_UBUNTU='boinc/client:latest'
 
-# Ability to add custom command line options if you don't want to use the defaults:
+# Ability to add custom command line options via env if you don't want defaults:
 if [[ -z $BOINC_CMD_LINE_OPTIONS ]]; then
   BOINC_CMD_LINE_OPTIONS='--allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec'
+fi
+
+# Ability to set custom volume via env if you don't want defaults:
+if [[ -z $VOLUME ]]; then
+  VOLUME="${HOME}/.boinc"
 fi
 
 # Check for args:
@@ -50,14 +55,8 @@ if [[ -z $BOINC_GUI_RPC_PASSWORD ]]; then
   echo 'This can be changed at any time by changing the value in gui_rpc_auth.cfg'
 fi
 
-# Volume will be created if it doesn't already exist:
-if [[ $MACOS -eq 1 ]]; then
-  VOLUME="${HOME}/.boinc"
-  docker run -d --name boinc -p 31416:31416 -v "${VOLUME}:/var/lib/boinc" -e BOINC_GUI_RPC_PASSWORD="${BOINC_GUI_RPC_PASSWORD}" -e BOINC_CMD_LINE_OPTIONS="${BOINC_CMD_LINE_OPTIONS}" "${IMG}"
-else
-  VOLUME='/opt/appdata/boinc'
-  docker run -d --name boinc --net host --pid host -v "${VOLUME}:/var/lib/boinc" -e BOINC_GUI_RPC_PASSWORD="${BOINC_GUI_RPC_PASSWORD}" -e BOINC_CMD_LINE_OPTIONS="${BOINC_CMD_LINE_OPTIONS}" "${IMG}"
-fi
+# Where the magic happens:
+docker run -d --name boinc -p 31416:31416 -v "${VOLUME}:/var/lib/boinc" -e BOINC_GUI_RPC_PASSWORD="${BOINC_GUI_RPC_PASSWORD}" -e BOINC_CMD_LINE_OPTIONS="${BOINC_CMD_LINE_OPTIONS}" "${IMG}"
 
 # Details:
 echo
