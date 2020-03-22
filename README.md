@@ -45,7 +45,7 @@ Stay tuned for full documentation on how to get the COVID-19 research running in
 
 ---
 
-## After installing Docker
+## After installing Docker:
 
 **Run the same command as above to get started with a minimal Alpine Linux-based image:**
 
