@@ -32,7 +32,7 @@ cd nucc
 ./quickstart.sh
 ```
 
-You should be squared away.
+This should take care of it.  If the script errors out after installing Docker, run it again, and You should be squared away.
 
 ---
 
