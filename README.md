@@ -55,6 +55,8 @@ If you want to run the latest image, which is a bit more beefy and based on Ubun
 
 The `docker run` command for Windows may be a bit different syntax-wise.  I will provide updates after I have tested on Windows.
 
+---
+
 ## Updates:
 
 Helper scripts and further documentation will be listed here in the coming days in order to improve cross-platform compatibility.
