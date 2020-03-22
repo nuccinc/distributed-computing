@@ -41,6 +41,8 @@ If running one of the supported operating systems above, you can easily install 
 
 Stay tuned for full documentation on how to get the COVID-19 research running in a BSD jail (compatible with FreeNAS).
 
+---
+
 ## After installing Docker, run the same command as above to get started with a minimal Alpine Linux-based image:
 
 `docker run -d --name boinc --net host --pid host -v /opt/appdata/boinc:/var/lib/boinc -e BOINC_GUI_RPC_PASSWORD="123" -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec" boinc/client:baseimage-alpine`
