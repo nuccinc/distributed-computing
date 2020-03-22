@@ -1,4 +1,4 @@
-![Platform: Linux and Windows](https://img.shields.io/badge/platform-Linux, Windows, macOS-blue)
+![Platform: Linux and Windows](https://img.shields.io/badge/platform-Linux,%20macOS,%20Windows-green)
 ![Follow @NUCC Inc. on Twitter](https://img.shields.io/twitter/follow/nucc_inc?label=follow&style=social)
 
 # NUCC Distributed Computing to Aid in COVID-19 Research
