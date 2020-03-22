@@ -26,34 +26,32 @@ folding research team that is actively processing COVID-19-specific workloads.
 - Arch
 - macOS
 
-The best way to install Docker for these platforms and distributions is via [The Almost Universal Docker Installer](https://github.com/phx/dockerinstall), as it uses best practices and works automatically
-with macOS and most Linux distributions (except RPM-based -- support coming soon)
-
-If running one of the supported operating systems above, you can easily install Docker via the command below:
-
-`curl -fsSL 'https://raw.githubusercontent.com/phx/dockerinstall/master/install_docker.sh' | bash`
+```
+git clone http://github.com/phx/nucc.git
+cd nucc
+./quickstart.sh
+```
 
 ### Other platforms, please refer to [the official Docker documentation](https://docs.docker.com/install/) for installing Docker for your particular OS:
 
 - [Windows](https://docs.docker.com/docker-for-windows/install/)
 - [CentOS](https://docs.docker.com/install/linux/docker-ce/centos/)
 - [Fedora](https://docs.docker.com/install/linux/docker-ce/fedora/)
-
-### Unix:
-
-Stay tuned for full documentation on how to get the COVID-19 research running in a BSD jail (compatible with FreeNAS).
+- UNIX: Stay tuned for full documentation on how to get the COVID-19 research running in a BSD jail (compatible with FreeNAS).
 
 ---
 
 ## After installing Docker:
 
-**Run the same command as above to get started with a minimal Alpine Linux-based image:**
+- CentOS
+- RHEL
+- Fedora
 
-`docker run -d --name boinc --net host --pid host -v /opt/appdata/boinc:/var/lib/boinc -e BOINC_GUI_RPC_PASSWORD="123" -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec" boinc/client:baseimage-alpine`
-
-If you want to run the latest image, which is a bit more beefy and based on Ubuntu, just replace `baseimage-aline` with `latest`.
-
-`docker run -d --name boinc --net host --pid host -v /opt/appdata/boinc:/var/lib/boinc -e BOINC_GUI_RPC_PASSWORD="123" -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec" boinc/client:latest`
+```
+git clone http://github.com/phx/nucc.git
+cd nucc
+./quickstart.sh
+```
 
 #### Caveats:
 
