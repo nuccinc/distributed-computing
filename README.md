@@ -17,17 +17,17 @@ folding research team that is actively processing COVID-19-specific workloads.
 
 ## If you don't currently have Docker installed:
 
-- macOS
 - Debian
+- Raspbian
 - Ubuntu
-- Kali
+- Kali 2018+ (based on Debian Stretch)
 - Arch
+- macOS
 
-The best way to install Docker for most Linux distributions is via [The Almost Universal Docker Installer](https://github.com/phx/dockerinstall).
+The best way to install Docker for these platforms and distributions is via [The Almost Universal Docker Installer](https://github.com/phx/dockerinstall), as it uses best practices and works automatically
+with macOS and most Linux distributions (except RPM-based -- support coming soon)
 
-- Works automatically with macOS and most Linux distributions (except RPM-based -- support coming soon)
-
-If running one of the supported operating systems, you can easily install Docker via the command below:
+If running one of the supported operating systems above, you can easily install Docker via the command below:
 
 `curl -fsSL 'https://raw.githubusercontent.com/phx/dockerinstall/master/install_docker.sh' | bash`
 
