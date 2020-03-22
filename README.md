@@ -15,7 +15,13 @@ folding research team that is actively processing COVID-19-specific workloads.
 **Copy/paste the following one-liner to get started immediately:**
 `docker run -d --name boinc --net host --pid host -v /opt/appdata/boinc:/var/lib/boinc -e BOINC_GUI_RPC_PASSWORD="123" -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec" boinc/client:baseimage-alpine`
 
-## macOS/Debian/Ubuntu/Kali/Arch -- If you don't currently have Docker installed:
+## If you don't currently have Docker installed:
+
+- macOS
+- Debian
+- Ubuntu
+- Kali
+- Arch
 
 The best way to install Docker for most Linux distributions is via [The Almost Universal Docker Installer](https://github.com/phx/dockerinstall).
 
@@ -25,7 +31,7 @@ If running one of the supported operating systems, you can easily install Docker
 
 `curl -fsSL 'https://raw.githubusercontent.com/phx/dockerinstall/master/install_docker.sh' | bash`
 
-## Windows/CentOS/Fedora -- please refer to [the official Docker documentation](https://docs.docker.com/install/) for installing Docker for your particular OS:
+## Other platforms, please refer to [the official Docker documentation](https://docs.docker.com/install/) for installing Docker for your particular OS:
 
 - [Windows](https://docs.docker.com/docker-for-windows/install/)
 - [CentOS](https://docs.docker.com/install/linux/docker-ce/centos/)
