@@ -5,7 +5,7 @@
 
 ** Latest Update: March 22, 2020 ***
 
-Join The National Upcycled Computing Collective in a joint effort to combine our extra resources in order to aid in COVID-19 research.
+Join [The National Upcycled Computing Collective (NUCC)](https://www.nuccinc.org/) in a collaborative effort to combine our resources in order to aid in COVID-19 research.
 
 This project draws heavily from [BOINC's default Docker configurations](https://github.com/BOINC/boinc-client-docker).
 
@@ -53,3 +53,9 @@ Helper scripts and further documentation will be listed here in the coming days 
 #### Caveats:
 
 The `docker run` command for Windows may be a bit different syntax-wise.  I will provide updates after I have tested on Windows.
+
+#### About The National Upcycled Computing Collective
+
+[The National Upcycled Computing Collective, Inc.](http://nuccinc.org) is a 501(c)(3) Nonprofit Organization [NTEE U41] Computer Science, Technology & Engineering, Research Institute (EIN 82-1177433)
+as determined by the Internal Revenue Service.  Our mission is to find new uses for technology, thereby extending life cycles with an intent to re-purpose electronic devices responsibly.  For more
+information, please visit [https://www.nuccinc.org/about/](https://www.nuccinc.org/about/).
