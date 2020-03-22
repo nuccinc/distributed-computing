@@ -37,7 +37,7 @@ cd nucc
 - [Windows](https://docs.docker.com/docker-for-windows/install/)
 - [CentOS](https://docs.docker.com/install/linux/docker-ce/centos/)
 - [Fedora](https://docs.docker.com/install/linux/docker-ce/fedora/)
-- UNIX: Stay tuned for full documentation on how to get the COVID-19 research running in a BSD jail (compatible with FreeNAS).
+- UNIX: Stay tuned for full docs on how to get COVID-19 research running in a BSD jail (compatible with FreeNAS)
 
 ---
 
