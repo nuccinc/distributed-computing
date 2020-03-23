@@ -249,7 +249,6 @@ Docker Swarm does not support `pid=host` mode. As a result, client settings rela
 
 ## Updates:
 
-- Currently working on ability to run optional docker images rather than the default.
 - BSD/FreeNAS documentation forthcoming.
 - Documentation on remotely monitoring and managing workloads is in the works.
 
