@@ -35,14 +35,6 @@ Copy/paste the following one-liner to get started immediately on MacOS or Linux:
 
 ---
 
-### Important for Docker: View the [Supported Architectures and Tags](#supported-architectures-and-tags)
-
-This will allow you work most efficiciently based on your particular system.
-
-Especially if you have GPUs, you will want to check out these options that are tailored to fit your needs.
-
----
-
 ## Windows Native Installation:
 
 Download the zip file of the repository, unzip it, and run `quickstart.bat --native --attach` from an elevated (Administrator) command prompt.
