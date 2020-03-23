@@ -144,6 +144,9 @@ REM ============================================================================
 :DOCKERINSTALLED
 IF [%~2]==[--image] (SET IMG=%~3)
 ECHO.
+ECHO Making sure Docker Desktop is started...
+@START %DOCKER%
+ECHO.
 SET /P "VOLUME_ENABLED=Have you enabled the C drive under the Docker Resources Filesharing Settings? [y/n] "
 IF [%VOLUME_ENABLED%]==[n] ECHO Enable the C drive under Docker ^> Resources ^> Filesharing & GOTO :EOF
 ECHO.
