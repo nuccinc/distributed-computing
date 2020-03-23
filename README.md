@@ -27,7 +27,7 @@ Copy/paste the following one-liner to get started immediately:
 - Ubuntu
 - Kali 2018+ (based on Debian Stretch)
 - Arch
-- macOS
+- MacOS
 
 ```
 git clone http://github.com/phx/nucc.git
@@ -39,9 +39,30 @@ If the script errors out after installing Docker, run it again in a new login sh
 
 ---
 
+### Windows (via Docker)
+
+Download the zip file of the repository, unzip it, and run `quickstart.bat` from an elevated (Administrator) `cmd` prompt.
+
+Alternatively, if you have `git` installed, launch an elevated (Administrator) `cmd` promt and run the following:
+
+```
+git clone https://github.com/phx/nucc.git
+cd nucc
+quickstart.bat
+```
+
+This will install the [Chocolatey](https://chocolatey.org/) package manager, which will then install Docker Desktop.
+
+Once Docker Desktop is installed, it will launch, and you will need to log out and log back in for it to finish starting up.
+
+Then open up Docker preferences > Resources > Filesharing, check to enable the C drive, and then click "Apply and Restart".
+
+After Docker has *completely* finished restarting, run `quickstart.bat --docker-installed` to complete the setup.
+
+When running the Docker image for the first time, Windows will ask to confirm if Docker can access your C drive, so please say yes.
+
 ### Other platforms, please refer to [the official Docker documentation](https://docs.docker.com/install/) for installing Docker for your particular OS:
 
-- [Windows](https://docs.docker.com/docker-for-windows/install/)
 - [CentOS](https://docs.docker.com/install/linux/docker-ce/centos/)
 - [Fedora](https://docs.docker.com/install/linux/docker-ce/fedora/)
 - UNIX: Stay tuned for full docs on how to get COVID-19 research running in a BSD jail (compatible with FreeNAS)
