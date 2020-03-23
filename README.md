@@ -26,13 +26,22 @@ Copy/paste the following one-liner to get started immediately on MacOS or Linux:
 **Contents**
 - [Windows Native Installation](#windows-native-installation)
 - [Windows Docker Installation](#windows-docker-installation)
-- [Linux/MacOS Docker Installation](#linux-and-macos)
+- [Linux/MacOS Docker Installation](#linux-and-macos-docker-installation)
 - [Supported Architectures and Tags](#supported-architectures-and-tags)
 - [Docker Swarm mode](#docker-swarm-mode)
 - [Updates](#updates)
 - [About NUCC](#about-the-national-upcycled-computing-collective)
 
 ---
+
+### IMPORTANT: View the [Supported Architectures and Tags](#supported-architectures-and-tags)
+
+This will allow you work most efficiciently based on your particular system.
+
+Especially if you have GPUs, you will want to check out these options that are tailored to fit your needs.
+
+---
+
 ## Windows Native Installation:
 
 Download the zip file of the repository, unzip it, and run `quickstart.bat --native --attach` from an elevated (Administrator) command prompt.
@@ -79,7 +88,7 @@ When Docker Desktop is launched for the first time, you will need to log out and
 *When running the Docker image for the first time, Windows will ask to confirm if Docker can access your C drive.*
 
 ---
-## Linux and MacOS
+## Linux and MacOS Docker Installation
 
 ### If you don't currently have Docker installed:
 
@@ -104,6 +113,14 @@ I am currently working to build these distros into [The Almost Universal Docker 
 
 - [CentOS](https://docs.docker.com/install/linux/docker-ce/centos/)
 - [Fedora](https://docs.docker.com/install/linux/docker-ce/fedora/)
+
+### If you already have Docker installed:
+
+```
+git clone http://github.com/phx/nucc.git
+cd nucc
+./quickstart.sh
+```
 
 ---
 
