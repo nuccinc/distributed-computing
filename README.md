@@ -58,7 +58,7 @@ When Docker Desktop is launched for the first time, you will need to log out and
 - Right-click the Docker icon in the taskbar
 - Go to Preferences > Resources > Filesharing
 - Check to enable the C drive
-- Click "Apply and Restart".
+- Click "Apply and Restart"
 
 After Docker has *COMPLETELY* finished restarting, run `quickstart.bat --docker-installed` to start processing workload immediately.
 
