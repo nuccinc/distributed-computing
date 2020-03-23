@@ -59,7 +59,7 @@ When Docker Desktop is launched for the first time, you will need to log out and
 - Go to Preferences > Resources > Filesharing
 - Check to enable the C drive
 - Click "Apply and Restart"
-- Wait for Docker to *completely* finished restarting
+- Wait for Docker to *completely* finish restarting
 - Run `quickstart.bat --docker-installed` from an elevated prompt to start processing workloads immediately
 
 *When running the Docker image for the first time, Windows will ask to confirm if Docker can access your C drive.*
