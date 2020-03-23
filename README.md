@@ -1,4 +1,4 @@
-![Platform: Linux and Windows](https://img.shields.io/badge/platform-Linux,%20macOS,%20Windows-green)
+![Platform: ALL](https://img.shields.io/badge/platform-Linux,%20macOS,%20Windows-green)
 ![Follow @NUCC Inc. on Twitter](https://img.shields.io/twitter/follow/nucc_inc?label=follow&style=social)
 ![Tweet about this Project](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fphx%2Fnucc)
 
