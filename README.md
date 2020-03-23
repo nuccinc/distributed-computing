@@ -35,7 +35,7 @@ Copy/paste the following one-liner to get started immediately on MacOS or Linux:
 
 ---
 
-### IMPORTANT: View the [Supported Architectures and Tags](#supported-architectures-and-tags)
+### Important for Docker: View the [Supported Architectures and Tags](#supported-architectures-and-tags)
 
 This will allow you work most efficiciently based on your particular system.
 
