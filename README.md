@@ -39,7 +39,7 @@ If the script errors out after installing Docker, run it again in a new login sh
 
 ---
 
-### Windows (via Docker)
+### Windows
 
 Download the zip file of the repository, unzip it, and run `quickstart.bat` from an elevated (Administrator) `cmd` prompt.
 
