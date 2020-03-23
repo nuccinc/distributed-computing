@@ -84,9 +84,9 @@ When Docker Desktop is launched for the first time, you will need to log out and
 
 ## BSD Jail Installation
 
-Documentation for FreeBSD (specifically, FreeNAS) can be found **[in this blog post](https://bookandcode.com/nuccbsd)**.
+**[Documentation for FreeBSD (specifically, FreeNAS) can be found in this blog post](https://bookandcode.com/nuccbsd)**.
 
-If you have any issues, reach out to me directly on Discord (if you know me), submit an issue, or leave a comment on the post.
+If you have any trouble, reach out to me on Discord (if you know me), submit an issue, or leave a comment on the post.
 
 ---
 
