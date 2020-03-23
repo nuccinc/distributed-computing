@@ -89,6 +89,13 @@ When Docker Desktop is launched for the first time, you will need to log out and
 *When running the Docker image for the first time, Windows will ask to confirm if Docker can access your C drive.*
 
 ---
+
+## BSD Jail Installation
+
+Documentation on this is in progress.  It does work 100% correctly, and documentation will also include FreeNAS-specific instructions.
+
+---
+
 ## Linux and MacOS Docker Installation
 
 ### If you don't currently have Docker installed:
@@ -122,12 +129,6 @@ git clone http://github.com/phx/nucc.git
 cd nucc
 ./quickstart.sh
 ```
-
----
-
-## BSD Jail Installation
-
-Documentation on this is in progress.  It does work 100% correctly, and documentation will also include FreeNAS-specific instructions.
 
 ---
 
