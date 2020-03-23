@@ -18,7 +18,7 @@ if [[ $1 = "alpine" ]]; then
   IMG="${IMG_ALPINE}"
 elif [[ $1 = "ubuntu" ]]; then
   IMG="${IMG_UBUNTU}"
-else
+elif [[ -z $IMG ]]; then
   IMG="${IMG_ALPINE}"
 fi
 
