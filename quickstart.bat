@@ -36,6 +36,7 @@ IF [%1]==[-help] (CALL :USAGE && EXIT /B)
 IF [%1]==[--help] (CALL :USAGE && EXIT /B)
 
 REM Main script arguments:
+IF [%2]==[--image] (CALL :DOCKERINSTALL %~1 %~2 %~3 & EXIT /B)
 IF [%2]==[--attach] (CALL :NATIVEINSTALL %~1 %~2 & EXIT /B)
 IF [%1]==[--native] (CALL :NATIVEINSTALL & EXIT /B)
 IF [%1]==[--docker] (CALL :DOCKERINSTALL & EXIT /B)
@@ -112,7 +113,7 @@ REM =   DOCKERINSTALL - Installs and Launches Docker Desktop.
 REM =   Script will need to be run a second time with --docker to pull and run the Docker image.
 REM ========================================================================================================================================
 :DOCKERINSTALL
-IF EXIST %DOCKER% CALL :DOCKERINSTALLED & EXIT /B
+IF EXIST %DOCKER% CALL :DOCKERINSTALLED %~1 %~2 %~3 & EXIT /B
 
 REM Install Chocolatey:
 CALL :INSTALLCHOCOLATEY
@@ -141,7 +142,7 @@ REM ============================================================================
 REM =   DOCKERINSTALLED - Downloads image specified with %IMG% and runs it in a Docker container
 REM ========================================================================================================================================
 :DOCKERINSTALLED
-ECHO [DEBUG] DOCKERINSTALLED
+IF [%~2]==[--image] (SET IMG=%~3)
 ECHO.
 SET /P "VOLUME_ENABLED=Have you enabled the C drive under the Docker Resources Filesharing Settings? [y/n] "
 IF [%VOLUME_ENABLED%]==[n] ECHO Enable the C drive under Docker ^> Resources ^> Filesharing & GOTO :EOF
