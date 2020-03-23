@@ -62,6 +62,8 @@ When Docker Desktop is launched for the first time, you will need to log out and
 
 *When running the Docker image for the first time, Windows will ask to confirm if Docker can access your C drive.*
 
+---
+
 ### Other platforms, please refer to [the official Docker documentation](https://docs.docker.com/install/) for installing Docker for your particular OS:
 
 - [CentOS](https://docs.docker.com/install/linux/docker-ce/centos/)
@@ -79,10 +81,6 @@ git clone http://github.com/phx/nucc.git
 cd nucc
 ./quickstart.sh
 ```
-
-#### Caveats:
-
-The `docker run` command for Windows may be a bit different syntax-wise.  I will provide updates after I have tested on Windows.
 
 ---
 
