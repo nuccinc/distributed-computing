@@ -37,9 +37,7 @@ cd nucc
 
 If the script errors out after installing Docker, run it again in a new login shell that recognizes your user as a member of the `docker` group, and you should be squared away.
 
----
-
-### Windows
+### Windows:
 
 Download the zip file of the repository, unzip it, and run `quickstart.bat` from an elevated (Administrator) `cmd` prompt.
 
