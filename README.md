@@ -26,8 +26,8 @@ Copy/paste the following one-liner to get started immediately on MacOS or Linux:
 **Contents**
 - [Windows Native Installation](#windows-native-installation)
 - [Windows Docker Installation](#windows-docker-installation)
-- [Linux/MacOS Docker Installation](#linux-and-macos-docker-installation)
 - [BSD Jail Installation](#bsd-jail-installation)
+- [Linux/MacOS Docker Installation](#linux-and-macos-docker-installation)
 - [Supported Architectures and Tags](#supported-architectures-and-tags)
 - [Docker Swarm mode](#docker-swarm-mode)
 - [Updates](#updates)
