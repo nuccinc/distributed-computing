@@ -84,7 +84,9 @@ When Docker Desktop is launched for the first time, you will need to log out and
 
 ## BSD Jail Installation
 
-Documentation on this is in progress.  It does work 100% correctly, and documentation will also include FreeNAS-specific instructions.
+Documentation for FreeBSD (specifically, FreeNAS) can be found **[in this blog post](https://bookandcode.com/nuccbsd)**.
+
+If you have any issues, reach out to me directly on Discord (if you know me), submit an issue, or leave a comment on the post.
 
 ---
 
@@ -241,7 +243,6 @@ Docker Swarm does not support `pid=host` mode. As a result, client settings rela
 
 ## Updates:
 
-- BSD/FreeNAS documentation forthcoming.
 - Documentation on remotely monitoring and managing workloads is in the works.
 
 ---
