@@ -159,6 +159,7 @@ ECHO This can be changed at any time by changing the value in gui_rpc_auth.cfg.
 ECHO.
 
 REM Where the magic happens:
+IF [%~2]==[--image] (docker stop boinc 2>NUL & docker rm boinc 2>NUL)
 docker run -d --restart always --name boinc -p 31416:31416 -v "%VOLUME%:/var/lib/boinc" -e "BOINC_GUI_RPC_PASSWORD=%BOINC_GUI_RPC_PASSWORD%" -e "BOINC_CMD_LINE_OPTIONS=%BOINC_CMD_LINE_OPTIONS%" "%IMG%"
 
 ECHO.
