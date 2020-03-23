@@ -5,7 +5,7 @@
 
 # NUCC Distributed Computing to Aid in COVID-19 Research
 
-**Latest Update: March 22, 2020**
+**Latest Update: March 23, 2020**
 
 Join [The National Upcycled Computing Collective (NUCC)](https://www.nuccinc.org/) in a collaborative effort to combine our resources in order to aid in COVID-19 research.
 This project draws heavily from [BOINC's default Docker configurations](https://github.com/BOINC/boinc-client-docker).
@@ -19,6 +19,53 @@ folding research team that is actively processing COVID-19-specific workloads.
 Copy/paste the following one-liner to get started immediately on MacOS or Linux:
 
 `docker run -d --restart always --name boinc -p 31416 -v "${HOME}/.boinc:/var/lib/boinc" -e BOINC_GUI_RPC_PASSWORD="123" -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec" boinc/client:baseimage-alpine`
+
+---
+
+## Windows Native Installation:
+
+Download the zip file of the repository, unzip it, and run `quickstart.bat --native --attach` from an elevated (Administrator) command prompt.
+
+Alternatively, if you have `git` installed, launch an elevated (Administrator) command promt and run the following:
+
+```
+git clone https://github.com/phx/nucc.git
+cd nucc
+quickstart.bat --native --attach
+```
+
+This will install the [Chocolatey](https://chocolatey.org/) package manager, which will then install BOINC.
+
+BOINC Manager will automatically launch, at which point you will wait for the *Select a Project* window to pop up.
+
+Cancel out of that window, confirm, and hit [Enter] to continue running the script.
+
+It will automatically connect to the correct project and start processing workloads immediately.
+
+## Windows Docker Installation:
+
+Download the zip file of the repository, unzip it, and run `quickstart.bat` from an elevated (Administrator) command prompt.
+
+Alternatively, if you have `git` installed, launch an elevated (Administrator) command promt and run the following:
+
+```
+git clone https://github.com/phx/nucc.git
+cd nucc
+quickstart.bat --docker
+```
+
+This will install the [Chocolatey](https://chocolatey.org/) package manager, which will then install Docker Desktop.
+
+When Docker Desktop is launched for the first time, you will need to log out and log back in for it to finish starting up.
+
+- Right-click the Docker icon in the taskbar
+- Go to Preferences > Resources > Filesharing
+- Check to enable the C drive
+- Click "Apply and Restart"
+- Wait for Docker to *completely* finish restarting
+- Run `quickstart.bat --docker` again from an elevated prompt to start processing workloads immediately
+
+*When running the Docker image for the first time, Windows will ask to confirm if Docker can access your C drive.*
 
 ---
 
@@ -38,31 +85,6 @@ cd nucc
 ```
 
 *If the script errors out after installing Docker, run it again in a new login shell that recognizes your user as a member of the `docker` group, and you should be squared away.*
-
-### Windows:
-
-Download the zip file of the repository, unzip it, and run `quickstart.bat` from an elevated (Administrator) `cmd` prompt.
-
-Alternatively, if you have `git` installed, launch an elevated (Administrator) `cmd` promt and run the following:
-
-```
-git clone https://github.com/phx/nucc.git
-cd nucc
-quickstart.bat
-```
-
-This will install the [Chocolatey](https://chocolatey.org/) package manager, which will then install Docker Desktop.
-
-When Docker Desktop is launched for the first time, you will need to log out and log back in for it to finish starting up.
-
-- Right-click the Docker icon in the taskbar
-- Go to Preferences > Resources > Filesharing
-- Check to enable the C drive
-- Click "Apply and Restart"
-- Wait for Docker to *completely* finish restarting
-- Run `quickstart.bat --docker-installed` from an elevated prompt to start processing workloads immediately
-
-*When running the Docker image for the first time, Windows will ask to confirm if Docker can access your C drive.*
 
 ---
 
