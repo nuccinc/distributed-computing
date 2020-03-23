@@ -133,7 +133,7 @@ ECHO You will need to log out and log back in after launching Docker for the fir
 ECHO After you log back in and Docker starts, go to Docker Settings ^> Resources ^> Filesharing, and check enable the C drive.
 ECHO Click "Apply & Restart", and then make sure Docker has COMPLETELY finished starting.
 ECHO.
-ECHO When Docker has completely finished starting, run this same script with the --docker-installed parameter.
+ECHO When Docker has completely finished starting, run %~nx0 again with the --docker parameter.
 PAUSE
 @START %DOCKER%
 EXIT /B
