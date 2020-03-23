@@ -53,11 +53,14 @@ quickstart.bat
 
 This will install the [Chocolatey](https://chocolatey.org/) package manager, which will then install Docker Desktop.
 
-Once Docker Desktop is installed, it will launch, and you will need to log out and log back in for it to finish starting up.
+When Docker Desktop is launched for the first time, you will need to log out and log back in for it to finish starting up.
 
-Then open up Docker preferences > Resources > Filesharing, check to enable the C drive, and then click "Apply and Restart".
+- Right-click the Docker icon in the taskbar
+- Go to Preferences > Resources > Filesharing
+- Check to enable the C drive
+- Click "Apply and Restart".
 
-After Docker has *completely* finished restarting, run `quickstart.bat --docker-installed` to complete the setup.
+After Docker has *COMPLETELY* finished restarting, run `quickstart.bat --docker-installed` to start processing workload immediately.
 
 When running the Docker image for the first time, Windows will ask to confirm if Docker can access your C drive, so please say yes.
 
