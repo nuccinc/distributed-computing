@@ -161,55 +161,53 @@ These can be used in the Linux/MacOS one-liner at the top of this page or passed
 - Install the [ROCm Driver](https://rocm.github.io/ROCmInstall.html).
 - Reboot your system.
 - Run the following command.
-
-`IMG=boinc/client:amd ./quickstart.sh`
+  - Linux: `IMG=boinc/client:amd ./quickstart.sh`
+  - Windows: `quickstart.bat --docker --image boinc/client:amd`
 
 #### Intel GPU-savvy BOINC client usage
 - Install the Intel GPU Driver.
 - Run the following command:
-
-`IMG=boinc/client:intel ./quickstart.sh`
- 
+  - Linux: `IMG=boinc/client:intel ./quickstart.sh`
+  - Windows: `quickstart.bat --docker --image boinc/client:intel`
 
 #### Legacy Intel GPU-savvy BOINC client usage
 - Install the Intel GPU Driver.
 - Run the following command:
-
-`IMG=boinc/client:intel-legacy ./quickstart.sh`
+  - Linux: `IMG=boinc/client:intel-legacy ./quickstart.sh`
+  - Windows: `quickstart.bat --docker --image boinc/client:intel-legacy`
 
 #### Multi GPU-savvy BOINC client usage
 - Make sure you have installed the [NVIDIA driver](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver).
 - Install the NVIDIA-Docker version 2.0 by following the instructions [here](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)).
 - Run the following command:
-
-`IMG=boinc/client:multi-gpu ./quickstart.sh`
+  - Linux: `IMG=boinc/client:multi-gpu ./quickstart.sh`
+  - Windows: `quickstart.bat --docker --image boinc/client:multi-gpu`
  
 #### NVIDIA-savvy BOINC client usage
 - Make sure you have installed the [NVIDIA driver](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver).
 - Install the NVIDIA-Docker version 2.0 by following the instructions [here](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)).
 - Run the following command:
-
-`IMG=boinc/client:nvidia ./quickstart.sh`
- 
+  - Linux: `IMG=boinc/client:nvidia ./quickstart.sh`
+  - Windows: `quickstart.bat --docker --image boinc/client:nvidia`
 
 #### VirtualBox-savvy BOINC client usage
 
 - Install the `virtualbox-dkms` package on the host.
 - Run the following command:
-
-`IMG=boinc/client:virtualbox ./quickstart.sh`
+  - Linux: `IMG=boinc/client:virtualbox ./quickstart.sh`
+  - Windows: `quickstart.bat --docker --image boinc/client:virtualbox`
 
 #### ARMv7 32-bit savvy BOINC client usage
 - Make sure you have [Docker installed on your Raspberry Pi](https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/) or you are using a [Docker friendly OS](https://blog.hypriot.com/).
 - Run the following command.
-
-`IMG=boinc/client:arm32v7 ./quickstart.sh`
+  - Linux: `IMG=boinc/client:arm32v7 ./quickstart.sh`
+  - Windows: `quickstart.bat --docker --image boinc/client:arm32v7`
 
 #### ARMv8 64-bit savvy BOINC client usage
 - Make sure you are using a [64-bit OS on your Raspberry Pi](https://wiki.ubuntu.com/ARM/RaspberryPi#arm64) and have [Docker installed on your Raspberry Pi](https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/).
 - Run the following command.
-
-`IMG=boinc/client:arm64v8 ./quickstart.sh`
+  - Linux: `IMG=boinc/client:arm64v8 ./quickstart.sh`
+  - Windows: `quickstart.bat --docker --image boinc/client:arm64v8`
 
 ---
 
