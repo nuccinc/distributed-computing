@@ -111,7 +111,11 @@ cd nucc
 
 ### Updates:
 
-Helper scripts and further documentation will be listed here in the coming days in order to improve cross-platform compatibility.
+Currently working on ability to run optional docker images rather than the default.
+
+BSD/FreeNAS documentation forthcoming.
+
+Documentation on remotely monitoring and managing workloads is in the works.
 
 ## About The National Upcycled Computing Collective
 
