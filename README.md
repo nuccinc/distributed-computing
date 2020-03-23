@@ -27,6 +27,7 @@ Copy/paste the following one-liner to get started immediately on MacOS or Linux:
 - [Windows Native Installation](#windows-native-installation)
 - [Windows Docker Installation](#windows-docker-installation)
 - [Linux/MacOS Docker Installation](#linux-and-macos-docker-installation)
+- [BSD Jail Installation](#bsd-jail-installation)
 - [Supported Architectures and Tags](#supported-architectures-and-tags)
 - [Docker Swarm mode](#docker-swarm-mode)
 - [Updates](#updates)
@@ -121,6 +122,12 @@ git clone http://github.com/phx/nucc.git
 cd nucc
 ./quickstart.sh
 ```
+
+---
+
+## BSD Jail Installation
+
+Documentation on this is in progress.  It does work 100% correctly, and documentation will also include FreeNAS-specific instructions.
 
 ---
 
