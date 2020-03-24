@@ -110,7 +110,7 @@ cd nucc
 
 *If the script errors out after installing Docker, run it again in a new login shell that recognizes your user as a member of the `docker` group, and you should be squared away.*
 
-**CentOS:***
+**CentOS:**
 
 I am currently working to add CentOS support to [The Almost Universal Docker Installer](https://github.com/phx/dockerinstall), which is used by [`quickstart.sh`](quickstart.sh).
 
