@@ -6,7 +6,7 @@
 
 # NUCC Distributed Computing to Aid in COVID-19 Research
 
-**Latest Update: March 23, 2020**
+**Latest Update: March 24, 2020**
 
 Join [The National Upcycled Computing Collective (NUCC)](https://www.nuccinc.org/) in a collaborative effort to combine our resources in order to aid in COVID-19 research.
 This project draws heavily from [BOINC's default Docker configurations](https://github.com/BOINC/boinc-client-docker).
@@ -94,12 +94,13 @@ If you have any trouble, reach out to me on Discord (if you know me), submit an 
 
 ### If you don't currently have Docker installed:
 
-- Debian
-- Raspbian
+- Debian 8+
+- Raspbian 8+
 - Ubuntu
+- Fedora 30+
 - Kali 2018+ (based on Debian Stretch)
 - Arch
-- MacOS
+- MacOS 10.8+
 
 ```
 git clone http://github.com/phx/nucc.git
@@ -109,12 +110,13 @@ cd nucc
 
 *If the script errors out after installing Docker, run it again in a new login shell that recognizes your user as a member of the `docker` group, and you should be squared away.*
 
-#### RPM-based distros, please refer to [the official Docker documentation](https://docs.docker.com/install/) for installing Docker for your particular OS:
+**CentOS:***
 
-I am currently working to build these distros into [The Almost Universal Docker Installer](https://github.com/phx/dockerinstall), which is used by [`quickstart.sh`](quickstart.sh).
+I am currently working to add CentOS support to [The Almost Universal Docker Installer](https://github.com/phx/dockerinstall), which is used by [`quickstart.sh`](quickstart.sh).
 
-- [CentOS](https://docs.docker.com/install/linux/docker-ce/centos/)
-- [Fedora](https://docs.docker.com/install/linux/docker-ce/fedora/)
+Until then, if you use CentOS, please refer to [the official Docker installation documentation](https://docs.docker.com/install/linux/docker-ce/centos/) on how to install Docker.
+
+After Docker is installed, just run [`quickstart.sh`](quickstart.sh) to immediately get up and running.
 
 ### If you already have Docker installed:
 
@@ -243,8 +245,9 @@ Docker Swarm does not support `pid=host` mode. As a result, client settings rela
 
 ## Updates:
 
+- Added Fedora support.
 - Documentation on remotely monitoring and managing workloads is in the works.
-- Will be adding RPM-based distros to [The Almost Universal Docker Installer](https://github.com/phx/dockerinstall) very shortly.
+- Working on adding CentOS support to [The Almost Universal Docker Installer](https://github.com/phx/dockerinstall).
 
 ---
 
