@@ -98,7 +98,7 @@ If you have any trouble, reach out to me on Discord (if you know me), submit an 
 - Ubuntu
 - Debian 8+
 - Raspbian 8+
-- CentOS/RHEL/Fedora
+- CentOS/RHEL/Amazon Linux
 - Fedora 30+
 - Kali 2018+ (based on Debian Stretch)
 - Arch
