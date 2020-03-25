@@ -6,7 +6,7 @@
 
 # NUCC Distributed Computing to Aid in COVID-19 Research
 
-**Latest Update: March 24, 2020**
+**Latest Update: March 25, 2020**
 
 Join [The National Upcycled Computing Collective (NUCC)](https://www.nuccinc.org/) in a collaborative effort to combine our resources in order to aid in COVID-19 research.
 This project draws heavily from [BOINC's default Docker configurations](https://github.com/BOINC/boinc-client-docker).
@@ -29,7 +29,7 @@ Copy/paste the following one-liner to get started immediately on MacOS or Linux:
 - [BSD Jail Installation](#bsd-jail-installation)
 - [Linux/MacOS Docker Installation](#linux-and-macos-docker-installation)
 - [Supported Architectures and Tags](#supported-architectures-and-tags)
-- [Docker Swarm mode](#docker-swarm-mode)
+- [Docker Swarm Mode](#docker-swarm-mode)
 - [Updates](#updates)
 - [About NUCC](#about-the-national-upcycled-computing-collective)
 
@@ -94,13 +94,14 @@ If you have any trouble, reach out to me on Discord (if you know me), submit an 
 
 ### If you don't currently have Docker installed:
 
+- MacOS 10.8+
+- Ubuntu
 - Debian 8+
 - Raspbian 8+
-- Ubuntu
+- CentOS/RHEL/Fedora
 - Fedora 30+
 - Kali 2018+ (based on Debian Stretch)
 - Arch
-- MacOS 10.8+
 
 ```
 git clone http://github.com/phx/nucc.git
@@ -110,14 +111,6 @@ cd nucc
 
 *If the script errors out after installing Docker, run it again in a new login shell that recognizes your user as a member of the `docker` group, and you should be squared away.*
 
-**CentOS:**
-
-I am currently working to add CentOS support to [The Almost Universal Docker Installer](https://github.com/phx/dockerinstall), which is used by [`quickstart.sh`](quickstart.sh).
-
-Until then, if you use CentOS, please refer to [the official Docker installation documentation](https://docs.docker.com/install/linux/docker-ce/centos/) on how to install Docker.
-
-After Docker is installed, just run [`quickstart.sh`](quickstart.sh) to immediately get up and running.
-
 ### If you already have Docker installed:
 
 ```
@@ -125,6 +118,18 @@ git clone http://github.com/phx/nucc.git
 cd nucc
 ./quickstart.sh
 ```
+
+#### Firewall Caveats:
+
+If you are running `firewalld` or `ufw` or something like that, you will need to either create a rule for the `docker0` interface on port `31416`.
+
+Alternately, you can disable the service altogether by running `systemctl disable firewalld` (etc.), and then rebooting.
+
+This is necessary to be able to resolve DNS inside the containers.
+
+If you have already installed and spun up a container via `quickstart.sh`, just implement the firewall rules and run `docker restart boinc`.
+
+If you disable the firewall completely, the `boinc` container should spin up immediately after reboot and will be able to process workloads successfully.
 
 ---
 
@@ -207,7 +212,7 @@ These can be used in the Linux/MacOS one-liner at the top of this page or passed
 
 ---
 
-## Docker Swarm mode
+## Docker Swarm Mode
 
 You can use a Docker Swarm to launch a large number of clients, for example across a cluster that you are using for BOINC computation. First, start the swarm and create a network,
 
@@ -245,9 +250,9 @@ Docker Swarm does not support `pid=host` mode. As a result, client settings rela
 
 ## Updates:
 
-- Added Fedora support.
+- Added Centos/RHEL/Amazon Linux support for [The Almost Universal Docker Installer](https://github.com/phx/dockerinstall), which is used by [`quickstart.sh`](quickstart.sh).
 - Documentation on remotely monitoring and managing workloads is in the works.
-- Working on adding CentOS support to [The Almost Universal Docker Installer](https://github.com/phx/dockerinstall).
+- The last feature to be added will be shortcut commands to interact with containers.
 
 ---
 
