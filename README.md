@@ -16,8 +16,10 @@ folding research team that is actively processing COVID-19-specific workloads.
 ---
 
 ### The fastest and easiest way to contribute if you already have BOINC installed:
-- Windows: `boinccmd --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
-- Every other OS: `boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+- Windows:
+  - `boinccmd --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+- Every other OS:
+  - `boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
 
 ### The fastest and easiest way to contribute if you already have Docker installed:
 
@@ -334,7 +336,7 @@ This will allow you to be on the machine and run `boinccmd` commands directly.
 - You should execute them as-is if you have already exec'd into the Docker container
 - You should prepend them with `docker exec [container-name] ` if running them against the Docker container with the BOINC client installed.
   - If BOINC was installed via Docker and one of the quickstart scripts, the container name is `boinc`.
-    - Example: `docker exec -it boinc boinccmd --get_state`
+  - Example: `docker exec -it boinc boinccmd --get_state`
 
 #### Request no more work after current Rosetta@home tasks finish:
 
