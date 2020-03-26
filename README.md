@@ -143,7 +143,10 @@ Follow [the official instructions](https://boinc.berkeley.edu/wiki/Installing_BO
 
 After starting BOINC, cancel out of the "Select a Project" window if it pops up, and run the command below to start choochin':
 
-`boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+- Windows:
+  - `boinccmd --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+- Every other OS:
+  - `boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
 
 ---
 
