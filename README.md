@@ -303,11 +303,12 @@ Two very good `boinccmd` references:
 - [https://boinc.berkeley.edu/wiki/Boinccmd_tool](https://boinc.berkeley.edu/wiki/Boinccmd_tool)
 - [https://www.systutorials.com/docs/linux/man/1-boinccmd/](https://www.systutorials.com/docs/linux/man/1-boinccmd/)
 
-- **Acces the shell on the Docker container:**
-  - `docker exec -it boinc /bin/sh`
-  - This will allow you to be on the machine and run `boinccmd` commands directly.
-- **Execute a specific `boinccmd` command inside local docker container directly from the host:**
-  - `docker exec boinc boinccmd --command-arguments-here`
+#### Acces the shell on the Docker container:
+- Command: `docker exec -it boinc /bin/sh`
+- This will allow you to be on the machine and run `boinccmd` commands directly.
+
+#### Execute a specific `boinccmd` command inside local docker container directly from the host:
+- Command: `docker exec boinc boinccmd --command-arguments-here`
 
 ### For the sake of simplicity, the commands below will be listed as native/local commands.  This means one of three things:
 
