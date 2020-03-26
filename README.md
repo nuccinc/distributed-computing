@@ -268,7 +268,7 @@ You have a couple of good options here:
 *For BSD, there is also the `boinc_curses` TUI application, which allows you to view local tasks, and for various Linux distros, there is the `boinctui` package, which I have personally never tried,
 but imagine it is probably similar to `boinc_curses` for BSD.*
 
-** For basic tasks, you can refer to [Boinc Commands and Shortcuts](#boinc-commands-and-shortcuts).**
+**For basic tasks, you can refer to [Boinc Commands and Shortcuts](#boinc-commands-and-shortcuts).**
 
 ### BOINCTASKS ([Download Here](https://efmer.com/download-boinctasks/))
 
