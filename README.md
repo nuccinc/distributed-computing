@@ -310,20 +310,19 @@ Two very good `boinccmd` references:
 #### Execute a specific `boinccmd` command inside local docker container directly from the host:
 - Command: `docker exec boinc boinccmd --command-arguments-here`
 
-### For the sake of simplicity, the commands below will be listed as native/local commands.  This means one of three things:
+#### Attach to NUCC's Rosetta@home Project (this is done automatically in the quickstart scripts):
+
+- Native Windows command: `boinccmd --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+- Native *NIX command: `boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+- Docker command: `docker exec [container-name] boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+
+### For simplicity, the commands below will be listed as local commands. This means 1 of 3 things:
 
 - You should execute them as-is if running the BOINC client on the host
 - You should execute them as-is if you have already exec'd into the Docker container
 - You should prepend them with `docker exec [container-name] ` if running them against the Docker container with the BOINC client installed.
   - If BOINC was installed via Docker and one of the quickstart scripts, the container name is `boinc`.
     - Example: `docker exec -it boinc boinccmd --get_state`
-
-#### Attach to NUCC's Rosetta@home Project (this is done automatically in the quickstart scripts):
-
-- Native Windows command: `boinccmd --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
-- Native *NIX command: `boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
-- Docker command: `docker exec [container-name] boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
-  - If you installed via the quickstart scripts, the container name is `boinc`.
 
 #### Request no more work after current Rosetta@home tasks finish:
 - This is a "graceful stop" and could take up to 24 hours for workloads to completely stop processing:
