@@ -25,11 +25,6 @@ fi
 # Check to see if Docker is installed
 if ! command -v 'docker' &> /dev/null; then
   echo -e "\nIt looks like you don't have Docker installed."
-  if command -v 'rpm' &> /dev/null; then
-    echo -e "\nYour operating system is not currently supported by the Docker auto-installer."
-    echo -e "Please download and install Docker before proceeding."
-    exit
-  fi
   read -rp "Would you like to install it now? [y/n] " ans
   if [[ $ans = "y" ]]; then
     if [[ -n $(uname -a | grep -iE '(linux)|(darwin)') ]]; then
