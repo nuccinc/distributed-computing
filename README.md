@@ -16,7 +16,8 @@ folding research team that is actively processing COVID-19-specific workloads.
 ---
 
 ### The fastest and easiest way to contribute if you already have BOINC installed:
-`boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+- Windows: `boinccmd --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+- Every other OS: `boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
 
 ### The fastest and easiest way to contribute if you already have Docker installed:
 
@@ -296,7 +297,7 @@ in which case, you should consult the [#firewall-caveats](Firewall Caveats) mini
 
 ---
 
-## Boinc Commands and Shortcuts
+## BOINC Commands and Shortcuts
 
 Two very good `boinccmd` references:
 
