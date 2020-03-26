@@ -6,7 +6,7 @@
 
 # NUCC Distributed Computing to Aid in COVID-19 Research
 
-**Latest Update: March 25, 2020**
+**Latest Update: March 26, 2020**
 
 Join [The National Upcycled Computing Collective (NUCC)](https://www.nuccinc.org/) in a collaborative effort to combine our resources in order to aid in COVID-19 research.
 This project draws heavily from [BOINC's default Docker configurations](https://github.com/BOINC/boinc-client-docker).
@@ -14,6 +14,9 @@ The difference is that without registering for any accounts or sharing any perso
 folding research team that is actively processing COVID-19-specific workloads.
 
 ---
+
+### The fastest and easiest way to contribute if you already have BOINC installed:
+`boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
 
 ### The fastest and easiest way to contribute if you already have Docker installed:
 
@@ -24,18 +27,58 @@ Copy/paste the following one-liner to get started immediately on MacOS or Linux:
 ---
 
 **Contents**
-- [Windows Native Installation](#windows-native-installation)
-- [Windows Docker Installation](#windows-docker-installation)
+- [Automated Linux/MacOS Docker-based Installation](#automated-linux-and-macos-docker-installation)
+- [Automated Windows Native Installation](#automated-windows-native-installation)
+- [Automated Windows Docker-based Installation](#windows-docker-installation)
 - [BSD Jail Installation](#bsd-jail-installation)
-- [Linux/MacOS Docker Installation](#linux-and-macos-docker-installation)
-- [Supported Architectures and Tags](#supported-architectures-and-tags)
+- [Manual Installation](#manual-installation)
+- [Docker Supported Architectures and Tags](#docker-supported-architectures-and-tags)
 - [Docker Swarm Mode](#docker-swarm-mode)
+- [Viewing and Managing Workloads](#viewing-and-managing-workloads)
 - [Updates](#updates)
 - [About NUCC](#about-the-national-upcycled-computing-collective)
 
 ---
 
-## Windows Native Installation:
+## Automated Linux and MacOS Docker Installation
+
+If Docker is not already installed, the [`quickstart.sh`](quickstart.sh) script will install Docker via [The Almost Universal Docker Installer](https://github.com/phx/dockerinstall),
+then pull [the official boinc/client image from DockerHub](https://hub.docker.com/r/boinc/client) ([`base-alpine`](https://github.com/BOINC/boinc-client-docker/blob/master/Dockerfile.base-alpine) by default).
+
+You can run a custom image by running `IMG=boinc/client[tag-name] ./quickstart.sh` (see [Supported Architectures and Tags](#docker-supported-architectures-and-tags)).
+
+- MacOS 10.8+
+- Ubuntu
+- Debian 8+
+- Raspbian 8+
+- CentOS/RHEL/Amazon Linux
+- Fedora 30+
+- Kali 2018+ (based on Debian Stretch)
+- Arch
+
+```
+git clone http://github.com/phx/nucc.git
+cd nucc
+./quickstart.sh
+```
+
+*If the script errors out after installing Docker, run it again in a new login shell that recognizes your user as a member of the `docker` group, and you should be squared away.*
+
+#### Firewall Caveats:
+
+If you are running `firewalld` or `ufw` or something like that, you will need to either create a rule for the `docker0` interface on port `31416`.
+
+Alternately, you can disable the service altogether by running `systemctl disable firewalld` (etc.), and then rebooting.
+
+This is necessary to be able to resolve DNS inside the containers.
+
+If you have already installed and spun up a container via `quickstart.sh`, just implement the firewall rules and run `docker restart boinc`.
+
+If you disable the firewall completely, the `boinc` container should spin up immediately after reboot and will be able to process workloads successfully.
+
+---
+
+## Automated Windows Native Installation:
 
 Download the zip file of the repository, unzip it, and run `quickstart.bat --native --attach` from an elevated (Administrator) command prompt.
 
@@ -90,50 +133,17 @@ If you have any trouble, reach out to me on Discord (if you know me), submit an 
 
 ---
 
-## Linux and MacOS Docker Installation
+## Manual Installation
 
-### If you don't currently have Docker installed:
+Follow [the official instructions](https://boinc.berkeley.edu/wiki/Installing_BOINC) to install BOINC locally.
 
-- MacOS 10.8+
-- Ubuntu
-- Debian 8+
-- Raspbian 8+
-- CentOS/RHEL/Amazon Linux
-- Fedora 30+
-- Kali 2018+ (based on Debian Stretch)
-- Arch
+After starting BOINC, cancel out of the "Select a Project" window if it pops up, and run the command below to start choochin':
 
-```
-git clone http://github.com/phx/nucc.git
-cd nucc
-./quickstart.sh
-```
-
-*If the script errors out after installing Docker, run it again in a new login shell that recognizes your user as a member of the `docker` group, and you should be squared away.*
-
-### If you already have Docker installed:
-
-```
-git clone http://github.com/phx/nucc.git
-cd nucc
-./quickstart.sh
-```
-
-#### Firewall Caveats:
-
-If you are running `firewalld` or `ufw` or something like that, you will need to either create a rule for the `docker0` interface on port `31416`.
-
-Alternately, you can disable the service altogether by running `systemctl disable firewalld` (etc.), and then rebooting.
-
-This is necessary to be able to resolve DNS inside the containers.
-
-If you have already installed and spun up a container via `quickstart.sh`, just implement the firewall rules and run `docker restart boinc`.
-
-If you disable the firewall completely, the `boinc` container should spin up immediately after reboot and will be able to process workloads successfully.
+`boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
 
 ---
 
-## Supported Architectures and Tags
+## Docker Supported Architectures and Tags
 
 You can specialize the `boinc/client` image with any of the following tags to use one of the specialized container version instead.
 
@@ -248,11 +258,97 @@ Docker Swarm does not support `pid=host` mode. As a result, client settings rela
 
 ---
 
-## Updates:
+## Viewing and Managing  Workloads
+
+You have a couple of good options here:
+
+- Best Option: [BOINCTASKS](https://efmer.com/download-boinctasks/)
+- View tasks from the native BOINC Manager
+
+*For BSD, there is also the `boinc_curses` TUI application, which allows you to view local tasks, and for various Linux distros, there is the `boinctui` package, which I have personally never tried,
+but imagine it is probably similar to `boinc_curses` for BSD.*
+
+** For basic tasks, you can refer to [Boinc Commands and Shortcuts](#boinc-commands-and-shortcuts).**
+
+### BOINCTASKS ([Download Here](https://efmer.com/download-boinctasks/))
+
+This is honestly the best option, especially if you are running BOINC from multiple machines on the same network.  The thing I like most about it is that it doesn't require a native BOINC installation
+if all you need is the **BOINC Manager**, like if you are running the *BOINC Client* via Docker or from a different machine on the network.  One of the best features is its ability to scan your network
+for BOINC clients and automatically add them to the management interface.  BOINCTASKS is the only option if you want to manage multiple clients from a GUI interface without having to disconnect between
+viewing each individual client.  It's a Windows program, but is FULLY-COMPATIBLE with *nix hosts via [Wine](https://www.winehq.org/).  It literally took me less than a minute to get it fully-installed
+on my Ubuntu laptop, after which I was able to see all the clients on my local network running BOINC, and remotely manage their tasks.
+
+### Native BOINC Manager ([Official Installation Instructions](https://boinc.berkeley.edu/wiki/Installing_BOINC))
+
+If you are running BOINC via Docker, it's a little redundant to download BOINC natively, but you can do so if you want to view and manage the tasks running from a GUI interface.
+
+- Launch BOINC
+- If the "Select a Project" pops up, just cancel out of it if you're connecting to a remote BOINC client or Docker container.
+- `File > Select Computer`
+  - Enter the computer's IP/hostname and password from `gui_rpc_auth.cfg`, and Click "OK".
+
+If you are running BOINC via Docker on your local machine, the IP address will be `127.0.0.1`.  Otherwise, enter the IP of the **HOST** that Docker is running on (not the IP of the container
+from the `docker0` interface).  By specifying `-p 31416` in the `docker run` command, we mapped the communication port used by the BOINC client in the Docker container to the host machine.
+
+`Boingmgr` should have no trouble connecting to any Docker container on the network unless prohibited by firewall rules on operating systems such as CentOS or Fedora,
+in which case, you should consult the [#firewall-caveats](Firewall Caveats) mini-section for more information.
+
+---
+
+## Boinc Commands and Shortcuts
+
+Two very good `boinccmd` references:
+
+- [https://boinc.berkeley.edu/wiki/Boinccmd_tool](https://boinc.berkeley.edu/wiki/Boinccmd_tool)
+- [https://www.systutorials.com/docs/linux/man/1-boinccmd/](https://www.systutorials.com/docs/linux/man/1-boinccmd/)
+
+- **Acces the shell on the Docker container:**
+  - `docker exec -it boinc /bin/sh`
+  - This will allow you to be on the machine and run `boinccmd` commands directly.
+- **Execute a specific `boinccmd` command inside local docker container directly from the host:**
+  - `docker exec boinc boinccmd --command-arguments-here`
+
+For the sake of simplicity, the commands below will be listed as native/local commands.  This means one of three things:
+
+- You should execute them as-is if running the BOINC client on the host
+- You should execute them as-is if you have already exec'd into the Docker container
+- You should prepend them with `docker exec [container-name] ` if running them against the Docker container with the BOINC client installed.
+  - If BOINC was installed via Docker and one of the quickstart scripts, the container name is `boinc`.
+    - Example: `docker exec -it boinc boinccmd --get_state`
+
+- **Attach to NUCC's Rosetta@home Project (this is done automatically in the quickstart scripts):**
+  - Native Windows command: `boinccmd --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+  - Native *NIX command: `boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+  - Docker command: `docker exec [container-name] boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+    - If you installed via the quickstart scripts, the container name is `boinc`.
+- **Request no more work after current Rosetta@home tasks finish:**
+  - This is a "graceful stop" and could take up to 24 hours for workloads to completely stop processing:
+    - Native command: `boinccmd --project http://boinc.bakerlab.org/rosetta/ nomorework`
+    - Docker command: `docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ nomorework`
+  - Later, you can substitue `nomorework` with `allowmorework` to start pulling tasks again
+- **Suspend all tasks for the Rosetta@home project:**
+  - Native command: `boinccmd --project http://boinc.bakerlab.org/rosetta/ suspend`
+  - Docker command: `docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ suspend`
+- **Resume all tasks for the Rosetta@home project:**
+  - Native command: `boinccmd --project http://boinc.bakerlab.org/rosetta/ resume`
+  - Docker command: `docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ resume`
+- **Stop or Start the BOINC Docker container***:
+  - `docker stop boinc` and `docker start boinc`
+  - This is not recommended, as your current tasks will be abandoned.
+  - Best practices would be as follows:
+    - `docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ suspend`
+    - `docker stop boinc`
+    - `docker start boinc`
+    - `docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ resume`
+
+---
+
+## Updates
 
 - Added Centos/RHEL/Amazon Linux support for [The Almost Universal Docker Installer](https://github.com/phx/dockerinstall), which is used by [`quickstart.sh`](quickstart.sh).
-- Documentation on remotely monitoring and managing workloads is in the works.
-- The last feature to be added will be shortcut commands to interact with containers.
+- Documentation on remotely monitoring and managing workloads has been provided.
+- Added manual installation steps.
+- Re-organized a few things.
 
 ---
 
