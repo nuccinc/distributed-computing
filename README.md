@@ -305,17 +305,28 @@ Two very good `boinccmd` references:
 - [https://www.systutorials.com/docs/linux/man/1-boinccmd/](https://www.systutorials.com/docs/linux/man/1-boinccmd/)
 
 #### Acces the shell on the Docker container:
-- Command: `docker exec -it boinc /bin/sh`
-- This will allow you to be on the machine and run `boinccmd` commands directly.
+
+`docker exec -it boinc /bin/sh`
+
+This will allow you to be on the machine and run `boinccmd` commands directly.
 
 #### Execute a specific `boinccmd` command inside local docker container directly from the host:
-- Command: `docker exec boinc boinccmd --command-arguments-here`
+
+`docker exec boinc boinccmd --command-arguments-here`
 
 #### Attach to NUCC's Rosetta@home Project (this is done automatically in the quickstart scripts):
 
-- Native Windows command: `boinccmd --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
-- Native *NIX command: `boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
-- Docker command: `docker exec [container-name] boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+**Windows:**
+
+`boinccmd --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+
+**Linux/MacOS/BSD:**
+
+`boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+
+**Docker:**
+
+`docker exec [container-name] boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
 
 ### For simplicity, the commands below will be listed as local commands. This means 1 of 3 things:
 
@@ -326,26 +337,35 @@ Two very good `boinccmd` references:
     - Example: `docker exec -it boinc boinccmd --get_state`
 
 #### Request no more work after current Rosetta@home tasks finish:
-- This is a "graceful stop" and could take up to 24 hours for workloads to completely stop processing:
-  - Command: `boinccmd --project http://boinc.bakerlab.org/rosetta/ nomorework`
-  - Later, you can substitue `nomorework` with `allowmorework` to start pulling tasks again
+
+`boinccmd --project http://boinc.bakerlab.org/rosetta/ nomorework`
+
+This is a "graceful stop" and could take up to 24 hours for workloads to completely stop processing:
+
+Later, you can substitue `nomorework` with `allowmorework` to start pulling tasks again
 
 #### Suspend all tasks for the Rosetta@home project:
 
-- Command: `boinccmd --project http://boinc.bakerlab.org/rosetta/ suspend`
+`boinccmd --project http://boinc.bakerlab.org/rosetta/ suspend`
 
 #### Resume all tasks for the Rosetta@home project:
-- Command: `boinccmd --project http://boinc.bakerlab.org/rosetta/ resume`
+
+`boinccmd --project http://boinc.bakerlab.org/rosetta/ resume`
 
 #### Stop or Start the BOINC Docker container:
 
-- `docker stop boinc` and `docker start boinc`
-  - This is not recommended, as your current tasks will be abandoned.
-  - Best practices would be as follows:
-    - `docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ suspend`
-    - `docker stop boinc`
-    - `docker start boinc`
-    - `docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ resume`
+`docker stop boinc` and `docker start boinc`
+
+This is not recommended, as your current tasks will be abandoned.
+
+**Best practices would be as follows:**
+
+```sh
+docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ suspend
+docker stop boinc
+docker start boinc
+docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ resume
+```
 
 ---
 
