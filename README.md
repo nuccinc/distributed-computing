@@ -258,7 +258,7 @@ Docker Swarm does not support `pid=host` mode. As a result, client settings rela
 
 ---
 
-## Viewing and Managing  Workloads
+## Viewing and Managing Workloads
 
 You have a couple of good options here:
 
