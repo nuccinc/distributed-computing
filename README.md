@@ -171,9 +171,9 @@ is `baseimage-alpine`, which uses `musl` instead.  If this causes any issues wit
 but for now, Alpine is working perfectly with our Rosetta@home workloads, and the image itself is much leaner, which was our reason for choosing
 it as our default. 
 
-You can specialize the `boinc/client` image with any of the tags below in order to use one of the specialized container versions.
+If you wish, you can specify the `boinc/client` image with any of the tags below in order to use one of the specialized versions instead of `baseimage-alpine`.
 
-These can be used in the Linux/MacOS one-liner at the top of this page, passed as the `$IMG` environment variable to `quickstart.sh`:
+These can be used in the Linux/MacOS one-liner at the top of this page or passed as the `$IMG` environment variable to `quickstart.sh`:
 - `IMG=[image-name] ./quickstart.sh`
 
 They can also be passed as a command line argument to to `quickstart.bat`:
