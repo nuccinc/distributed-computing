@@ -174,10 +174,10 @@ it as our default.
 If you wish, you can specify the `boinc/client` image with any of the tags below in order to use one of the specialized versions instead of `baseimage-alpine`.
 
 These can be used in the Linux/MacOS one-liner at the top of this page or passed as the `$IMG` environment variable to `quickstart.sh`:
-- `IMG=[image-name] ./quickstart.sh`
+- `IMG=boinc/client:[image-name] ./quickstart.sh`
 
 They can also be passed as a command line argument to to `quickstart.bat`:
-- `quickstart.bat --docker --image [image-name]`
+- `quickstart.bat --docker --image boinc/client:[image-name]`
 
 ---
 
