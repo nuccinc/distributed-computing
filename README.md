@@ -152,9 +152,34 @@ After starting BOINC, cancel out of the "Select a Project" window if it pops up,
 
 ## Docker Supported Architectures and Tags
 
-You can specialize the `boinc/client` image with any of the following tags to use one of the specialized container version instead.
+Not all of the BOINC images below are compatible with the COVID-19 Rosetta@home workloads.  To be perfectly clear, Rosetta@home
+is only handing out ***processor-focused*** workloads.  This means if you want to take advantage of your beefy GPU, you will be better off
+focusing on something like [Folding@home](https://foldingathome.org/), which can take advantage of that.  Also, Rosetta@home is not currently
+supporting ARM-based workloads.
 
-These can be used in the Linux/MacOS one-liner at the top of this page or passed as the `$IMG` environment variable to `quickstart.sh`.
+That being said, from the current word on the street, Folding@home is having trouble with distributing COVID-19 workloads at the moment,
+which is why NUCC has chosen Rosetta@home for the COVID-19 research in particular.
+
+NUCC will have additional projects in the future with [Folding@home](https://foldingathome.org/) and [GPUGRID](https://gpugrid.net/),
+and we will continue to update this page with instructions on how to connect to those particular projects.
+
+However, in the meantime, [Rosetta@home](https://boinc.bakerlab.org/) remains the best possible solution for continuously receiving
+and processing workloads that specifically target COVID-19 in particular, which is why NUCC has chosen the current solution.   
+
+BOINC's default image is `baseimage-ubuntu` or `latest`, which uses `glibc`, however NUCC's default image from the quickstart scripts
+is `baseimage-alpine`, which uses `musl` instead.  If this causes any issues with future projects, we will change to the Ubuntu base image,
+but for now, Alpine is working perfectly with our Rosetta@home workloads, and the image itself is much leaner, which was our reason for choosing
+it as our default. 
+
+You can specialize the `boinc/client` image with any of the tags below in order to use one of the specialized container versions.
+
+These can be used in the Linux/MacOS one-liner at the top of this page, passed as the `$IMG` environment variable to `quickstart.sh`:
+- `IMG=[image-name] ./quickstart.sh`
+
+They can also be passed as a command line argument to to `quickstart.bat`:
+- `quickstart.bat --docker --image [image-name]`
+
+---
 
 ### x86-64
 | Tag | Info |
