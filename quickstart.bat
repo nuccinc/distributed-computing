@@ -79,7 +79,7 @@ REM Install BOINC:
 ECHO.
 ECHO Installing BOINC...
 cinst /y boinc
-IF ERRORLEVEL 1 (ECHO BOINC failed to install. Please run "cinst /y boinc" from a new elevated command prompt. & GOTO:EOF)
+IF ERRORLEVEL 1 (ECHO BOINC failed to install. Please run "%~nx0 --native --attach" from a new elevated command prompt. & GOTO:EOF)
 
 :LAUNCHBOINC
 REM Launch BOINC:
