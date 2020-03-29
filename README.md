@@ -397,7 +397,7 @@ docker start boinc
 docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ resume
 ```
 
-### Docker Shortcut Functions (`nuccd`):
+### Docker Shortcut Function (`nuccd`):
 
 This will probably become part of the install script in the future, but as of now, this can make things much easier for Docker-based installations.
 
