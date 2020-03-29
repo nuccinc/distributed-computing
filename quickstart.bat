@@ -139,6 +139,15 @@ PAUSE
 EXIT /B
 
 REM ========================================================================================================================================
+REM =   INSTALLCHOCOLATEY - Installs the Chocolatey package manager for Windows.
+REM ========================================================================================================================================
+:INSTALLCHOCOLATEY
+ECHO.
+ECHO Installing Chocolatey (or making sure it's already installed)...
+@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+EXIT /B
+
+REM ========================================================================================================================================
 REM =   DOCKERINSTALLED - Downloads image specified with %IMG% and runs it in a Docker container
 REM ========================================================================================================================================
 :DOCKERINSTALLED
@@ -166,15 +175,6 @@ ECHO.
 SET /P "ANS=Do you want to check the current status? [y/n] "
 IF [%ANS%]==[y] (docker exec boinc boinccmd --get_state)
 
-EXIT /B
-
-REM ========================================================================================================================================
-REM =   INSTALLCHOCOLATEY - Installs the Chocolatey package manager for Windows.
-REM ========================================================================================================================================
-:INSTALLCHOCOLATEY
-ECHO.
-ECHO Installing Chocolatey (or making sure it's already installed)...
-@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 EXIT /B
 
  
