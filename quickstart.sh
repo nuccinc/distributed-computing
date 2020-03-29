@@ -5,7 +5,7 @@ IMG_UBUNTU='boinc/client:latest'
 
 # Ability to add custom command line options via env if you don't want defaults:
 if [[ -z $BOINC_CMD_LINE_OPTIONS ]]; then
-  BOINC_CMD_LINE_OPTIONS='--allow_remote_gui_rpc --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec'
+  BOINC_CMD_LINE_OPTIONS='--allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec'
 fi
 
 # Ability to set custom volume via env if you don't want defaults:
