@@ -16,16 +16,13 @@ folding research team that is actively processing COVID-19-specific workloads.
 ---
 
 ### The fastest and easiest way to contribute if you already have BOINC installed:
-- Windows:
-  - `boinccmd --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
-- Every other OS:
-  - `boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+`boinccmd --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
 
 ### The fastest and easiest way to contribute if you already have Docker installed:
 
 Copy/paste the following one-liner to get started immediately on MacOS or Linux:
 
-`docker run -d --restart always --name boinc -p 31416 -v "${HOME}/.boinc:/var/lib/boinc" -e BOINC_GUI_RPC_PASSWORD="123" -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec" boinc/client:baseimage-alpine`
+`docker run -d --restart always --name boinc -p 31416 -v "${HOME}/.boinc:/var/lib/boinc" -e BOINC_GUI_RPC_PASSWORD="123" -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec" boinc/client:baseimage-alpine`
 
 ---
 
@@ -143,10 +140,7 @@ Follow [the official instructions](https://boinc.berkeley.edu/wiki/Installing_BO
 
 After starting BOINC, cancel out of the "Select a Project" window if it pops up, and run the command below to start choochin':
 
-- Windows:
-  - `boinccmd --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
-- Every other OS:
-  - `boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+`boinccmd --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
 
 ---
 
@@ -274,7 +268,7 @@ docker service create \
   --network=boinc \
   -p 31416 \
   -e BOINC_GUI_RPC_PASSWORD="123" \
-  -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec" \
+  -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec" \
   boinc/client
 ```
 
@@ -346,17 +340,13 @@ This will allow you to be on the machine and run `boinccmd` commands directly.
 
 #### Attach to NUCC's Rosetta@home Project (this is done automatically in the quickstart scripts):
 
-**Windows:**
+**Native Installation:**
 
 `boinccmd --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
 
-**Linux/MacOS/BSD:**
+**Docker Installation:**
 
-`boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
-
-**Docker:**
-
-`docker exec [container-name] boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+`docker exec [container-name] boinccmd --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
 
 ### For simplicity, the commands below will be listed as local commands. This means 1 of 3 things:
 
