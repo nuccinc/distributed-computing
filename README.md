@@ -418,7 +418,7 @@ nuccd() {
   elif [[ $1 = "uninstall" ]]; then
     docker stop boinc 2>/dev/null
     docker rm boinc 2>/dev/null
-    docker rmi $(docker images | 'boinc/client')
+    docker images | grep boinc | awk '{print $3}' | xargs docker rmi 2>/dev/null
   else
     echo '
 USAGE: nuccd [OPTIONS]
@@ -462,7 +462,7 @@ elif [[ $1 = "remove" ]]; then
 elif [[ $1 = "uninstall" ]]; then
   docker stop boinc 2>/dev/null
   docker rm boinc 2>/dev/null
-  docker rmi $(docker images | 'boinc/client')
+  docker images | grep boinc | awk '{print $3}' | xargs docker rmi 2>/dev/null
 else
   echo '
 USAGE: nuccd [OPTIONS]
