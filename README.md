@@ -273,7 +273,7 @@ docker service create \
   --network=boinc \
   -p 31416 \
   -e BOINC_GUI_RPC_PASSWORD="123" \
-  -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec" \
+  -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec" \
   boinc/client
 ```
 
@@ -351,7 +351,7 @@ This will allow you to be on the machine and run `boinccmd` commands directly.
 
 **Docker Installation:**
 
-`docker exec [container-name] boinccmd --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+`docker exec [container-name] boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
 
 ### For simplicity, the commands below will be listed as local commands. This means 1 of 3 things:
 
