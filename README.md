@@ -6,7 +6,7 @@
 
 # NUCC Distributed Computing to Aid in COVID-19 Research
 
-**Latest Update: March 28, 2020**
+**Latest Update: March 29, 2020**
 
 Join [The National Upcycled Computing Collective (NUCC)](https://www.nuccinc.org/) in a collaborative effort to combine our resources in order to aid in COVID-19 research.
 This project draws heavily from [BOINC's default Docker configurations](https://github.com/BOINC/boinc-client-docker).
@@ -397,14 +397,104 @@ docker start boinc
 docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ resume
 ```
 
+### Docker Shortcut Functions (`nuccd`):
+
+This will probably become part of the install script in the future, but as of now, this can make things much easier for Docker-based installations.
+
+Just add this function to a dotfile like `~/.bash_functions` and source it in your `~/.bashrc` or `~/.bash_profile`:
+
+```sh
+nuccd() {
+  if [[ $1 = "allowmorework" ]]; then
+    docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ allowmorework
+  elif [[ $1 = "nomorework" ]]; then
+    docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ nomorework
+  elif [[ $1 = "suspend" ]]; then
+    docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ suspend
+  elif [[ $1 = "resume" ]]; then
+    docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ resume
+  elif [[ $1 = "stop" ]]; then
+    docker stop boinc
+  elif [[ $1 = "start" ]]; then
+    docker start boinc
+  elif [[ $1 = "remove" ]]; then
+    docker stop boinc 2>/dev/null
+    docker rm boinc
+  elif [[ $1 = "uninstall" ]]; then
+    docker stop boinc 2>/dev/null
+    docker rm boinc 2>/dev/null
+    docker rmi $(docker images | 'boinc/client')
+  else
+    echo '
+USAGE: nuccd [OPTIONS]
+
+allowmorework
+nomorwork
+suspend
+resume
+start
+stop
+remove
+uninstall
+'
+  fi
+}
+```
+
+Alternately, you can use it as a script and save it somewhere in your `$PATH` like `/usr/local/bin`:
+
+- `sudo vi /usr/local/bin/nuccd`
+- Add the following:
+
+```sh
+#!/bin/bash
+
+if [[ $1 = "allowmorework" ]]; then
+  docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ allowmorework
+elif [[ $1 = "nomorework" ]]; then
+  docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ nomorework
+elif [[ $1 = "suspend" ]]; then
+  docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ suspend
+elif [[ $1 = "resume" ]]; then
+  docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ resume
+elif [[ $1 = "stop" ]]; then
+  docker stop boinc
+elif [[ $1 = "start" ]]; then
+  docker start boinc
+elif [[ $1 = "remove" ]]; then
+  docker stop boinc 2>/dev/null
+  docker rm boinc
+elif [[ $1 = "uninstall" ]]; then
+  docker stop boinc 2>/dev/null
+  docker rm boinc 2>/dev/null
+  docker rmi $(docker images | 'boinc/client')
+else
+  echo '
+USAGE: nuccd [OPTIONS]
+
+allowmorework
+nomorwork
+suspend
+resume
+start
+stop
+remove
+uninstall
+'
+fi
+```
+
+- Save the file and figure out how to exit `vi`
+- `sudo chmod +x /usr/local/bin/nuccd`
+
 ---
 
 ## Updates
 
-- Added Centos/RHEL/Amazon Linux support for [The Almost Universal Docker Installer](https://github.com/phx/dockerinstall), which is used by [`quickstart.sh`](quickstart.sh).
-- Documentation on remotely monitoring and managing workloads has been provided.
-- Added manual installation steps.
-- Re-organized a few things.
+- Added `nuccd` Docker shortcut function/script instructions.
+- Working on adding `nuccd` support to quickstart scripts.
+- Working on automated native installation for MacOS.
+- Automated native installation for Linux coming soon.
 
 ---
 
