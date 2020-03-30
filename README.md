@@ -26,7 +26,7 @@ Copy/paste the following one-liner to get started immediately on MacOS or Linux:
 - Windows:
   - `C:\PROGRA~1\BOINC\boinccmd.exe --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
 - MacOS:
-  - `/Applications/BOINCManager.app/Contents/Resources/boinc -redirectio "/Library/Application Support/BOINC Data/" --daemon --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+  - `(/Applications/BOINCManager.app/Contents/Resources/boinc -redirectio "/Library/Application Support/BOINC Data/" --daemon --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec &) >/dev/null 2>&1 && open /Applications/BOINCManager.app`
 - Linux:
   - `boinccmd --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
 
@@ -40,6 +40,7 @@ Example: `boinccmd --passwd <yourpassword> --project_attach http://boinc.bakerla
 - [Automated Linux/MacOS Docker-based Installation](#automated-linux-and-macos-docker-installation)
 - [Automated Windows Native Installation](#automated-windows-native-installation)
 - [Automated Windows Docker-based Installation](#windows-docker-installation)
+- [Automated MacOS Native Installation](#automated-macos-native-installation)
 - [BSD Jail Installation](#bsd-jail-installation)
 - [Manual Installation](#manual-installation)
 - [Docker Supported Architectures and Tags](#docker-supported-architectures-and-tags)
@@ -135,6 +136,16 @@ When Docker Desktop is launched for the first time, you will need to log out and
 - Run `quickstart.bat --docker` again from an elevated prompt to start processing workloads immediately
 
 *When running the Docker image for the first time, Windows will ask to confirm if Docker can access your C drive.*
+
+---
+
+## Automated MacOS Native Installation
+
+```
+git clone https://github.com/phx/nucc
+cd nucc
+./quickstart.sh --native
+```
 
 ---
 
@@ -498,10 +509,10 @@ fi
 
 ## Updates
 
+- Added native installation support for MacOS in `quickstart.sh`
 - Made some clarifications and edits to the [BSD Documentation](https://bookandcode.com/nuccbsd/)
 - Made some clarifications on the Folding@home status and why NUCC is currently using Rosetta@home for COVID-19 research
 - Working on adding `nuccd` support to quickstart scripts.
-- Working on automated native installation for MacOS.
 - Automated native installation for Linux coming soon.
 
 ---
