@@ -15,19 +15,24 @@ folding research team that is actively processing COVID-19-specific workloads.
 
 ---
 
-### The fastest and easiest way to contribute if you already have BOINC installed:
-`boinccmd --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
-
-or 
-
-`boinccmd --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
-
-
 ### The fastest and easiest way to contribute if you already have Docker installed:
 
 Copy/paste the following one-liner to get started immediately on MacOS or Linux:
 
 `docker run -d --restart always --name boinc -p 31416 -v "${HOME}/.boinc:/var/lib/boinc" -e BOINC_GUI_RPC_PASSWORD="123" -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec" boinc/client:baseimage-alpine`
+
+
+### The fastest and easiest way to contribute if you already have BOINC installed natively:
+- Windows:
+  - `C:\PROGRA~1\BOINC\boinccmd.exe --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+- MacOS:
+  - /Applications/BOINCManager.app/Contents/Resources/boinc -redirectio "/Library/Application Support/BOINC Data/" --daemon --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec
+- Linux:
+  - `boinccmd --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+
+Note: If you don't have things configured exactly right, you may have to pass the password located in `gui_rpc_passwd.cfg` in the command line to `boinccmd`.
+
+Example: `boinccmd --passwd <yourpassword> --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
 
 ---
 
@@ -104,6 +109,8 @@ Cancel out of that window, confirm, and hit [Enter] to continue running the scri
 
 It will automatically connect to the correct project and start processing workloads immediately.
 
+I find it easier to view and manage by going to `View > Advanced`, as things appear to be more organized.
+
 ## Windows Docker Installation:
 
 Download the zip file of the repository, unzip it, and run `quickstart.bat` from an elevated (Administrator) command prompt.
@@ -146,6 +153,10 @@ Follow [the official instructions](https://boinc.berkeley.edu/wiki/Installing_BO
 After starting BOINC, cancel out of the "Select a Project" window if it pops up, and run the command below to start choochin':
 
 `boinccmd --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
+
+If running on Linux or MacOS, you may find it easier to go to `View > Advanced` to monitor things.
+
+**Note:** `boinccmd` is typically only in your `$PATH` on Linux. 
 
 ---
 
