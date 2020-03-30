@@ -6,7 +6,7 @@
 
 # NUCC Distributed Computing to Aid in COVID-19 Research
 
-**Latest Update: March 29, 2020**
+**Latest Update: March 30, 2020**
 
 Join [The National Upcycled Computing Collective (NUCC)](https://www.nuccinc.org/) in a collaborative effort to combine our resources in order to aid in COVID-19 research.
 This project draws heavily from [BOINC's default Docker configurations](https://github.com/BOINC/boinc-client-docker).
@@ -156,8 +156,9 @@ is only handing out ***processor-focused*** workloads.  This means if you want t
 focusing on something like [Folding@home](https://foldingathome.org/), which can take advantage of that.  Also, Rosetta@home is not currently
 supporting ARM-based workloads.
 
-That being said, from the current word on the street, Folding@home is having trouble with distributing COVID-19 workloads at the moment,
-which is why NUCC has chosen Rosetta@home for the COVID-19 research in particular.
+The current issue with Folding@home is that the number of servers sending data back is causing a DDOS on their systems as they are receiving the folded results.
+As a result of this, the work units aren't finishing, and no work can be handed out.  They have engaged several companies to help, but this is the primary reason
+for NUCC choosing to work with Rosetta@home for the COVID-19 research in particular, as they are handing out 100% COVID-19-specific work units immediately and efficiently.
 
 NUCC will have additional projects in the future with [Folding@home](https://foldingathome.org/) and [GPUGRID](https://gpugrid.net/),
 and we will continue to update this page with instructions on how to connect to those particular projects.
@@ -486,7 +487,8 @@ fi
 
 ## Updates
 
-- Added `nuccd` Docker shortcut function/script instructions.
+- Made some clarifications and edits to the [BSD Documentation](https://bookandcode.com/nuccbsd/)
+- Made some clarifications on the Folding@home status and why NUCC is currently using Rosetta@home for COVID-19 research
 - Working on adding `nuccd` support to quickstart scripts.
 - Working on automated native installation for MacOS.
 - Automated native installation for Linux coming soon.
