@@ -41,29 +41,28 @@ fi
 EOF
 
 ### VARIABLES:
+IMG_ALPINE='boinc/client:baseimage-alpine'
+IMG_UBUNTU='boinc/client:latest'
+# Ability to add custom project url via environment variable:
+PROJECT_URL="${PROJECT_URL:-http://boinc.bakerlab.org/rosetta/}"
+# Ability to add custom weak key via environment variable:
+WEAK_KEY="${WEAK_KEY:-2108683_fdd846588bee255b50901b8b678d52ec}"
+# Ability to add custom command line options via environment variable:
+if [[ $1 = "native" ]]; then
+  BOINC_CMD_LINE_OPTIONS="${BOINC_CMD_LINE_OPTIONS:---allow_remote_gui_rpc --project_attach ${PROJECT_URL} ${WEAK_KEY}}"
+else
+  BOINC_CMD_LINE_OPTIONS="${BONIC_CMD_LINE_OPTIONS:---allow_remote_gui_rpc --attach_project ${PROJECT_URL} ${WEAK_KEY}}"
+fi
+# Ability to set custom Docker volume via environment variable:
+VOLUME="${VOLUME:-${HOME}/.boinc}"
+# Ability to set custom Docker image via environment variable:
+IMG="${IMG:-${IMG_ALPINE}}"
+# Contents of cc_config.xml:
 CC_CONFIG='<cc_config>
    <options>
        <allow_remote_gui_rpc>1</allow_remote_gui_rpc>
    </options>
 </cc_config>'
-IMG_ALPINE='boinc/client:baseimage-alpine'
-IMG_UBUNTU='boinc/client:latest'
-# Ability to add custom command line options via env if you don't want defaults:
-if [[ -z $BOINC_CMD_LINE_OPTIONS ]]; then
-  if [[ $1 = "native" ]]; then
-    BOINC_CMD_LINE_OPTIONS='--allow_remote_gui_rpc --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec'
-  fi
-else
-  BOINC_CMD_LINE_OPTIONS='--allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec'
-fi
-# Ability to set custom Docker volume via environment variable:
-if [[ -z $VOLUME ]]; then
-  VOLUME="${HOME}/.boinc"
-fi
-# Ability to set custom Docker image via environment variable:
-if [[ -z $IMG ]]; then
-  IMG="${IMG_ALPINE}"
-fi
 
 ### FUNCTIONS:
 show_help() {
