@@ -155,6 +155,7 @@ When Docker Desktop is launched for the first time, you will need to log out and
 
 - Tested Distros:
   - Ubuntu
+  - Debian
 
 ```
 git clone https://github.com/phx/nucc
