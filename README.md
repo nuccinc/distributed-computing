@@ -157,6 +157,7 @@ When Docker Desktop is launched for the first time, you will need to log out and
   - MacOS
   - Ubuntu
   - Debian
+  - Kali
 
 ```
 git clone https://github.com/phx/nucc
@@ -477,7 +478,7 @@ fi
 
 ## Updates
 
-- Added automated native installation support for Ubuntu and Debian
+- Added automated native installation support for Ubuntu, Debian, and Kali
 - Added `nuccd` support for MacOS/Linux-based Docker installations
 - Fixed allow_gui_rpc for remote monitoring of Docker and native MacOS tasks
 
