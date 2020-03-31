@@ -84,7 +84,7 @@ in the supported environment variables:
 | `$IMG` | `boinc/client:baseimage-alpine` |
 | `$VOLUME` | `$HOME/.boinc` |
 | `$PROJECT_URL` | `http://boinc.bakerlab.org/rosetta/` |
-| `$WEAK_KEY` | `2108683_fdd846588bee255b50901b8b678d52ec` (NUCC United) |
+| `$WEAK_KEY` | `2108683_fdd846588bee255b50901b8b678d52ec` |
 | `$BOINC_CMD_LINE_OPTIONS` | `--allow_remote_gui_rpc --project_attach ${PROJECT_URL} ${WEAK_KEY}` |
 | `$BOINC_GUI_RPC_PASSWORD` | `[prompt]` |
 
