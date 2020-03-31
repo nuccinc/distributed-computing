@@ -434,7 +434,7 @@ docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ resume
 
 ### Docker Helper Script (`nuccd`):
 
-The `nuccd` helper script will be added to `/usr/local/bin/nuccd` as part of the `quickstart.sh` install script for Docker-based installations:
+The `nuccd` helper script will be added to `/usr/local/bin/nuccd` as part of the `quickstart.sh` install script for Docker-based installations on MacOS and Linux:
 
 ```sh
 #!/bin/bash
