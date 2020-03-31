@@ -40,7 +40,7 @@ Example: `boinccmd --passwd <yourpassword> --project_attach http://boinc.bakerla
 - [Automated Linux/MacOS Docker-based Installation](#automated-linux-and-macos-docker-installation)
 - [Automated Windows Native Installation](#automated-windows-native-installation)
 - [Automated Windows Docker-based Installation](#windows-docker-installation)
-- [Automated MacOS Native Installation](#automated-macos-native-installation)
+- [Automated MacOS and Linux Native Installation](#automated-macos-and-linux-native-installation)
 - [BSD Jail Installation](#bsd-jail-installation)
 - [Manual Installation](#manual-installation)
 - [Docker Supported Architectures and Tags](#docker-supported-architectures-and-tags)
@@ -151,7 +151,10 @@ When Docker Desktop is launched for the first time, you will need to log out and
 
 ---
 
-## Automated MacOS Native Installation
+## Automated MacOS and Linux Native Installation
+
+- Tested Distros:
+  - Ubuntu
 
 ```
 git clone https://github.com/phx/nucc
