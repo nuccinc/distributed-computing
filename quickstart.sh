@@ -1,5 +1,45 @@
 #!/usr/bin/env bash
 
+### NUCCD SCRIPT:
+read -r -d '' NUCCD <<'EOF'
+#!/bin/bash
+
+if [[ $1 = "allowmorework" ]]; then
+  docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ allowmorework
+elif [[ $1 = "nomorework" ]]; then
+  docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ nomorework
+elif [[ $1 = "suspend" ]]; then
+  docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ suspend
+elif [[ $1 = "resume" ]]; then
+  docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ resume
+elif [[ $1 = "stop" ]]; then
+  docker stop boinc
+elif [[ $1 = "start" ]]; then
+  docker start boinc
+elif [[ $1 = "remove" ]]; then
+  docker stop boinc 2>/dev/null
+  docker rm boinc
+elif [[ $1 = "uninstall" ]]; then
+  docker stop boinc 2>/dev/null
+  docker rm boinc 2>/dev/null
+  docker images | grep boinc | awk '{print $3}' | xargs docker rmi 2>/dev/null
+  sudo rm /usr/local/bin/nuccd 2>/dev/null
+else
+  echo '
+USAGE: nuccd [OPTIONS]
+
+allowmorework
+nomorwork
+suspend
+resume
+start
+stop
+remove
+uninstall
+'
+fi
+EOF
+
 ### VARIABLES:
 CC_CONFIG='<cc_config>
    <options>
@@ -62,14 +102,16 @@ docker_install() {
   docker run -d --restart always --name boinc -p 31416:31416 -v "${VOLUME}:/var/lib/boinc" -e BOINC_GUI_RPC_PASSWORD="${BOINC_GUI_RPC_PASSWORD}" -e BOINC_CMD_LINE_OPTIONS="${BOINC_CMD_LINE_OPTIONS}" "${IMG}"
 
   # Details:
-  echo
-  echo "Run 'docker exec -it boinc /bin/sh' to exec into the container."
-  echo "Run 'docker exec boin boinccmd --help for commands to execute in this similar manner."
-  echo
+  echo -e "\nRun 'docker exec -it boinc /bin/sh' to exec into the container."
+  echo -e "Run 'docker exec boin boinccmd --help for commands to execute in this similar manner.\n"
   read -rp 'Do you wish to get the current status? [y/n] ' getstatus
   if [[ $getstatus = "y" ]]; then
     docker exec boinc boinccmd --get_state
   fi
+  echo -e "\nInstalling nuccd helper script to /usr/local/bin..."
+  echo "$NUCCD" | sudo tee /usr/local/bin/nuccd > /dev/null
+  sudo chmod +x /usr/local/bin/nuccd
+  /usr/local/bin/nuccd --help
 }
 not_supported() {
   echo -e '\n[ERROR] This script is not currently supported for your operating system.'
