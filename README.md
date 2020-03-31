@@ -94,7 +94,7 @@ If you are running `firewalld` or `ufw` or something like that, you will need to
 
 Alternately, you can disable the service altogether by running `systemctl disable firewalld` (etc.), and then rebooting.
 
-**This is necessary to be able to resolve DNS inside the containers.**
+*This is necessary to be able to resolve DNS inside the containers.*
 
 If you have already installed and spun up a container via `quickstart.sh`, just implement the firewall rules and run `docker restart boinc`.
 
