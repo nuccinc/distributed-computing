@@ -195,7 +195,7 @@ pkg_manager_config() {
 native_install() {
   ### REMOVE LATER
   ### Fail-safe, native install for only tested distros:
-  if [[ ($DISTRO_NAME != "macos") && ($DISTRO_NAME != "ubuntu") && ($DISTRO_NAME != "debian") ]]; then
+  if [[ ($DISTRO_NAME != "macos") && ($DISTRO_NAME != "ubuntu") && ($DISTRO_NAME != "debian") && ($DISTRO_NAME != "kali") ]]; then
     not_supported
   fi
   pkg_manager_config
@@ -205,8 +205,8 @@ native_install() {
     echo "$CC_CONFIG" > "/Library/Application Support/BOINC Data/cc_config.xml"
     (/Applications/BOINCmanager.app/Contents/Resources/boinc -redirectio -dir "/Library/Application Support/BOINC Data/" --daemon --allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec &) >/dev/null 2>&1
     open /Applications/BOINCManager.app
-  elif [[ ($DISTRO_NAME = "ubuntu") || ($DISTRO_NAME = "debian") ]]; then
-    if [[ $DISTRO_NAME = "ubuntu" ]]; then
+  elif [[ ($DISTRO_NAME = "ubuntu") || ($DISTRO_NAME = "debian") || ($DISTRO_NAME = "kali") ]]; then
+    if [[ ($DISTRO_NAME = "ubuntu") || ($DISTRO_NAME = "kali") ]]; then
       echo -e '\nPlease select the appropriate BOINC client:\n'
       echo '1) boinc-client (DEFAULT)'
       echo '2) boinc-client-nvidia-cuda (NVIDIA CUDA support)'
@@ -242,11 +242,25 @@ native_install() {
     fi
     ${PKG_INSTALL} ${packages}
     echo "$BOINC_GUI_RPC_PASSWORD" | sudo tee '/etc/boinc-client/gui_rpc_auth.cfg' > /dev/null
-    sudo chown "$LOGNAME" '/etc/boinc-client/gui_rpc_auth.cfg'
+    if [[ $LOGNAME != "root" ]]; then
+      sudo chown "$LOGNAME" '/etc/boinc-client/gui_rpc_auth.cfg'
+    fi
     echo "$CC_CONFIG" | sudo tee '/etc/boinc-client/cc_config.xml' > /dev/null
     echo '127.0.0.1' | sudo tee '/etc/boinc-client/remote_hosts.cfg' > /dev/null
-    boinccmd --project_attach "${PROJECT_URL}" "${WEAK_KEY}"
-    sudo systemctl restart boinc-client.service
+    if [[ $DISTRO_NAME = "kali" ]]; then
+      sudo sed -i 's/User=boinc/User=root/' '/lib/systemd/system/boinc-client.service'
+      sudo systemctl daemon-reload
+    fi
+    sudo systemctl stop boinc-client.service
+    sudo systemctl start boinc-client.service
+    sudo systemctl enable boinc-client.service
+    sleep 5
+    # It's not wrong, just weirdness, bear with me:
+    if [[ $LOGNAME = "root" ]]; then
+      boinccmd --passwd "$(cat /etc/boinc-client/gui_rpc_auth.cfg)" --project_attach "${PROJECT_URL}" "${WEAK_KEY}"
+    else
+      boinccmd --project_attach "${PROJECT_URL}" "${WEAK_KEY}"
+    fi
   fi
 }
 
