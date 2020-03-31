@@ -153,7 +153,8 @@ When Docker Desktop is launched for the first time, you will need to log out and
 
 ## Automated MacOS and Linux Native Installation
 
-- Tested Distros:
+- Tested Operating Systems:
+  - MacOS
   - Ubuntu
   - Debian
 
