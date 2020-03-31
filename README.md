@@ -74,12 +74,12 @@ cd nucc
 ./quickstart.sh
 ```
 
-*If the script errors out after installing Docker, run it again in a new login shell that recognizes your user as a member of the `docker` group, and you should be squared away.*
+*Note: If the script errors out after installing Docker, run it again in a new login shell that recognizes your user as a member of the `docker` group, and you should be squared away.*
 
-**NOTE:** If you already have a team or want to specify an alternate project, don't be discouraged -- you can still use `quickstart.sh`!  Simply speficy your project URL and/or weak key
+If you already have a team or want to specify an alternate project, don't be discouraged -- you can still use `quickstart.sh`!  Simply speficy your project URL and/or weak key
 in the supported environment variables:
 
-| Variable name | Default value if unset |
+| Environment variable | Default value if unset |
 | :--- | :--- |
 | `$IMG` | `boinc/client:baseimage-alpine` |
 | `$VOLUME` | `$HOME/.boinc` |
