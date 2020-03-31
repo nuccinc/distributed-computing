@@ -1,5 +1,29 @@
 #!/usr/bin/env bash
 
+### VARIABLES:
+IMG_ALPINE='boinc/client:baseimage-alpine'
+IMG_UBUNTU='boinc/client:latest'
+# Ability to add custom project url via environment variable:
+PROJECT_URL="${PROJECT_URL:-http://boinc.bakerlab.org/rosetta/}"
+# Ability to add custom weak key via environment variable:
+WEAK_KEY="${WEAK_KEY:-2108683_fdd846588bee255b50901b8b678d52ec}"
+# Ability to add custom command line options via environment variable:
+if [[ $1 = "native" ]]; then
+  BOINC_CMD_LINE_OPTIONS="${BOINC_CMD_LINE_OPTIONS:---allow_remote_gui_rpc --project_attach ${PROJECT_URL} ${WEAK_KEY}}"
+else
+  BOINC_CMD_LINE_OPTIONS="${BONIC_CMD_LINE_OPTIONS:---allow_remote_gui_rpc --attach_project ${PROJECT_URL} ${WEAK_KEY}}"
+fi
+# Ability to set custom Docker volume via environment variable:
+VOLUME="${VOLUME:-${HOME}/.boinc}"
+# Ability to set custom Docker image via environment variable:
+IMG="${IMG:-${IMG_ALPINE}}"
+# Contents of cc_config.xml:
+CC_CONFIG='<cc_config>
+   <options>
+       <allow_remote_gui_rpc>1</allow_remote_gui_rpc>
+   </options>
+</cc_config>'
+
 ### NUCCD SCRIPT:
 read -r -d '' NUCCD <<'EOF'
 #!/bin/bash
@@ -39,30 +63,6 @@ uninstall
 '
 fi
 EOF
-
-### VARIABLES:
-IMG_ALPINE='boinc/client:baseimage-alpine'
-IMG_UBUNTU='boinc/client:latest'
-# Ability to add custom project url via environment variable:
-PROJECT_URL="${PROJECT_URL:-http://boinc.bakerlab.org/rosetta/}"
-# Ability to add custom weak key via environment variable:
-WEAK_KEY="${WEAK_KEY:-2108683_fdd846588bee255b50901b8b678d52ec}"
-# Ability to add custom command line options via environment variable:
-if [[ $1 = "native" ]]; then
-  BOINC_CMD_LINE_OPTIONS="${BOINC_CMD_LINE_OPTIONS:---allow_remote_gui_rpc --project_attach ${PROJECT_URL} ${WEAK_KEY}}"
-else
-  BOINC_CMD_LINE_OPTIONS="${BONIC_CMD_LINE_OPTIONS:---allow_remote_gui_rpc --attach_project ${PROJECT_URL} ${WEAK_KEY}}"
-fi
-# Ability to set custom Docker volume via environment variable:
-VOLUME="${VOLUME:-${HOME}/.boinc}"
-# Ability to set custom Docker image via environment variable:
-IMG="${IMG:-${IMG_ALPINE}}"
-# Contents of cc_config.xml:
-CC_CONFIG='<cc_config>
-   <options>
-       <allow_remote_gui_rpc>1</allow_remote_gui_rpc>
-   </options>
-</cc_config>'
 
 ### FUNCTIONS:
 show_help() {
