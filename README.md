@@ -76,6 +76,18 @@ cd nucc
 
 *If the script errors out after installing Docker, run it again in a new login shell that recognizes your user as a member of the `docker` group, and you should be squared away.*
 
+**NOTE:** If you already have a team or want to specify an alternate project, don't be discouraged -- you can still use `quickstart.sh`!  Simply speficy your project URL and/or weak key
+in the supported environment variables:
+
+| Variable name | Default value if unset |
+| :--- | :--- |
+| `$IMG` | default value: `boinc/client:baseimage-alpine` |
+| `$VOLUME` | default value: `$HOME/.boinc` |
+| `$PROJECT_URL` | default value: `http://boinc.bakerlab.org/rosetta/` |
+| `$WEAK_KEY` | default value: `2108683_fdd846588bee255b50901b8b678d52ec` (NUCC United) |
+| `$BOINC_CMD_LINE_OPTIONS` | default value: `--allow_remote_gui_rpc --project_attach ${PROJECT_URL} ${WEAK_KEY}` |
+| `$BOINC_GUI_RPC_PASSWORD` | default value: `[prompt]` |
+
 #### Firewall Caveats:
 
 If you are running `firewalld` or `ufw` or something like that, you will need to either create a rule for the `docker0` interface on port `31416`.
