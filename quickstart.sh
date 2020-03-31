@@ -195,15 +195,54 @@ pkg_manager_config() {
 native_install() {
   ### REMOVE LATER
   ### Fail-safe, native install for only tested distros:
-  if [[ $DISTRO_NAME != "macos" ]]; then
+  if [[ ($DISTRO_NAME != "macos") && ($DISTRO_NAME != "ubuntu") ]]; then
     not_supported
   fi
+  pkg_manager_config
   ${UPDATE_PKG_CACHE}
   if [[ $DISTRO_NAME = "macos" ]]; then
     brew cask install boinc
     echo "$CC_CONFIG" > "/Library/Application Support/BOINC Data/cc_config.xml"
     (/Applications/BOINCmanager.app/Contents/Resources/boinc -redirectio -dir "/Library/Application Support/BOINC Data/" --daemon --allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec &) >/dev/null 2>&1
     open /Applications/BOINCManager.app
+  elif [[ $DISTRO_NAME = "ubuntu" ]]; then
+    echo -e '\nPlease select the appropriate BOINC client:\n'
+    echo '1) boinc-client (DEFAULT)'
+    echo '2) boinc-client-nvidia-cuda (NVIDIA CUDA support)'
+    echo '3) boinc-client-opencl (AMD/ATI OpenCL support)'
+    echo
+    read -rp 'Selection Number: ' boinc_client
+    if [[ $boinc_client -eq 1 ]]; then
+      packages='boinc-client'
+    elif [[ $boinc_client -eq 2 ]]; then
+      packages='boinc-client-nvidia-cuda'
+    elif [[ $boinc_client -eq 3 ]]; then
+      packages='boinc-client-opencl'
+    else
+      packages='boinc-client'
+    fi
+    echo -e '\nThe following will allow you to install BOINC local management utilities:'
+    read -rp 'Do you intend to manage projects from this local machine from a GUI or TUI interface? [y/n] ' local_mgmt
+    if [[ ($local_mgmt = 'y') || ($local_mgmt = 'yes') ]]; then
+      echo -e '\nPlease select your preferred BOINC Manager:\n'
+      echo '1) boinc-manager - GUI interface to control and monitor the BOINC core client'
+      echo '2) boinctui - Fullscreen terminal user interface (TUI) for BOINC core client'
+      echo '3) BOTH'
+      echo
+      read -rp 'Selection Number: ' boinc_manager
+      if [[ $boinc_manager -eq 1 ]]; then
+        packages="${packages} boinc-manager"
+      elif [[ $boinc_manager -eq 2 ]]; then
+        packages="${packages} boinctui"
+      elif [[ $boinc_manager -eq 3 ]]; then
+        packages="${packages} boinc-manager boinctui"
+      fi
+    fi
+    ${PKG_INSTALL} ${packages}
+    echo "$BOINC_GUI_RPC_PASSWORD" | sudo tee '/etc/boinc-client/gui_rpc_auth.cfg' > /dev/null
+    echo "$CC_CONFIG" | sudo tee '/etc/boinc-client/cc_config.xml' > /dev/null
+    boinccmd --project_attach "${PROJECT_URL}" "${WEAK_KEY}"
+    sudo systemctl restart boinc-client.service
   fi
 }
 
@@ -241,6 +280,12 @@ if [[ $1 = "--native" ]]; then
   fi
   distro_check
   native_install
+  echo
+  read -rp 'Would you like to get the current state? [y/n] ' get_state
+  if [[ ($get_state = 'y') || ($get_state = 'yes') ]]; then
+    boinccmd --get_state
+  fi
+  echo -e "\nFeel free to launch a BOINC Manager or use the command 'boinccmd' to monitor your tasks.\n"
 else
   docker_install
 fi
