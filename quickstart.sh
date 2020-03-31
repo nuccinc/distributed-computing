@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
 ### VARIABLES:
+CC_CONFIG='<cc_config>
+   <options>
+       <allow_remote_gui_rpc>1</allow_remote_gui_rpc>
+   </options>
+</cc_config>'
 IMG_ALPINE='boinc/client:baseimage-alpine'
 IMG_UBUNTU='boinc/client:latest'
 # Ability to add custom command line options via env if you don't want defaults:
@@ -51,12 +56,12 @@ docker_install() {
   fi
 
   # Where the magic happens:
+  mkdir -p "${VOLUME}"
+  sudo chown -R "${LOGNAME}" "${VOLUME}"
+  echo "${CC_CONFIG}" > "${VOLUME}/cc_config.xml"
   docker run -d --restart always --name boinc -p 31416:31416 -v "${VOLUME}:/var/lib/boinc" -e BOINC_GUI_RPC_PASSWORD="${BOINC_GUI_RPC_PASSWORD}" -e BOINC_CMD_LINE_OPTIONS="${BOINC_CMD_LINE_OPTIONS}" "${IMG}"
 
   # Details:
-  echo
-  echo "If you wish to manage your tasks on this machine remotely from another machine on the network:"
-  echo "Manually add the IP to ${VOLUME}/remote_hosts.cfg, and run 'docker restart boinc'."
   echo
   echo "Run 'docker exec -it boinc /bin/sh' to exec into the container."
   echo "Run 'docker exec boin boinccmd --help for commands to execute in this similar manner."
@@ -155,7 +160,8 @@ native_install() {
   ${UPDATE_PKG_CACHE}
   if [[ $DISTRO_NAME = "macos" ]]; then
     brew cask install boinc
-    (/Applications/BOINCmanager.app/Contents/Resources/boinc -redirectio -dir "/Library/Application Support/BOINC Data/" --daemon --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec &) >/dev/null 2>&1
+    echo "$CC_CONFIG" > "/Library/Application Support/BOINC Data/cc_config.xml"
+    (/Applications/BOINCmanager.app/Contents/Resources/boinc -redirectio -dir "/Library/Application Support/BOINC Data/" --daemon --allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec &) >/dev/null 2>&1
     open /Applications/BOINCManager.app
   fi
 }
@@ -173,7 +179,7 @@ fi
 if [[ -z $BOINC_GUI_RPC_PASSWORD ]]; then
   echo
   read -rp 'Please enter a value for the BOINC_GUI_RPC_PASSWORD: ' BOINC_GUI_RPC_PASSWORD
-  echo 'This can be changed at any time by changing the value in gui_rpc_auth.cfg'
+  echo -e 'This can be changed at any time by changing the value in gui_rpc_auth.cfg\n'
 fi
 
 if [[ $1 = "--native" ]]; then
