@@ -477,9 +477,9 @@ fi
 
 ## Updates
 
+- Added automated native installation support for Ubuntu and Debian
+- Added `nuccd` support for MacOS/Linux-based Docker installations
 - Fixed allow_gui_rpc for remote monitoring of Docker and native MacOS tasks
-- Automated native installation for Linux coming soon.
-- Working on adding `nuccd` support to quickstart scripts.
 
 ---
 
