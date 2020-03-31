@@ -6,7 +6,7 @@
 
 # NUCC Distributed Computing to Aid in COVID-19 Research
 
-**Latest Update: March 30, 2020**
+**Latest Update: March 31, 2020**
 
 Join [The National Upcycled Computing Collective (NUCC)](https://www.nuccinc.org/) in a collaborative effort to combine our resources in order to aid in COVID-19 research.
 This project draws heavily from [BOINC's default Docker configurations](https://github.com/BOINC/boinc-client-docker).
@@ -26,7 +26,7 @@ Copy/paste the following one-liner to get started immediately on MacOS or Linux:
 - Windows:
   - `C:\PROGRA~1\BOINC\boinccmd.exe --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
 - MacOS:
-  - `(/Applications/BOINCManager.app/Contents/Resources/boinc -redirectio "/Library/Application Support/BOINC Data/" --daemon --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec &) >/dev/null 2>&1 && open /Applications/BOINCManager.app`
+  - `(/Applications/BOINCManager.app/Contents/Resources/boinc -redirectio "/Library/Application Support/BOINC Data/" --daemon --allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec &) >/dev/null 2>&1 && open /Applications/BOINCManager.app`
 - Linux:
   - `boinccmd --project_attach http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec`
 
@@ -509,11 +509,9 @@ fi
 
 ## Updates
 
-- Added native installation support for MacOS in `quickstart.sh`
-- Made some clarifications and edits to the [BSD Documentation](https://bookandcode.com/nuccbsd/)
-- Made some clarifications on the Folding@home status and why NUCC is currently using Rosetta@home for COVID-19 research
-- Working on adding `nuccd` support to quickstart scripts.
+- Fixed allow_gui_rpc for remote monitoring of Docker and native MacOS tasks
 - Automated native installation for Linux coming soon.
+- Working on adding `nuccd` support to quickstart scripts.
 
 ---
 
