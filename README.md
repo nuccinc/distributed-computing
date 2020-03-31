@@ -415,54 +415,9 @@ docker start boinc
 docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ resume
 ```
 
-### Docker Shortcut Function (`nuccd`):
+### Docker Helper Script (`nuccd`):
 
-This will probably become part of the install script in the future, but as of now, this can make things much easier for Docker-based installations.
-
-Just add this function to a dotfile like `~/.bash_functions` and source it in your `~/.bashrc` or `~/.bash_profile`:
-
-```sh
-nuccd() {
-  if [[ $1 = "allowmorework" ]]; then
-    docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ allowmorework
-  elif [[ $1 = "nomorework" ]]; then
-    docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ nomorework
-  elif [[ $1 = "suspend" ]]; then
-    docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ suspend
-  elif [[ $1 = "resume" ]]; then
-    docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ resume
-  elif [[ $1 = "stop" ]]; then
-    docker stop boinc
-  elif [[ $1 = "start" ]]; then
-    docker start boinc
-  elif [[ $1 = "remove" ]]; then
-    docker stop boinc 2>/dev/null
-    docker rm boinc
-  elif [[ $1 = "uninstall" ]]; then
-    docker stop boinc 2>/dev/null
-    docker rm boinc 2>/dev/null
-    docker images | grep boinc | awk '{print $3}' | xargs docker rmi 2>/dev/null
-  else
-    echo '
-USAGE: nuccd [OPTIONS]
-
-allowmorework
-nomorwork
-suspend
-resume
-start
-stop
-remove
-uninstall
-'
-  fi
-}
-```
-
-Alternately, you can use it as a script and save it somewhere in your `$PATH` like `/usr/local/bin`:
-
-- `sudo vi /usr/local/bin/nuccd`
-- Add the following:
+The `nuccd` helper script will be added to `/usr/local/bin/nuccd` as part of the `quickstart.sh` install script for Docker-based installations:
 
 ```sh
 #!/bin/bash
@@ -486,6 +441,7 @@ elif [[ $1 = "uninstall" ]]; then
   docker stop boinc 2>/dev/null
   docker rm boinc 2>/dev/null
   docker images | grep boinc | awk '{print $3}' | xargs docker rmi 2>/dev/null
+  sudo rm -f /usr/local/bin/nuccd
 else
   echo '
 USAGE: nuccd [OPTIONS]
@@ -501,11 +457,6 @@ uninstall
 '
 fi
 ```
-
-- Save the file and figure out how to exit `vi`
-- `sudo chmod +x /usr/local/bin/nuccd`
-
----
 
 ## Updates
 
