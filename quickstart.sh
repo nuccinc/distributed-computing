@@ -255,12 +255,7 @@ native_install() {
     sudo systemctl start boinc-client.service
     sudo systemctl enable boinc-client.service
     sleep 5
-    # It's not wrong, just weirdness, bear with me:
-    if [[ $LOGNAME = "root" ]]; then
-      boinccmd --passwd "$(cat /etc/boinc-client/gui_rpc_auth.cfg)" --project_attach "${PROJECT_URL}" "${WEAK_KEY}"
-    else
-      boinccmd --project_attach "${PROJECT_URL}" "${WEAK_KEY}"
-    fi
+    boinccmd --passwd "$(cat /etc/boinc-client/gui_rpc_auth.cfg)" --project_attach "${PROJECT_URL}" "${WEAK_KEY}"
   fi
 }
 
