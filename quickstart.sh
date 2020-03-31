@@ -242,11 +242,12 @@ native_install() {
     fi
     ${PKG_INSTALL} ${packages}
     echo "$BOINC_GUI_RPC_PASSWORD" | sudo tee '/etc/boinc-client/gui_rpc_auth.cfg' > /dev/null
+    echo "$CC_CONFIG" | sudo tee '/etc/boinc-client/cc_config.xml' > /dev/null
+    echo '127.0.0.1' | sudo tee '/etc/boinc-client/remote_hosts.cfg' > /dev/null
+    sudo chown -R boinc:boinc '/usr/lib/boinc-client'
     if [[ $LOGNAME != "root" ]]; then
       sudo chown "$LOGNAME" '/etc/boinc-client/gui_rpc_auth.cfg'
     fi
-    echo "$CC_CONFIG" | sudo tee '/etc/boinc-client/cc_config.xml' > /dev/null
-    echo '127.0.0.1' | sudo tee '/etc/boinc-client/remote_hosts.cfg' > /dev/null
     if [[ $DISTRO_NAME = "kali" ]]; then
       sudo sed -i 's/User=boinc/User=root/' '/lib/systemd/system/boinc-client.service'
       sudo systemctl daemon-reload
