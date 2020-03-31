@@ -195,7 +195,7 @@ pkg_manager_config() {
 native_install() {
   ### REMOVE LATER
   ### Fail-safe, native install for only tested distros:
-  if [[ ($DISTRO_NAME != "macos") && ($DISTRO_NAME != "ubuntu") ]]; then
+  if [[ ($DISTRO_NAME != "macos") && ($DISTRO_NAME != "ubuntu") && ($DISTRO_NAME != "debian") ]]; then
     not_supported
   fi
   pkg_manager_config
@@ -205,13 +205,15 @@ native_install() {
     echo "$CC_CONFIG" > "/Library/Application Support/BOINC Data/cc_config.xml"
     (/Applications/BOINCmanager.app/Contents/Resources/boinc -redirectio -dir "/Library/Application Support/BOINC Data/" --daemon --allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec &) >/dev/null 2>&1
     open /Applications/BOINCManager.app
-  elif [[ $DISTRO_NAME = "ubuntu" ]]; then
-    echo -e '\nPlease select the appropriate BOINC client:\n'
-    echo '1) boinc-client (DEFAULT)'
-    echo '2) boinc-client-nvidia-cuda (NVIDIA CUDA support)'
-    echo '3) boinc-client-opencl (AMD/ATI OpenCL support)'
-    echo
-    read -rp 'Selection Number: ' boinc_client
+  elif [[ ($DISTRO_NAME = "ubuntu") || ($DISTRO_NAME = "debian") ]]; then
+    if [[ $DISTRO_NAME = "ubuntu" ]]; then
+      echo -e '\nPlease select the appropriate BOINC client:\n'
+      echo '1) boinc-client (DEFAULT)'
+      echo '2) boinc-client-nvidia-cuda (NVIDIA CUDA support)'
+      echo '3) boinc-client-opencl (AMD/ATI OpenCL support)'
+      echo
+      read -rp 'Selection Number: ' boinc_client
+    fi
     if [[ $boinc_client -eq 1 ]]; then
       packages='boinc-client'
     elif [[ $boinc_client -eq 2 ]]; then
@@ -240,7 +242,9 @@ native_install() {
     fi
     ${PKG_INSTALL} ${packages}
     echo "$BOINC_GUI_RPC_PASSWORD" | sudo tee '/etc/boinc-client/gui_rpc_auth.cfg' > /dev/null
+    sudo chown "$LOGNAME" '/etc/boinc-client/gui_rpc_auth.cfg'
     echo "$CC_CONFIG" | sudo tee '/etc/boinc-client/cc_config.xml' > /dev/null
+    echo '127.0.0.1' | sudo tee '/etc/boinc-client/remote_hosts.cfg' > /dev/null
     boinccmd --project_attach "${PROJECT_URL}" "${WEAK_KEY}"
     sudo systemctl restart boinc-client.service
   fi
