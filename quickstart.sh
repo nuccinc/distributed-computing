@@ -23,7 +23,7 @@ elif [[ $1 = "uninstall" ]]; then
   docker stop boinc 2>/dev/null
   docker rm boinc 2>/dev/null
   docker images | grep boinc | awk '{print $3}' | xargs docker rmi 2>/dev/null
-  sudo rm /usr/local/bin/nuccd 2>/dev/null
+  sudo rm -f /usr/local/bin/nuccd
 else
   echo '
 USAGE: nuccd [OPTIONS]
