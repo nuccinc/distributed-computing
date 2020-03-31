@@ -11,7 +11,7 @@ WEAK_KEY="${WEAK_KEY:-2108683_fdd846588bee255b50901b8b678d52ec}"
 if [[ $1 = "native" ]]; then
   BOINC_CMD_LINE_OPTIONS="${BOINC_CMD_LINE_OPTIONS:---allow_remote_gui_rpc --project_attach ${PROJECT_URL} ${WEAK_KEY}}"
 else
-  BOINC_CMD_LINE_OPTIONS="${BONIC_CMD_LINE_OPTIONS:---allow_remote_gui_rpc --attach_project ${PROJECT_URL} ${WEAK_KEY}}"
+  BOINC_CMD_LINE_OPTIONS="${BOINC_CMD_LINE_OPTIONS:---allow_remote_gui_rpc --attach_project ${PROJECT_URL} ${WEAK_KEY}}"
 fi
 # Ability to set custom Docker volume via environment variable:
 VOLUME="${VOLUME:-${HOME}/.boinc}"
