@@ -474,6 +474,7 @@ fi
 
 ## Updates
 
+- Rosetta@home is now experiencing a shortage of work units, so we will soon be adding instructions on how to connect to additional projects.
 - Updated `quickstart.bat` for easier and more automated Windows native installation.
 - Should have automated native installation compatible with Fedora/CentOS/RHEL in the near future.
 - Automated native installation for Arch will come last (sorry, but you guys should already know what you're doing)
