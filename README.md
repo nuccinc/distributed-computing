@@ -111,14 +111,10 @@ Alternatively, if you have `git` installed, launch an elevated (Administrator) c
 ```
 git clone https://github.com/phx/nucc.git
 cd nucc
-quickstart.bat --native --attach
+quickstart.bat --native
 ```
 
 This will install the [Chocolatey](https://chocolatey.org/) package manager, which will then install BOINC.
-
-BOINC Manager will automatically launch, at which point you will wait for the *Select a Project* window to pop up.
-
-Cancel out of that window, confirm, and hit [Enter] to continue running the script.
 
 It will automatically connect to the correct project and start processing workloads immediately.
 
