@@ -474,7 +474,6 @@ fi
 
 ## Updates
 
-- As of 10:41 AM Central, [https://boinc.berkeley.edu/](https://boinc.berkeley.edu/) appears to be down, which will cause Windows automated native installation to fail.
 - Updated `quickstart.bat` for easier and more automated Windows native installation.
 - Should have automated native installation compatible with Fedora/CentOS/RHEL in the near future.
 - Automated native installation for Arch will come last (sorry, but you guys should already know what you're doing)
