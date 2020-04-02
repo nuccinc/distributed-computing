@@ -98,11 +98,13 @@ REM =   CONFIGURE - Automatically attaches native BOINC client to NUCC project a
 REM ========================================================================================================================================
 :CONFIGURE
 IF [%~1]==[--docker] SET CONFIG_DIR=%VOLUME%
-::IF [%~1]==[--native] SET CONFIG_DIR=%BOINC_DIR%
 IF [%~1]==[--native] SET CONFIG_DIR=%BOINC_DIR%
-
+::IF EXIST %CONFIG_DIR%\cc_config.xml CALL :DOCKERRUN %~1 %~2 %~3 & EXIT /B
 ECHO.
 ECHO Configuring BOINC...
+RM %CONFIG_DIR%\gui_rpc_auth.cfg 2>NUL
+RM %CONFIG_DIR%\cc_config.xml 2>NUL
+RM %CONFIG_DIR%\remote_hosts.cfg 2>NUL
 ECHO %BOINC_GUI_RPC_PASSWORD% > %CONFIG_DIR%\gui_rpc_auth.cfg
 ECHO ^<cc_config^> > %CONFIG_DIR%\cc_config.xml
 ECHO   ^<options^> >> %CONFIG_DIR%\cc_config.xml
@@ -111,7 +113,7 @@ ECHO   ^</options^> >> %CONFIG_DIR%\cc_config.xml
 ECHO ^</cc_config^> >> %CONFIG_DIR%\cc_config.xml
 ECHO 127.0.0.1 > %CONFIG_DIR%\remote_hosts.cfg
 
-IF [%~1]==[--docker] CALL :DOCKERINSTALLED %~1 %~2 %~3 & EXIT /B
+IF [%~1]==[--docker] CALL :DOCKERINSTALL %~1 %~2 %~3 & EXIT /B
 IF [%~1]==[--native] CALL :LAUNCHNATIVE %~1 %~2 %~3 & EXIT /B
 EXIT /B
 
@@ -142,8 +144,8 @@ REM =   DOCKERINSTALL - Installs and Launches Docker Desktop.
 REM =   Script will need to be run a second time with --docker to pull and run the Docker image.
 REM ========================================================================================================================================
 :DOCKERINSTALL
-IF EXIST %VOLUME%\cc_config.xml CALL :DOCKERRUN & EXIT /B
-IF EXIST %DOCKER% CALL :DOCKERINSTALLED & EXIT /B
+IF EXIST %VOLUME%\cc_config.xml CALL :DOCKERRUN  %~1 %~2 %~3 & EXIT /B
+IF EXIST %DOCKER% CALL :DOCKERINSTALLED %~1 %~2 %~3 & EXIT /B
 
 REM Install Chocolatey:
 CALL :INSTALLCHOCOLATEY
@@ -194,14 +196,17 @@ ECHO.
 ECHO When Docker maps the volume for the first time it will request access to the C drive, so please allow it.
 
 REM Configure BOINC:
-CALL :CONFIGURE %~1 %~2 %~3 & EXIT /B
+CALL :CONFIGURE %~1 %~2 %~3
+
+REM Run Docker
+CALL :DOCKERRUN %~1 %~2 %~3 & EXIT /B
 EXIT /B
 
 REM ========================================================================================================================================
 REM =   DOCKERRUN - Downloads image specified with %IMG% and runs it in a Docker container
 REM ========================================================================================================================================
 :DOCKERRUN
-IF [%~2]==[--image] (SET IMG=%~3)
+IF [%~2]==[--image] SET IMG=%~3
 
 REM Where the magic happens:
 ECHO.
