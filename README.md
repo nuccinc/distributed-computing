@@ -6,7 +6,7 @@
 
 # NUCC Distributed Computing to Aid in COVID-19 Research
 
-**Latest Update: March 31, 2020**
+**Latest Update: April 2, 2020**
 
 Join [The National Upcycled Computing Collective (NUCC)](https://www.nuccinc.org/) in a collaborative effort to combine our resources in order to aid in COVID-19 research.
 This project draws heavily from [BOINC's default Docker configurations](https://github.com/BOINC/boinc-client-docker).
@@ -474,9 +474,11 @@ fi
 
 ## Updates
 
-- Added automated native installation support for Ubuntu, Debian, and Kali
-- Added `nuccd` support for MacOS/Linux-based Docker installations
-- Fixed allow_gui_rpc for remote monitoring of Docker and native MacOS tasks
+- As of 10:41 AM Central, [https://boinc.berkeley.edu/](https://boinc.berkeley.edu/) appears to be down, which will cause Windows automated native installation to fail.
+- Updated `quickstart.bat` for easier and more automated Windows native installation.
+- Should have automated native installation compatible with Fedora/CentOS/RHEL in the near future.
+- Automated native installation for Arch will come last (sorry, but you guys should already know what you're doing)
+- Will eventually additional parameters to `quickstart.bat` in the future to specify custom project URL and weak key for both native and Docker-based installations.
 
 ---
 
