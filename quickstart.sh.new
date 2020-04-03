@@ -96,7 +96,17 @@ docker_install() {
   mkdir -p "${VOLUME}"
   sudo chown -R "${LOGNAME}" "${VOLUME}"
   echo "${CC_CONFIG}" > "${VOLUME}/cc_config.xml"
+  docker stop boinc 2>/dev/null
+  docker rm boinc 2>/dev/null
   docker run -d --restart always --name boinc -p 31416:31416 -v "${VOLUME}:/var/lib/boinc" -e BOINC_GUI_RPC_PASSWORD="${BOINC_GUI_RPC_PASSWORD}" -e BOINC_CMD_LINE_OPTIONS="${BOINC_CMD_LINE_OPTIONS}" "${IMG}"
+  if [[ $? -ne 0 ]]; then
+    echo -e "\nIf you are just now installing Docker, please run su - ${LOGNAME}"
+    echo -e "After you have re-logged in, execute the previous command used to run this script."
+    echo -e "Example:  $0 ${@}\n"
+    echo -e "Alternately, if you are running a firewall like firewalld or ufw, you will need to"
+    echo -e "disable it or create a rule for port 31416, reboot, and runn the $0 again.\n"
+    exit
+  fi
 
   # Details:
   echo -e "\nRun 'docker exec -it boinc /bin/sh' to exec into the container."
@@ -258,7 +268,6 @@ native_install() {
     echo "$BOINC_GUI_RPC_PASSWORD" | sudo tee "${CONFIG_DIR}/gui_rpc_auth.cfg" > /dev/null
     echo "$CC_CONFIG" | sudo tee "${CONFIG_DIR}/cc_config.xml" > /dev/null
     echo '127.0.0.1' | sudo tee "${CONFIG_DIR}/remote_hosts.cfg" > /dev/null
-    set -x
     sudo chown -R boinc:boinc "$BOINC_DIR"
     if [[ $LOGNAME != "root" ]]; then
       sudo usermod -G boinc -a "$LOGNAME"
@@ -319,7 +328,7 @@ if [[ $1 = "--native" ]]; then
   read -rp 'Would you like to get the current state? [y/n] ' get_state
   if [[ ($get_state = 'y') || ($get_state = 'yes') ]]; then
     boinccmd --get_state
-    echo -e "\nYou might need to login again with su - $LOGNAME in order to run boinccmd commands."
+    # echo -e "\nYou might need to login again with su - $LOGNAME in order to run boinccmd commands."
   fi
   echo -e "\nFeel free to launch a BOINC Manager or use the command 'boinccmd' to monitor your tasks.\n"
 else
