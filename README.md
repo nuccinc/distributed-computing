@@ -6,7 +6,7 @@
 
 # NUCC Distributed Computing to Aid in COVID-19 Research
 
-**Latest Update: April 2, 2020**
+**Latest Update: April 3, 2020**
 
 Join [The National Upcycled Computing Collective (NUCC)](https://www.nuccinc.org/) in a collaborative effort to combine our resources in order to aid in COVID-19 research.
 This project draws heavily from [BOINC's default Docker configurations](https://github.com/BOINC/boinc-client-docker).
@@ -474,7 +474,7 @@ fi
 
 ## Updates
 
-- Rosetta@home is now experiencing a shortage of work units, so we will soon be adding instructions on how to connect to additional projects.
+- Rosetta@home appears to have replinished work units for COVID-19, so everything is going well.
 - Updated `quickstart.bat` for easier and more automated Windows native installation.
 - Should have automated native installation compatible with Fedora/CentOS/RHEL in the near future.
 - Automated native installation for Arch will come last (sorry, but you guys should already know what you're doing)
