@@ -83,7 +83,7 @@ docker_install() {
     if [[ $ans = "y" ]]; then
       if [[ -n $(uname -a | grep -iE '(linux)|(darwin)') ]]; then
         if ! command -v 'curl' &> /dev/null; then
-          echo 'Please install curl and run this script again.'
+          echo -e '\nPlease install curl and run this script again.\n'
           exit
         fi
         curl -fsSL 'https://raw.githubusercontent.com/phx/dockerinstall/master/install_docker.sh' | bash
