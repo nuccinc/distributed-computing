@@ -104,7 +104,7 @@ docker_install() {
   sudo docker rm boinc 2>/dev/null
   sudo docker run -d --restart always --name boinc -p 31416:31416 -v "${VOLUME}:/var/lib/boinc" -e BOINC_GUI_RPC_PASSWORD="${BOINC_GUI_RPC_PASSWORD}" -e BOINC_CMD_LINE_OPTIONS="${BOINC_CMD_LINE_OPTIONS}" "${IMG}"
   if [[ $? -ne 0 ]]; then
-    echo -e "If you are running a firewall like firewalld or ufw, you will need to"
+    echo -e "\nIf you are running a firewall like firewalld or ufw, you will need to"
     echo -e "disable it or create a rule for port 31416, reboot, and run $0 again.\n"
     exit
   fi
