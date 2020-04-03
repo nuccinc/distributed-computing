@@ -74,8 +74,6 @@ cd nucc
 ./quickstart.sh
 ```
 
-*Note: If the script errors out after installing Docker, run it again in a new login shell that recognizes your user as a member of the `docker` group, and you should be squared away.*
-
 If you already have a team or want to specify an alternate project, don't be discouraged -- you can still use `quickstart.sh`!  Simply speficy your project URL and/or weak key
 in the supported environment variables:
 
@@ -474,9 +472,9 @@ fi
 
 ## Updates
 
-- Rosetta@home appears to have replinished work units for COVID-19, so everything is going well.
-- Updated `quickstart.bat` for easier and more automated Windows native installation.
-- Should have automated native installation compatible with Fedora/CentOS/RHEL in the near future.
+- Updated `quickstart.sh` for seamless Docker install and native install that automatically works with BOINC Manager.
+- Added Fedora support to automated native Linux install.
+- Should have automated native installation compatible CentOS/RHEL/Amazon Linux in the near future.
 - Automated native installation for Arch will come last (sorry, but you guys should already know what you're doing)
 - Will eventually additional parameters to `quickstart.bat` in the future to specify custom project URL and weak key for both native and Docker-based installations.
 
