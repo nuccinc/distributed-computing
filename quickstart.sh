@@ -8,7 +8,7 @@ PROJECT_URL="${PROJECT_URL:-http://boinc.bakerlab.org/rosetta/}"
 # Ability to add custom weak key via environment variable:
 WEAK_KEY="${WEAK_KEY:-2108683_fdd846588bee255b50901b8b678d52ec}"
 # Ability to add custom command line options via environment variable:
-if [[ $1 = "--docker" ]]; then
+if [[ ($1 = "--docker") || (-z $1) ]]; then
   BOINC_CMD_LINE_OPTIONS="${BOINC_CMD_LINE_OPTIONS:---allow_remote_gui_rpc --attach_project ${PROJECT_URL} ${WEAK_KEY}}"
 fi
 # Ability to set custom Docker volume via environment variable:
@@ -259,7 +259,6 @@ native_install() {
       CONFIG_DIR='/var/lib/boinc'
       BOINC_DIR="${CONFIG_DIR}"
       SERVICE_FILE='/usr/lib/systemd/system/boinc-client.service'
-      # DEBUG: /etc/systemd/system/multi-user.target.wants/boinc-client.service
     else
       CONFIG_DIR='/etc/boinc-client'
       BOINC_DIR='/usr/lib/boinc-client'
@@ -282,8 +281,6 @@ native_install() {
       sudo sed -i 's/User=boinc/User=root/' '/lib/systemd/system/boinc-client.service'
       sudo systemctl daemon-reload
     fi
-    # sudo sed -i "s@ExecStart=/usr/bin/boinc@ExecStart=/usr/bin/boinc ${BOINC_CMD_LINE_OPTIONS}@" "$SERVICE_FILE"
-    # sudo systemctl daemon-reload
     sudo systemctl stop boinc-client.service
     sudo systemctl start boinc-client.service
     sudo systemctl enable boinc-client.service
