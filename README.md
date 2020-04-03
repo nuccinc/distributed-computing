@@ -65,8 +65,10 @@ You can run a custom image by running `IMG=boinc/client[tag-name] ./quickstart.s
 - Raspbian 8+
 - CentOS/RHEL/Amazon Linux
 - Fedora 30+
-- Kali 2018+ (based on Debian Stretch)
 - Arch
+- Kali 2018+ (based on Debian Stretch)
+  - Docker auto-installation appears to be currently broken fo Kali.
+  - Only run `quickstart.sh` on Kali if you already have Docker installed.
 
 ```
 git clone http://github.com/phx/nucc.git
@@ -151,6 +153,7 @@ When Docker Desktop is launched for the first time, you will need to log out and
   - MacOS
   - Ubuntu
   - Debian
+  - Fedora
   - Kali
 
 ```
@@ -472,6 +475,7 @@ fi
 
 ## Updates
 
+- Docker installation for Kali appears to be broken. Only run `quickstart.sh --docker` on Kali if you already have Docker installed.
 - Updated `quickstart.sh` for seamless Docker install and native install that automatically works with BOINC Manager.
 - Added Fedora support to automated native Linux install.
 - Should have automated native installation compatible CentOS/RHEL/Amazon Linux in the near future.
