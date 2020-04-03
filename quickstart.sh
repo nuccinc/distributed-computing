@@ -8,9 +8,7 @@ PROJECT_URL="${PROJECT_URL:-http://boinc.bakerlab.org/rosetta/}"
 # Ability to add custom weak key via environment variable:
 WEAK_KEY="${WEAK_KEY:-2108683_fdd846588bee255b50901b8b678d52ec}"
 # Ability to add custom command line options via environment variable:
-if [[ $1 = "native" ]]; then
-  BOINC_CMD_LINE_OPTIONS="${BOINC_CMD_LINE_OPTIONS:---allow_remote_gui_rpc --project_attach ${PROJECT_URL} ${WEAK_KEY}}"
-else
+if [[ $1 = "--docker" ]]; then
   BOINC_CMD_LINE_OPTIONS="${BOINC_CMD_LINE_OPTIONS:---allow_remote_gui_rpc --attach_project ${PROJECT_URL} ${WEAK_KEY}}"
 fi
 # Ability to set custom Docker volume via environment variable:
@@ -84,6 +82,10 @@ docker_install() {
     read -rp "Would you like to install it now? [y/n] " ans
     if [[ $ans = "y" ]]; then
       if [[ -n $(uname -a | grep -iE '(linux)|(darwin)') ]]; then
+        if ! command -v 'curl' &> /dev/null; then
+          echo -e '\nPlease install curl and run this script again.\n'
+          exit
+        fi
         curl -fsSL 'https://raw.githubusercontent.com/phx/dockerinstall/master/install_docker.sh' | bash
       else
         echo -e "\nYour operating system is not currently supported by the Docker auto-installer."
@@ -98,14 +100,21 @@ docker_install() {
   mkdir -p "${VOLUME}"
   sudo chown -R "${LOGNAME}" "${VOLUME}"
   echo "${CC_CONFIG}" > "${VOLUME}/cc_config.xml"
-  docker run -d --restart always --name boinc -p 31416:31416 -v "${VOLUME}:/var/lib/boinc" -e BOINC_GUI_RPC_PASSWORD="${BOINC_GUI_RPC_PASSWORD}" -e BOINC_CMD_LINE_OPTIONS="${BOINC_CMD_LINE_OPTIONS}" "${IMG}"
+  sudo docker stop boinc 2>/dev/null
+  sudo docker rm boinc 2>/dev/null
+  sudo docker run -d --restart always --name boinc -p 31416:31416 -v "${VOLUME}:/var/lib/boinc" -e BOINC_GUI_RPC_PASSWORD="${BOINC_GUI_RPC_PASSWORD}" -e BOINC_CMD_LINE_OPTIONS="${BOINC_CMD_LINE_OPTIONS}" "${IMG}"
+  if [[ $? -ne 0 ]]; then
+    echo -e "If you are running a firewall like firewalld or ufw, you will need to"
+    echo -e "disable it or create a rule for port 31416, reboot, and run $0 again.\n"
+    exit
+  fi
 
   # Details:
   echo -e "\nRun 'docker exec -it boinc /bin/sh' to exec into the container."
   echo -e "Run 'docker exec boin boinccmd --help for commands to execute in this similar manner.\n"
   read -rp 'Do you wish to get the current status? [y/n] ' getstatus
   if [[ $getstatus = "y" ]]; then
-    docker exec boinc boinccmd --get_state
+    sudo docker exec boinc boinccmd --get_state
   fi
   echo -e "\nInstalling nuccd helper script to /usr/local/bin..."
   echo "$NUCCD" | sudo tee /usr/local/bin/nuccd > /dev/null
@@ -195,7 +204,7 @@ pkg_manager_config() {
 native_install() {
   ### REMOVE LATER
   ### Fail-safe, native install for only tested distros:
-  if [[ ($DISTRO_NAME != "macos") && ($DISTRO_NAME != "ubuntu") && ($DISTRO_NAME != "debian") && ($DISTRO_NAME != "kali") ]]; then
+  if [[ ($DISTRO_NAME != "macos") && ($DISTRO_NAME != "ubuntu") && ($DISTRO_NAME != "debian") && ($DISTRO_NAME != "kali") && ($DISTRO_NAME != "fedora") ]]; then
     not_supported
   fi
   pkg_manager_config
@@ -205,7 +214,7 @@ native_install() {
     echo "$CC_CONFIG" > "/Library/Application Support/BOINC Data/cc_config.xml"
     (/Applications/BOINCmanager.app/Contents/Resources/boinc -redirectio -dir "/Library/Application Support/BOINC Data/" --daemon --allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec &) >/dev/null 2>&1
     open /Applications/BOINCManager.app
-  elif [[ ($DISTRO_NAME = "ubuntu") || ($DISTRO_NAME = "debian") || ($DISTRO_NAME = "kali") ]]; then
+  elif [[ ($DISTRO_NAME = "ubuntu") || ($DISTRO_NAME = "debian") || ($DISTRO_NAME = "kali") || ($DISTRO_NAME = "fedora") ]]; then
     if [[ ($DISTRO_NAME = "ubuntu") || ($DISTRO_NAME = "kali") ]]; then
       echo -e '\nPlease select the appropriate BOINC client:\n'
       echo '1) boinc-client (DEFAULT)'
@@ -225,38 +234,61 @@ native_install() {
     fi
     echo -e '\nThe following will allow you to install BOINC local management utilities:'
     read -rp 'Do you intend to manage projects from this local machine from a GUI or TUI interface? [y/n] ' local_mgmt
+    echo
     if [[ ($local_mgmt = 'y') || ($local_mgmt = 'yes') ]]; then
-      echo -e '\nPlease select your preferred BOINC Manager:\n'
-      echo '1) boinc-manager - GUI interface to control and monitor the BOINC core client'
-      echo '2) boinctui - Fullscreen terminal user interface (TUI) for BOINC core client'
-      echo '3) BOTH'
-      echo
-      read -rp 'Selection Number: ' boinc_manager
-      if [[ $boinc_manager -eq 1 ]]; then
+      if [[ $DISTRO_NAME != "fedora" ]]; then
+        echo -e 'Please select your preferred BOINC Manager:\n'
+        echo '1) boinc-manager - GUI interface to control and monitor the BOINC core client'
+        echo '2) boinctui - Fullscreen terminal user interface (TUI) for BOINC core client'
+        echo '3) BOTH'
+        echo
+        read -rp 'Selection Number: ' boinc_manager
+        if [[ $boinc_manager -eq 1 ]]; then
+          packages="${packages} boinc-manager"
+        elif [[ $boinc_manager -eq 2 ]]; then
+          packages="${packages} boinctui"
+        elif [[ $boinc_manager -eq 3 ]]; then
+          packages="${packages} boinc-manager boinctui"
+        fi
+      else
         packages="${packages} boinc-manager"
-      elif [[ $boinc_manager -eq 2 ]]; then
-        packages="${packages} boinctui"
-      elif [[ $boinc_manager -eq 3 ]]; then
-        packages="${packages} boinc-manager boinctui"
       fi
     fi
     ${PKG_INSTALL} ${packages}
-    echo "$BOINC_GUI_RPC_PASSWORD" | sudo tee '/etc/boinc-client/gui_rpc_auth.cfg' > /dev/null
-    echo "$CC_CONFIG" | sudo tee '/etc/boinc-client/cc_config.xml' > /dev/null
-    echo '127.0.0.1' | sudo tee '/etc/boinc-client/remote_hosts.cfg' > /dev/null
-    sudo chown -R boinc:boinc '/usr/lib/boinc-client'
+    if [[ $DISTRO_NAME = "fedora" ]]; then
+      CONFIG_DIR='/var/lib/boinc'
+      BOINC_DIR="${CONFIG_DIR}"
+      SERVICE_FILE='/usr/lib/systemd/system/boinc-client.service'
+      # DEBUG: /etc/systemd/system/multi-user.target.wants/boinc-client.service
+    else
+      CONFIG_DIR='/etc/boinc-client'
+      BOINC_DIR='/usr/lib/boinc-client'
+      SERVICE_FILE='/lib/systemd/system/boinc-client.service'
+    fi
+    BOINC_CMD_LINE_OPTIONS="${BOINC_CMD_LINE_OPTIONS:---allow_remote_gui_rpc --daemon --dir ${BOINC_DIR} --project_attach ${PROJECT_URL} ${WEAK_KEY}}"
+    echo "$BOINC_GUI_RPC_PASSWORD" | sudo tee "${CONFIG_DIR}/gui_rpc_auth.cfg" > /dev/null
+    echo "$CC_CONFIG" | sudo tee "${CONFIG_DIR}/cc_config.xml" > /dev/null
+    echo '127.0.0.1' | sudo tee "${CONFIG_DIR}/remote_hosts.cfg" > /dev/null
+    sudo chown -R boinc:boinc "$BOINC_DIR"
     if [[ $LOGNAME != "root" ]]; then
-      sudo chown "$LOGNAME" '/etc/boinc-client/gui_rpc_auth.cfg'
+      sudo usermod -G boinc -a "$LOGNAME"
+      sudo chmod g+rw ${CONFIG_DIR}/gui_rpc_auth.cfg
+      sudo chmod g+rw ${CONFIG_DIR}/*.*
+      sudo ln -sf "${CONFIG_DIR}/gui_rpc_auth.cfg" "/home/${LOGNAME}/gui_rpc_auth.cfg"
+      sudo chown boinc:boinc "/home/${LOGNAME}/gui_rpc_auth.cfg"
+      sudo chown "$LOGNAME" "${CONFIG_DIR}/gui_rpc_auth.cfg"
     fi
     if [[ $DISTRO_NAME = "kali" ]]; then
       sudo sed -i 's/User=boinc/User=root/' '/lib/systemd/system/boinc-client.service'
       sudo systemctl daemon-reload
     fi
+    # sudo sed -i "s@ExecStart=/usr/bin/boinc@ExecStart=/usr/bin/boinc ${BOINC_CMD_LINE_OPTIONS}@" "$SERVICE_FILE"
+    # sudo systemctl daemon-reload
     sudo systemctl stop boinc-client.service
     sudo systemctl start boinc-client.service
     sudo systemctl enable boinc-client.service
     sleep 5
-    boinccmd --passwd "$(cat /etc/boinc-client/gui_rpc_auth.cfg)" --project_attach "${PROJECT_URL}" "${WEAK_KEY}"
+    boinccmd --passwd "$(cat "${CONFIG_DIR}/gui_rpc_auth.cfg")" --project_attach "${PROJECT_URL}" "${WEAK_KEY}"
   fi
 }
 
@@ -298,8 +330,10 @@ if [[ $1 = "--native" ]]; then
   read -rp 'Would you like to get the current state? [y/n] ' get_state
   if [[ ($get_state = 'y') || ($get_state = 'yes') ]]; then
     boinccmd --get_state
+    # echo -e "\nYou might need to login again with su - $LOGNAME in order to run boinccmd commands."
   fi
   echo -e "\nFeel free to launch a BOINC Manager or use the command 'boinccmd' to monitor your tasks.\n"
 else
   docker_install
+  echo -e "\nIf have just now installing Docker, please run su - ${LOGNAME} to inherit docker group privileges."
 fi
