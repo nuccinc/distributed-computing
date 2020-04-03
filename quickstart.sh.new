@@ -82,6 +82,10 @@ docker_install() {
     read -rp "Would you like to install it now? [y/n] " ans
     if [[ $ans = "y" ]]; then
       if [[ -n $(uname -a | grep -iE '(linux)|(darwin)') ]]; then
+        if ! command -v 'curl' &> /dev/null; then
+          echo 'Please install curl and run this script again.'
+          exit
+        fi
         curl -fsSL 'https://raw.githubusercontent.com/phx/dockerinstall/master/install_docker.sh' | bash
       else
         echo -e "\nYour operating system is not currently supported by the Docker auto-installer."
@@ -96,15 +100,12 @@ docker_install() {
   mkdir -p "${VOLUME}"
   sudo chown -R "${LOGNAME}" "${VOLUME}"
   echo "${CC_CONFIG}" > "${VOLUME}/cc_config.xml"
-  docker stop boinc 2>/dev/null
-  docker rm boinc 2>/dev/null
-  docker run -d --restart always --name boinc -p 31416:31416 -v "${VOLUME}:/var/lib/boinc" -e BOINC_GUI_RPC_PASSWORD="${BOINC_GUI_RPC_PASSWORD}" -e BOINC_CMD_LINE_OPTIONS="${BOINC_CMD_LINE_OPTIONS}" "${IMG}"
+  sudo docker stop boinc 2>/dev/null
+  sudo docker rm boinc 2>/dev/null
+  sudo docker run -d --restart always --name boinc -p 31416:31416 -v "${VOLUME}:/var/lib/boinc" -e BOINC_GUI_RPC_PASSWORD="${BOINC_GUI_RPC_PASSWORD}" -e BOINC_CMD_LINE_OPTIONS="${BOINC_CMD_LINE_OPTIONS}" "${IMG}"
   if [[ $? -ne 0 ]]; then
-    echo -e "\nIf you are just now installing Docker, please run su - ${LOGNAME}"
-    echo -e "After you have re-logged in, execute the previous command used to run this script."
-    echo -e "Example:  $0 ${@}\n"
-    echo -e "Alternately, if you are running a firewall like firewalld or ufw, you will need to"
-    echo -e "disable it or create a rule for port 31416, reboot, and runn the $0 again.\n"
+    echo -e "If you are running a firewall like firewalld or ufw, you will need to"
+    echo -e "disable it or create a rule for port 31416, reboot, and run $0 again.\n"
     exit
   fi
 
@@ -113,7 +114,7 @@ docker_install() {
   echo -e "Run 'docker exec boin boinccmd --help for commands to execute in this similar manner.\n"
   read -rp 'Do you wish to get the current status? [y/n] ' getstatus
   if [[ $getstatus = "y" ]]; then
-    docker exec boinc boinccmd --get_state
+    sudo docker exec boinc boinccmd --get_state
   fi
   echo -e "\nInstalling nuccd helper script to /usr/local/bin..."
   echo "$NUCCD" | sudo tee /usr/local/bin/nuccd > /dev/null
@@ -273,8 +274,9 @@ native_install() {
       sudo usermod -G boinc -a "$LOGNAME"
       sudo chmod g+rw ${CONFIG_DIR}/gui_rpc_auth.cfg
       sudo chmod g+rw ${CONFIG_DIR}/*.*
-      sudo ln -s "${CONFIG_DIR}/gui_rpc_auth.cfg" "/home/${LOGNAME}/gui_rpc_auth.cfg"
+      sudo ln -sf "${CONFIG_DIR}/gui_rpc_auth.cfg" "/home/${LOGNAME}/gui_rpc_auth.cfg"
       sudo chown boinc:boinc "/home/${LOGNAME}/gui_rpc_auth.cfg"
+      sudo chown "$LOGNAME" "${CONFIG_DIR}/gui_rpc_auth.cfg"
     fi
     if [[ $DISTRO_NAME = "kali" ]]; then
       sudo sed -i 's/User=boinc/User=root/' '/lib/systemd/system/boinc-client.service'
@@ -333,4 +335,5 @@ if [[ $1 = "--native" ]]; then
   echo -e "\nFeel free to launch a BOINC Manager or use the command 'boinccmd' to monitor your tasks.\n"
 else
   docker_install
+  echo -e "\nIf have just now installing Docker, please run su - ${LOGNAME} to inherit docker group privileges."
 fi
