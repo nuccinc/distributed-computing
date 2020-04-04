@@ -337,7 +337,8 @@ You have a couple of good options here:
 - Best Option: [BOINCTASKS](https://efmer.com/download-boinctasks/)
 - View tasks from the native BOINC Manager
 
-*For BSD, there is also the `boinc_curses` TUI application, which allows you to view local tasks, and for various Linux distros, there is the `boinctui` package, which is surprisingly very nice.*
+For various Linux distros, there is also the `boinctui` package which allows you to view and control local or remote tasks from the command line.
+Addtionally, for BSD, there is the `boinc_curses` TUI application, which is similar to `boinctui`, although not as polished (yet still very nice and useful).
 
 **For basic tasks, you can refer to [Boinc Commands and Shortcuts](#boinc-commands-and-shortcuts).**
 
