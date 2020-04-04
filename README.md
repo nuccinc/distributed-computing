@@ -41,7 +41,7 @@ Example: `boinccmd --passwd <yourpassword> --project_attach http://boinc.bakerla
 - [Automated Windows Native Installation](#automated-windows-native-installation)
 - [Automated Windows Docker-based Installation](#windows-docker-installation)
 - [Automated MacOS and Linux Native Installation](#automated-macos-and-linux-native-installation)
-- [FreeBSD/FreeNAS Jail Installation](#freebsd-freenas-jail-installation)
+- [FreeBSD/FreeNAS Jail Installation](#freebsdfreenas-jail-installation)
 - [Manual Installation](#manual-installation)
 - [Docker Supported Architectures and Tags](#docker-supported-architectures-and-tags)
 - [Docker Swarm Mode](#docker-swarm-mode)
