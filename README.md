@@ -477,7 +477,7 @@ fi
 
 ---
 
-## Addtitional NUCC Projects
+## Additional NUCC Projects
 
 Listed below are the current projects that NUCC is involved in.  While we urge that everyone contribute to the default Rosetta@home project for COVID-19 research, whenever there are a shortage of work units,
 or if you feel like your powerful GPU could be put to better use in a project that doesn't solely rely on CPU processing, please feel free to help contribute to our other projects.
