@@ -6,7 +6,7 @@
 
 # NUCC Distributed Computing to Aid in COVID-19 Research
 
-**Latest Update: April 3, 2020**
+**Latest Update: April 4, 2020**
 
 Join [The National Upcycled Computing Collective (NUCC)](https://www.nuccinc.org/) in a collaborative effort to combine our resources in order to aid in COVID-19 research.
 This project draws heavily from [BOINC's default Docker configurations](https://github.com/BOINC/boinc-client-docker).
@@ -48,6 +48,8 @@ Example: `boinccmd --passwd <yourpassword> --project_attach http://boinc.bakerla
 - [Viewing and Managing Workloads](#viewing-and-managing-workloads)
 - [BOINC Commands and Shortcuts](#boinc-commands-and-shortcuts)
 - [Updates](#updates)
+- [Additional NUCC Projects](#additional-nucc-projects)
+- [Connecting to Additional NUCC Projects](#connecting-to-additional-nucc-projects) 
 - [About NUCC](#about-the-national-upcycled-computing-collective)
 
 ---
@@ -473,12 +475,87 @@ uninstall
 fi
 ```
 
+---
+
+## Addtitional NUCC Projects
+
+Listed below are the current projects that NUCC is involved in.  While we urge that everyone contribute to the default Rosetta@home project for COVID-19 research, whenever there are a shortage of work units,
+or if you feel like your powerful GPU could be put to better use in a project that doesn't solely rely on CPU processing, please feel free to help contribute to our other projects.
+
+### BioMed
+
+| Project | URL | Weak Key |
+| :--- | :--- | :--- |
+| [Rosetta@home](https://boinc.bakerlab.org/) (Default) | `https://boinc.bakerlab.org/` | `2108683_fdd846588bee255b50901b8b678d52ec` |
+| [GPUGRID](https://www.gpugrid.net/) | `https://www.gpugrid.net/` | `557786_557339997aa264af08d60b87d63b87bf` |
+| [World Community Grid](https://www.worldcommunitygrid.org/) | `https://www.worldcommunitygrid.org/` | `1106753_8497a4536b5fd28c9ba92b2e5370f680` |
+
+### Astrophysics
+
+| Project | URL | Weak Key |
+| :--- | :--- | :--- |
+| [Asteroids@home](https://asteroidsathome.net/) | `https://asteroidsathome.net/boinc/` | `451292_98c21ef402d851077468889c8e4eb195` |
+| [Cosmology@home](https://www.cosmologyathome.org/) | `https://www.cosmologyathome.org/` | `1573916_4e7dff029d28e6412d4f867cedc24a9d` |
+| [Einstein@home](https://einsteinathome.org/) | `https://einsteinathome.org/` | `1024046_72abcfafd8b4bc3b9044122bb38cb8bc` |
+| [Milkyway@home](https://milkyway.cs.rpi.edu/milkyway/) | `https://milkyway.cs.rpi.edu/milkyway/` | `1376257_e6829810b2778a51599c59eb026ff7d4` |
+| [Universe@home](https://universeathome.pl/universe/) | `https://universeathome.pl/universe/` | `209514_cc1405976c0bc31b292c6875c7517274` |
+
+### Mathematics
+
+| Project | URL | Weak Key |
+| :--- | :--- | :--- |
+| [NFS@home](https://escatter11.fullerton.edu/) | `https://escatter11.fullerton.edu/` | `485489_09087b82f39f88c873fc0d4337303f21` |
+| [Primegrid](https://escatter11.fullerton.edu/) | `https://escatter11.fullerton.edu/` | `485489_09087b82f39f88c873fc0d4337303f21` |
+
+---
+
+## Connecting to Additional NUCC Projects
+
+You can connect to different projects on MacOS and Linux by setting the `$PROJECT_URL` and `$WEAK_KEY` environment variables when running [`quickstart.sh`](quickstart.sh).
+
+On Windows, you can manually edit [`quickstart.bat`](quickstart.bat) to set the `%PROJECT_URL%` and `%WEAK_KEY%` variables.
+
+If running with Docker, you will probably want to specify the `$IMG` or `%IMG%` variables as well, to best suit your specific setup, as listed in
+[Docker Supported Architectures and Tags](#docker-supported-architectures-and-tags).
+
+Refer to the example below:
+
+### Example - Connecting to GPUGRID and utilizing NVIDIA CUDA:
+
+#### Docker Installation:
+
+- Make sure you have installed the [NVIDIA driver](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver).
+- Install the NVIDIA-Docker version 2.0 by following the instructions [here](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)).
+- Run the following command:
+  - `IMG=boinc/client:nvidia PROJECT_URL=https://www.gpugrid.net/ WEAK_KEY=557786_557339997aa264af08d60b87d63b87bf ./quickstart.sh --docker`
+
+#### Native Windows Installation:
+
+Manually edit [`quickstart.bat`](quickstart.bat), and set the `%PROJECT_URL%` variable to `https://www.gpugrid.net/` and `%WEAK_KEY%` variable to `557786_557339997aa264af08d60b87d63b87bf`.
+
+Then, just run `quickstart.bat`.
+
+If BOINC is already installed, you can simply run the following:
+
+`C:\PROGRA~1\BOINC\boinccmd.exe --project_attach https://www.gpugrid.net/ 557786_557339997aa264af08d60b87d63b87bf`
+
+#### Native Linux Installation:
+
+For native installations, Ubuntu and Kali support the option to choose to install the `boinc-client-nvidia-cuda` package:
+
+`PROJECT_URL=https://www.gpugrid.net/ WEAK_KEY=557786_557339997aa264af08d60b87d63b87bf ./quickstart.sh --native`
+
+For other distributions, do refer to [Manual Installation](#manual-installation), and run the following:
+
+`boinccmd --project_attach https://www.gpugrid.net/ 557786_557339997aa264af08d60b87d63b87bf`
+
+---
+
 ## Updates
 
+- Added additional NUCC project documentation.
 - Docker installation for Kali appears to be broken. Only run `quickstart.sh --docker` on Kali if you already have Docker installed.
-- Updated `quickstart.sh` for seamless Docker install and native install that automatically works with BOINC Manager.
-- Added Fedora support to automated native Linux install.
-- Should have automated native installation compatible CentOS/RHEL/Amazon Linux in the near future.
+- CentOS/RHEL/Amazon Linux automated native installation is pending.
 - Automated native installation for Arch will come last (sorry, but you guys should already know what you're doing)
 - Will eventually additional parameters to `quickstart.bat` in the future to specify custom project URL and weak key for both native and Docker-based installations.
 
