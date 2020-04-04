@@ -47,9 +47,9 @@ Example: `boinccmd --passwd <yourpassword> --project_attach http://boinc.bakerla
 - [Docker Swarm Mode](#docker-swarm-mode)
 - [Viewing and Managing Workloads](#viewing-and-managing-workloads)
 - [BOINC Commands and Shortcuts](#boinc-commands-and-shortcuts)
-- [Updates](#updates)
 - [Additional NUCC Projects](#additional-nucc-projects)
 - [Connecting to Additional NUCC Projects](#connecting-to-additional-nucc-projects) 
+- [Updates](#updates)
 - [About NUCC](#about-the-national-upcycled-computing-collective)
 
 ---
