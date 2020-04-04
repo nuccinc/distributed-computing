@@ -545,7 +545,7 @@ For native installations, Ubuntu and Kali support the option to choose to instal
 
 `PROJECT_URL=https://www.gpugrid.net/ WEAK_KEY=557786_557339997aa264af08d60b87d63b87bf ./quickstart.sh --native`
 
-For other distributions, do refer to [Manual Installation](#manual-installation), and run the following:
+For other distributions, refer to the [Manual Installation](#manual-installation) instructions, and then run the following:
 
 `boinccmd --project_attach https://www.gpugrid.net/ 557786_557339997aa264af08d60b87d63b87bf`
 
