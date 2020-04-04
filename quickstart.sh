@@ -202,11 +202,6 @@ pkg_manager_config() {
   fi
 }
 native_install() {
-  ### REMOVE LATER
-  ### Fail-safe, native install for only tested distros:
-  if [[ ($DISTRO_NAME != "macos") && ($DISTRO_NAME != "ubuntu") && ($DISTRO_NAME != "debian") && ($DISTRO_NAME != "kali") && ($DISTRO_NAME != "fedora") ]]; then
-    not_supported
-  fi
   pkg_manager_config
   ${UPDATE_PKG_CACHE}
   if [[ $DISTRO_NAME = "macos" ]]; then
@@ -214,15 +209,13 @@ native_install() {
     echo "$CC_CONFIG" > "/Library/Application Support/BOINC Data/cc_config.xml"
     (/Applications/BOINCmanager.app/Contents/Resources/boinc -redirectio -dir "/Library/Application Support/BOINC Data/" --daemon --allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec &) >/dev/null 2>&1
     open /Applications/BOINCManager.app
-  elif [[ ($DISTRO_NAME = "ubuntu") || ($DISTRO_NAME = "debian") || ($DISTRO_NAME = "kali") || ($DISTRO_NAME = "fedora") ]]; then
-    if [[ ($DISTRO_NAME = "ubuntu") || ($DISTRO_NAME = "kali") ]]; then
+  elif [[ ($DISTRO_NAME = "ubuntu") || ($DISTRO_NAME = "kali") ]]; then
       echo -e '\nPlease select the appropriate BOINC client:\n'
       echo '1) boinc-client (DEFAULT)'
       echo '2) boinc-client-nvidia-cuda (NVIDIA CUDA support)'
       echo '3) boinc-client-opencl (AMD/ATI OpenCL support)'
       echo
       read -rp 'Selection Number: ' boinc_client
-    fi
     if [[ $boinc_client -eq 1 ]]; then
       packages='boinc-client'
     elif [[ $boinc_client -eq 2 ]]; then
@@ -232,11 +225,18 @@ native_install() {
     else
       packages='boinc-client'
     fi
+  else
+    if [[ $DISTRO_NAME = "centos" ]]; then
+      wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+      sudo yum localinstall -y http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+      ${UPDATE_PKG_CACHE}
+    fi
+    packages='boinc-client'
     echo -e '\nThe following will allow you to install BOINC local management utilities:'
     read -rp 'Do you intend to manage projects from this local machine from a GUI or TUI interface? [y/n] ' local_mgmt
     echo
     if [[ ($local_mgmt = 'y') || ($local_mgmt = 'yes') ]]; then
-      if [[ $DISTRO_NAME != "fedora" ]]; then
+      if [[ ($DISTRO_NAME != "fedora") && ($DISTRO_NAME != "centos") ]]; then
         echo -e 'Please select your preferred BOINC Manager:\n'
         echo '1) boinc-manager - GUI interface to control and monitor the BOINC core client'
         echo '2) boinctui - Fullscreen terminal user interface (TUI) for BOINC core client'
@@ -255,14 +255,12 @@ native_install() {
       fi
     fi
     ${PKG_INSTALL} ${packages}
-    if [[ $DISTRO_NAME = "fedora" ]]; then
+    if [[ ($DISTRO_NAME = "fedora") || ($DISTRO_NAME = "centos") ]]; then
       CONFIG_DIR='/var/lib/boinc'
       BOINC_DIR="${CONFIG_DIR}"
-      SERVICE_FILE='/usr/lib/systemd/system/boinc-client.service'
     else
       CONFIG_DIR='/etc/boinc-client'
       BOINC_DIR='/usr/lib/boinc-client'
-      SERVICE_FILE='/lib/systemd/system/boinc-client.service'
     fi
     BOINC_CMD_LINE_OPTIONS="${BOINC_CMD_LINE_OPTIONS:---allow_remote_gui_rpc --daemon --dir ${BOINC_DIR} --project_attach ${PROJECT_URL} ${WEAK_KEY}}"
     echo "$BOINC_GUI_RPC_PASSWORD" | sudo tee "${CONFIG_DIR}/gui_rpc_auth.cfg" > /dev/null
