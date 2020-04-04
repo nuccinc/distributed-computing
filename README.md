@@ -151,11 +151,12 @@ When Docker Desktop is launched for the first time, you will need to log out and
 
 ## Automated MacOS and Linux Native Installation
 
-- Tested Operating Systems:
+- Supported Operating Systems:
   - MacOS
   - Ubuntu
   - Debian
   - Fedora
+  - CentOS/RHEL/Amazon Linux
   - Kali
 
 ```
@@ -553,9 +554,9 @@ For other distributions, refer to the [Manual Installation](#manual-installation
 
 ## Updates
 
+- Added automated native installation support for CentOS/RHEL/Amazon Linux.
 - Added additional NUCC project documentation.
 - Docker installation for Kali appears to be broken. Only run `quickstart.sh --docker` on Kali if you already have Docker installed.
-- CentOS/RHEL/Amazon Linux automated native installation is pending.
 - Automated native installation for Arch will come last (sorry, but you guys should already know what you're doing)
 - Will eventually additional parameters to `quickstart.bat` in the future to specify custom project URL and weak key for both native and Docker-based installations.
 
