@@ -16,8 +16,8 @@ SET "BOINC=C:\PROGRA~1\BOINC\boinc.exe"
 SET "BOINC_MGR=C:\PROGRA~1\BOINC\boincmgr.exe"
 SET "BOINC_CMD=C:\PROGRA~1\BOINC\boinccmd.exe"
 SET "BOINC_DIR=C:\ProgramData\BOINC"
+SET "BOINC_CMD_LINE_OPTIONS=--allow_remote_gui_rpc --detach_console --dir %BOINC_DIR% --attach_project %PROJECT_URL% %WEAK_KEY%"
 IF [%~1]==[--docker] SET "BOINC_CMD_LINE_OPTIONS=--allow_remote_gui_rpc --attach_project %PROJECT_URL% %WEAK_KEY%"
-IF [%~1]==[--native] SET "BOINC_CMD_LINE_OPTIONS=--allow_remote_gui_rpc --detach_console --dir %BOINC_DIR% --attach_project %PROJECT_URL% %WEAK_KEY%"
 SET "IMG_ALPINE=boinc/client:baseimage-alpine"
 SET "IMG_UBUNTU=boinc/client:latest"
 REM Select Default Docker image:
@@ -30,14 +30,13 @@ REM ++
 REM ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 REM GET HELP!
-IF [%1]==[] (CALL :USAGE && EXIT /B)
-IF [%1]==[/?] (CALL :USAGE && EXIT /B)
-IF [%1]==[/h] (CALL :USAGE && EXIT /B)
-IF [%1]==[/help] (CALL :USAGE && EXIT /B)
-IF [%1]==[help] (CALL :USAGE && EXIT /B)
-IF [%1]==[-h] (CALL :USAGE && EXIT /B)
-IF [%1]==[-help] (CALL :USAGE && EXIT /B)
-IF [%1]==[--help] (CALL :USAGE && EXIT /B)
+IF [%~1]==[/?] (CALL :USAGE && EXIT /B)
+IF [%~1]==[/h] (CALL :USAGE && EXIT /B)
+IF [%~1]==[/help] (CALL :USAGE && EXIT /B)
+IF [%~1]==[help] (CALL :USAGE && EXIT /B)
+IF [%~1]==[-h] (CALL :USAGE && EXIT /B)
+IF [%~1]==[-help] (CALL :USAGE && EXIT /B)
+IF [%~1]==[--help] (CALL :USAGE && EXIT /B)
 
 REM Set gui_rpc_auth.cfg
 ECHO.
@@ -45,9 +44,10 @@ SET /P "BOINC_GUI_RPC_PASSWORD=Please enter a value for the BOINC_GUI_RPC_PASSWO
 ECHO This can be changed at any time by changing the value in gui_rpc_auth.cfg.
 
 REM Main script arguments:
-IF [%2]==[--image] (CALL :DOCKERINSTALL %~1 %~2 %~3 & EXIT /B)
-IF [%1]==[--docker] (CALL :DOCKERINSTALL %~1 %~2 %~3 & EXIT /B)
-IF [%1]==[--native] (CALL :NATIVEINSTALL %~1 %~2 %~3 & EXIT /B)
+IF [%~1]==[] (CALL :NATIVEINSTALL & EXIT /B)
+IF [%~1]==[--native] (CALL :NATIVEINSTALL %~1 %~2 %~3 & EXIT /B)
+IF [%~2]==[--image] (CALL :DOCKERINSTALL %~1 %~2 %~3 & EXIT /B)
+IF [%~1]==[--docker] (CALL :DOCKERINSTALL %~1 %~2 %~3 & EXIT /B)
 
 REM ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 REM ++                                                            
@@ -97,8 +97,8 @@ REM ============================================================================
 REM =   CONFIGURE - Automatically attaches native BOINC client to NUCC project and start processing workloads.
 REM ========================================================================================================================================
 :CONFIGURE
+SET CONFIG_DIR=%BOINC_DIR%
 IF [%~1]==[--docker] SET CONFIG_DIR=%VOLUME%
-IF [%~1]==[--native] SET CONFIG_DIR=%BOINC_DIR%
 ::IF EXIST %CONFIG_DIR%\cc_config.xml CALL :DOCKERRUN %~1 %~2 %~3 & EXIT /B
 ECHO.
 ECHO Configuring BOINC...
@@ -115,6 +115,7 @@ ECHO 127.0.0.1 > %CONFIG_DIR%\remote_hosts.cfg
 
 IF [%~1]==[--docker] CALL :DOCKERINSTALL %~1 %~2 %~3 & EXIT /B
 IF [%~1]==[--native] CALL :LAUNCHNATIVE %~1 %~2 %~3 & EXIT /B
+IF [%~1]==[] CALL :LAUNCHNATIVE %~1 %~2 %~3 & EXIT /B
 EXIT /B
 
 REM ========================================================================================================================================
@@ -220,3 +221,4 @@ IF [%ANS%]==[y] (docker exec boinc boinccmd --get_state)
 EXIT /B
 
  
+

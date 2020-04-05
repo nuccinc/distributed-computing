@@ -75,7 +75,7 @@ You can run a custom image by running `IMG=boinc/client[tag-name] ./quickstart.s
 ```
 git clone http://github.com/phx/nucc.git
 cd nucc
-./quickstart.sh
+./quickstart.sh --docker
 ```
 
 If you already have a team or want to specify an alternate project, don't be discouraged -- you can still use `quickstart.sh`!  Simply speficy your project URL and/or weak key
@@ -107,18 +107,17 @@ If you disable the firewall completely, the `boinc` container should spin up imm
 ## Automated Windows Native Installation:
 
 - Download the zip file of the repository
-- Hit WinKey, and type `cmd`
-- Right click on `cmd`, and click `Run as Administrator`
-  - At the elevated (Administrator) command prompt, run the following:
-    - `cd C:\Users\%USERNAME%\Downloads\nucc-master`
-    - `quickstart.bat --native`
+- Navigate to your Downloads folder, and unzip `nucc-master.zip`
+  - Open the `nucc-master` folder
+  - Right click on `quickstart.bat`, and click `Run as Administrator`
+    - Agree to the firewall notice if it pops up
 
 Alternatively, if you have `git` installed, launch an elevated (Administrator) command promt and run the following:
 
 ```
 git clone https://github.com/phx/nucc.git
 cd nucc
-quickstart.bat --native
+quickstart.bat
 ```
 
 This will install the [Chocolatey](https://chocolatey.org/) package manager, which will then install BOINC.
@@ -379,6 +378,12 @@ Two very good `boinccmd` references:
 - [https://boinc.berkeley.edu/wiki/Boinccmd_tool](https://boinc.berkeley.edu/wiki/Boinccmd_tool)
 - [https://www.systutorials.com/docs/linux/man/1-boinccmd/](https://www.systutorials.com/docs/linux/man/1-boinccmd/)
 
+#### Windows:
+
+`boinccmd.exe` is located in `C:\Program Files\BOINC`
+
+You can run boinccmd commands from a command prompt by running `C:\PROGR~1\BOINC\boinccmd.exe [args]`
+
 #### Acces the shell on the Docker container:
 
 `docker exec -it boinc /bin/sh`
@@ -539,7 +544,7 @@ Refer to the example below:
 
 Manually edit [`quickstart.bat`](quickstart.bat), and set the `%PROJECT_URL%` variable to `https://www.gpugrid.net/` and `%WEAK_KEY%` variable to `557786_557339997aa264af08d60b87d63b87bf`.
 
-Then, just run `quickstart.bat`.
+Then, just run `quickstart.bat` with Administrator privileges.
 
 If BOINC is already installed, you can simply run the following:
 
@@ -559,8 +564,9 @@ For other distributions, refer to the [Manual Installation](#manual-installation
 
 ## Updates
 
-- Updated instructions for automated native Windows install for less tech-savvy people.
-- Eventually, I will change the native vs. docker options on `quickstart.bat` so that Right-Click > Run as Administrator will execute native installation as opposed to Docker installation.
+- Updated instructions for automated native Windows install for less tech-savvy people:
+  - Right-Click > Run as Administrator will execute native installation as opposed to Docker installation, same as if run without arguments.
+  - `quickstart.bat` now requires the `--docker` argument for Windows Docker installations.
 - Added automated native installation support for CentOS/RHEL/Amazon Linux.
 - Docker installation for Kali appears to be broken. Only run `quickstart.sh --docker` on Kali if you already have Docker installed.
 - Automated native installation for Arch will come last (sorry, but you guys should already know what you're doing)
