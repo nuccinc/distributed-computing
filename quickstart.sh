@@ -28,16 +28,18 @@ read -r -d '' NUCCD <<'EOF'
 
 usage() {
   echo '
-USAGE: nuccd [OPTIONS]
+USAGE: nuccd [ARGS]
 
-allowmorework
-nomorwork
-suspend
-resume
-start
-stop
-remove
-uninstall
+allowmorework    requests more work from current project.
+nomorwork        requests no more work after current work units finish.
+suspend          suspends all current tasks.
+resume           resumes all current tasks.
+[boinccmd args]  execute any boinccmd arguments.
+start            starts to boinc docker container.
+stop             stops the boinc docker container.
+remove           removes the boinc docker container.
+uninstall        stops and removes container, removes all boinc/client images, and deletes nuccd.
+help             shows this help dialog
 '
 }
 
