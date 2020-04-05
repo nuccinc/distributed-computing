@@ -128,7 +128,8 @@ ECHO Attaching to Project...
 %BOINC% %BOINC_CMD_LINE_OPTIONS%
 IF ERRORLEVEL 1 (ECHO Failed to attach to project. Please run "boinccmd %ATTACH%" after BOINC is running. & GOTO :EOF)
 
-SLEEP 5
+REM Sleep 5 seconds:
+ping -n 6 127.0.0.1 >NUL
 
 REM Launch BOINC:
 ECHO.
