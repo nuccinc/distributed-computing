@@ -37,10 +37,10 @@ Example: `boinccmd --passwd <yourpassword> --project_attach http://boinc.bakerla
 ---
 
 **Contents**
+- [Automated Linux/MacOS Native Installation](#automated-linux-and-macos-native-installation)
 - [Automated Linux/MacOS Docker-based Installation](#automated-linux-and-macos-docker-installation)
 - [Automated Windows Native Installation](#automated-windows-native-installation)
 - [Automated Windows Docker-based Installation](#windows-docker-installation)
-- [Automated MacOS and Linux Native Installation](#automated-macos-and-linux-native-installation)
 - [FreeBSD/FreeNAS Jail Installation](#freebsdfreenas-jail-installation)
 - [Manual Installation](#manual-installation)
 - [Docker Supported Architectures and Tags](#docker-supported-architectures-and-tags)
@@ -51,6 +51,24 @@ Example: `boinccmd --passwd <yourpassword> --project_attach http://boinc.bakerla
 - [Connecting to Additional NUCC Projects](#connecting-to-additional-nucc-projects) 
 - [Updates](#updates)
 - [About NUCC](#about-the-national-upcycled-computing-collective)
+
+---
+
+## Automated Linux and MacOS Native Installation
+
+- Supported Operating Systems:
+  - MacOS
+  - Ubuntu
+  - Debian
+  - Fedora
+  - CentOS/RHEL/Amazon Linux
+  - Kali
+
+```
+git clone https://github.com/phx/nucc
+cd nucc
+./quickstart.sh --native
+```
 
 ---
 
@@ -150,24 +168,6 @@ When Docker Desktop is launched for the first time, you will need to log out and
 - Run `quickstart.bat --docker` again from an elevated prompt to start processing workloads immediately
 
 *When running the Docker image for the first time, Windows will ask to confirm if Docker can access your C drive.*
-
----
-
-## Automated MacOS and Linux Native Installation
-
-- Supported Operating Systems:
-  - MacOS
-  - Ubuntu
-  - Debian
-  - Fedora
-  - CentOS/RHEL/Amazon Linux
-  - Kali
-
-```
-git clone https://github.com/phx/nucc
-cd nucc
-./quickstart.sh --native
-```
 
 ---
 
