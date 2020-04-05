@@ -382,7 +382,7 @@ Two very good `boinccmd` references:
 
 `boinccmd.exe` is located in `C:\Program Files\BOINC`
 
-You can run boinccmd commands from a command prompt by running `C:\PROGR~1\BOINC\boinccmd.exe [args]`
+You can run boinccmd commands from a command prompt by running `C:\PROGRA~1\BOINC\boinccmd.exe [args]`
 
 #### Acces the shell on the Docker container:
 
