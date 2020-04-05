@@ -6,7 +6,7 @@
 
 # NUCC Distributed Computing to Aid in COVID-19 Research
 
-**Latest Update: April 4, 2020**
+**Latest Update: April 5, 2020**
 
 Join [The National Upcycled Computing Collective (NUCC)](https://www.nuccinc.org/) in a collaborative effort to combine our resources in order to aid in COVID-19 research.
 This project draws heavily from [BOINC's default Docker configurations](https://github.com/BOINC/boinc-client-docker).
@@ -106,7 +106,12 @@ If you disable the firewall completely, the `boinc` container should spin up imm
 
 ## Automated Windows Native Installation:
 
-Download the zip file of the repository, unzip it, and run `quickstart.bat --native --attach` from an elevated (Administrator) command prompt.
+- Download the zip file of the repository
+- Hit WinKey, and type `cmd`
+- Right click on `cmd`, and click `Run as Administrator`
+  - At the elevated (Administrator) command prompt, run the following:
+    - `cd C:\Users\%USERNAME%\Downloads\nucc-master`
+    - `quickstart.bat --native`
 
 Alternatively, if you have `git` installed, launch an elevated (Administrator) command promt and run the following:
 
@@ -554,8 +559,9 @@ For other distributions, refer to the [Manual Installation](#manual-installation
 
 ## Updates
 
+- Updated instructions for automated native Windows install for less tech-savvy people.
+- Eventually, I will change the native vs. docker options on `quickstart.bat` so that Right-Click > Run as Administrator will execute native installation as opposed to Docker installation.
 - Added automated native installation support for CentOS/RHEL/Amazon Linux.
-- Added additional NUCC project documentation.
 - Docker installation for Kali appears to be broken. Only run `quickstart.sh --docker` on Kali if you already have Docker installed.
 - Automated native installation for Arch will come last (sorry, but you guys should already know what you're doing)
 - Will eventually additional parameters to `quickstart.bat` in the future to specify custom project URL and weak key for both native and Docker-based installations.
