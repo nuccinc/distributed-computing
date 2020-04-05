@@ -87,8 +87,8 @@ You can run a custom image by running `IMG=boinc/client[tag-name] ./quickstart.s
 - Fedora 30+
 - Arch
 - Kali 2018+ (based on Debian Stretch)
-  - Docker auto-installation appears to be currently broken fo Kali.
-  - Only run `quickstart.sh` on Kali if you already have Docker installed.
+  - Docker auto-installation appears to be currently broken for Kali.
+    - Only run `quickstart.sh --docker` on Kali if you already have Docker installed.
 
 ```
 git clone http://github.com/phx/nucc.git
