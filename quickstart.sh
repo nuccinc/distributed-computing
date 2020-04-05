@@ -26,6 +26,21 @@ CC_CONFIG='<cc_config>
 read -r -d '' NUCCD <<'EOF'
 #!/bin/bash
 
+usage() {
+  echo '
+USAGE: nuccd [OPTIONS]
+
+allowmorework
+nomorwork
+suspend
+resume
+start
+stop
+remove
+uninstall
+'
+}
+
 if [[ $1 = "allowmorework" ]]; then
   docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ allowmorework
 elif [[ $1 = "nomorework" ]]; then
@@ -46,19 +61,13 @@ elif [[ $1 = "uninstall" ]]; then
   docker rm boinc 2>/dev/null
   docker images | grep boinc | awk '{print $3}' | xargs docker rmi 2>/dev/null
   sudo rm -f /usr/local/bin/nuccd
+elif [[ ($1 = "-h") || (-n $(echo "${@}" | grep help)) ]]; then
+  usage
 else
-  echo '
-USAGE: nuccd [OPTIONS]
-
-allowmorework
-nomorwork
-suspend
-resume
-start
-stop
-remove
-uninstall
-'
+  docker exec boinc boinccmd "${@}"
+  if [[ $? -ne 0 ]]; then
+    usage
+  fi
 fi
 EOF
 
