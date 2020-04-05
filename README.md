@@ -450,6 +450,22 @@ The `nuccd` helper script will be added to `/usr/local/bin/nuccd` as part of the
 ```sh
 #!/bin/bash
 
+usage() {
+  echo '
+USAGE: nuccd [OPTIONS]
+
+[boinccmd arguments]
+allowmorework
+nomorwork
+suspend
+resume
+start
+stop
+remove
+uninstall
+'
+}
+
 if [[ $1 = "allowmorework" ]]; then
   docker exec boinc boinccmd --project http://boinc.bakerlab.org/rosetta/ allowmorework
 elif [[ $1 = "nomorework" ]]; then
@@ -470,18 +486,14 @@ elif [[ $1 = "uninstall" ]]; then
   docker rm boinc 2>/dev/null
   docker images | grep boinc | awk '{print $3}' | xargs docker rmi 2>/dev/null
   sudo rm -f /usr/local/bin/nuccd
-else
-  echo '
-USAGE: nuccd [OPTIONS]
-
-allowmorework
-nomorwork
-suspend
-resume
-start
-stop
-remove
-uninstall
+elif [[ ($1 = "-h") || (-n $(echo "${@}" | grep help)) ]]; then
+  usage
+else 
+  docker exec boinc boinccmd "${@}"
+  if [[ $? -ne 0 ]]; then
+    usage
+  fi
+fi
 '
 fi
 ```
