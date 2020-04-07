@@ -589,4 +589,4 @@ For other distributions, refer to the [Manual Installation](#manual-installation
 
 [The National Upcycled Computing Collective, Inc.](http://nuccinc.org) is a 501(c)(3) Nonprofit Organization [NTEE U41] Computer Science, Technology & Engineering, Research Institute (EIN 82-1177433)
 as determined by the Internal Revenue Service.  Our mission is to find new uses for technology, thereby extending life cycles with an intent to re-purpose electronic devices responsibly.  For more
-information, please visit [https://www.nuccinc.org/about/](https://www.nuccinc.org/about/).
+information, please visit [http://www.nuccinc.org/about/](http://www.nuccinc.org/about/).
