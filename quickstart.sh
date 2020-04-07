@@ -333,10 +333,11 @@ if [[ $1 = "--native" ]]; then
   distro_check
   native_install
   echo
-  read -rp 'Would you like to get the current state? [y/n] ' get_state
-  if [[ ($get_state = 'y') || ($get_state = 'yes') ]]; then
-    boinccmd --get_state
-    # echo -e "\nYou might need to login again with su - $LOGNAME in order to run boinccmd commands."
+  if [[ $DISTRO_NAME != "macos" ]]; then
+    read -rp 'Would you like to get the current state? [y/n] ' get_state
+    if [[ ($get_state = 'y') || ($get_state = 'yes') ]]; then
+      boinccmd --get_state
+    fi
   fi
   echo -e "\nFeel free to launch a BOINC Manager or use the command 'boinccmd' to monitor your tasks.\n"
 else
