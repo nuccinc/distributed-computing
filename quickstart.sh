@@ -221,9 +221,7 @@ native_install() {
     echo "$BOINC_GUI_RPC_PASSWORD" > "${CONFIG_DIR}/gui_rpc_auth.cfg"
     echo "$CC_CONFIG" > "${CONFIG_DIR}/cc_config.xml"
     echo '127.0.0.1' > "${CONFIG_DIR}/remote_hosts.cfg"
-    set -x
     (/Applications/BOINCmanager.app/Contents/Resources/boinc -redirectio -dir "${CONFIG_DIR}/" --daemon --allow_remote_gui_rpc --attach_project "${PROJECT_URL}" "${WEAK_KEY}" &) >/dev/null 2>&1
-    set +x
     open /Applications/BOINCManager.app
   elif [[ ($DISTRO_NAME = "ubuntu") || ($DISTRO_NAME = "kali") ]]; then
       echo -e '\nPlease select the appropriate BOINC client:\n'
