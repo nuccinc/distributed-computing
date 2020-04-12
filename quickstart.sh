@@ -217,8 +217,11 @@ native_install() {
   ${UPDATE_PKG_CACHE}
   if [[ $DISTRO_NAME = "macos" ]]; then
     brew cask install boinc
-    echo "$CC_CONFIG" > "/Library/Application Support/BOINC Data/cc_config.xml"
-    (/Applications/BOINCmanager.app/Contents/Resources/boinc -redirectio -dir "/Library/Application Support/BOINC Data/" --daemon --allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec &) >/dev/null 2>&1
+    CONFIG_DIR='/Library/Application Support/BOINC Data'
+    echo "$BOINC_GUI_RPC_PASSWORD" > "${CONFIG_DIR}/gui_rpc_auth.cfg"
+    echo "$CC_CONFIG" > "${CONFIG_DIR}/cc_config.xml"
+    echo '127.0.0.1' > "${CONFIG_DIR}/remote_hosts.cfg"
+    (/Applications/BOINCmanager.app/Contents/Resources/boinc -redirectio -dir "${CONFIG_DIR}/" --daemon --allow_remote_gui_rpc --attach_project "${PROJECT_URL}" "${WEAK_KEY}" &) >/dev/null 2>&1
     open /Applications/BOINCManager.app
   elif [[ ($DISTRO_NAME = "ubuntu") || ($DISTRO_NAME = "kali") ]]; then
       echo -e '\nPlease select the appropriate BOINC client:\n'
