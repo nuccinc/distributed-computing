@@ -6,7 +6,7 @@
 
 # NUCC Distributed Computing to Aid in COVID-19 Research
 
-**Latest Update: April 12, 2020**
+**Latest Update: April 17, 2020**
 
 Join [The National Upcycled Computing Collective (NUCC)](https://www.nuccinc.org/) in a collaborative effort to combine our resources in order to aid in COVID-19 research.
 This project draws heavily from [BOINC's default Docker configurations](https://github.com/BOINC/boinc-client-docker).
@@ -21,6 +21,9 @@ Copy/paste the following one-liner to get started immediately on MacOS or Linux:
 
 `docker run -d --restart always --name boinc -p 31416 -v "${HOME}/.boinc:/var/lib/boinc" -e BOINC_GUI_RPC_PASSWORD="123" -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc --attach_project http://boinc.bakerlab.org/rosetta/ 2108683_fdd846588bee255b50901b8b678d52ec" boinc/client:baseimage-alpine`
 
+### The fastest and easiest way to contribute on MacOS if you already have Homebrew installed:
+
+`brew tap phx/nucc && brew install nucc`
 
 ### The fastest and easiest way to contribute if you already have BOINC installed natively:
 - Windows:
@@ -67,7 +70,13 @@ Example: `boinccmd --passwd <yourpassword> --project_attach http://boinc.bakerla
 ```
 git clone https://github.com/phx/nucc
 cd nucc
-./quickstart.sh --native
+./quickstart.sh
+```
+
+### MacOS via Homebrew:
+```
+brew tap phx/nucc
+brew cask install nucc
 ```
 
 ---
@@ -77,7 +86,7 @@ cd nucc
 If Docker is not already installed, the [`quickstart.sh`](quickstart.sh) script will install Docker via [The Almost Universal Docker Installer](https://github.com/phx/dockerinstall),
 then pull [the official boinc/client image from DockerHub](https://hub.docker.com/r/boinc/client) ([`base-alpine`](https://github.com/BOINC/boinc-client-docker/blob/master/Dockerfile.base-alpine) by default).
 
-You can run a custom image by running `IMG=boinc/client[tag-name] ./quickstart.sh` (see [Supported Architectures and Tags](#docker-supported-architectures-and-tags)).
+You can run a custom image by running `IMG=boinc/client[tag-name] ./quickstart.sh --docker` (see [Supported Architectures and Tags](#docker-supported-architectures-and-tags)).
 
 - MacOS 10.8+
 - Ubuntu
@@ -146,7 +155,7 @@ I find it easier to view and manage by going to `View > Advanced`, as things app
 
 ## Windows Docker Installation:
 
-Download the zip file of the repository, unzip it, and run `quickstart.bat` from an elevated (Administrator) command prompt.
+Download the zip file of the repository, unzip it, and run `quickstart.bat --docker` from an elevated (Administrator) command prompt.
 
 Alternatively, if you have `git` installed, launch an elevated (Administrator) command promt and run the following:
 
@@ -197,8 +206,7 @@ If running on Linux or MacOS, you may find it easier to go to `View > Advanced` 
 
 Not all of the BOINC images below are compatible with the COVID-19 Rosetta@home workloads.  To be perfectly clear, Rosetta@home
 is only handing out ***processor-focused*** workloads.  This means if you want to take advantage of your beefy GPU, you will be better off
-focusing on something like [Folding@home](https://foldingathome.org/), which can take advantage of that.  Also, Rosetta@home is not currently
-supporting ARM-based workloads.
+focusing on something like [Folding@home](https://foldingathome.org/), which can take advantage of that.
 
 The current issue with Folding@home is that the number of servers sending data back is causing a DDOS on their systems as they are receiving the folded results.
 As a result of this, the work units aren't finishing, and no work can be handed out.  They have engaged several companies to help, but this is the primary reason
@@ -218,7 +226,7 @@ it as our default.
 If you wish, you can specify the `boinc/client` image with any of the tags below in order to use one of the specialized versions instead of `baseimage-alpine`.
 
 These can be used in the Linux/MacOS one-liner at the top of this page or passed as the `$IMG` environment variable to `quickstart.sh`:
-- `IMG=boinc/client:[image-name] ./quickstart.sh`
+- `IMG=boinc/client:[image-name] ./quickstart.sh --docker`
 
 They can also be passed as a command line argument to to `quickstart.bat`:
 - `quickstart.bat --docker --image boinc/client:[image-name]`
@@ -248,52 +256,52 @@ They can also be passed as a command line argument to to `quickstart.bat`:
 - Install the [ROCm Driver](https://rocm.github.io/ROCmInstall.html).
 - Reboot your system.
 - Run the following command.
-  - Linux: `IMG=boinc/client:amd ./quickstart.sh`
+  - Linux: `IMG=boinc/client:amd ./quickstart.sh --docker`
   - Windows: `quickstart.bat --docker --image boinc/client:amd`
 
 #### Intel GPU-savvy BOINC client usage
 - Install the Intel GPU Driver.
 - Run the following command:
-  - Linux: `IMG=boinc/client:intel ./quickstart.sh`
+  - Linux: `IMG=boinc/client:intel ./quickstart.sh --docker`
   - Windows: `quickstart.bat --docker --image boinc/client:intel`
 
 #### Legacy Intel GPU-savvy BOINC client usage
 - Install the Intel GPU Driver.
 - Run the following command:
-  - Linux: `IMG=boinc/client:intel-legacy ./quickstart.sh`
+  - Linux: `IMG=boinc/client:intel-legacy ./quickstart.sh --docker`
   - Windows: `quickstart.bat --docker --image boinc/client:intel-legacy`
 
 #### Multi GPU-savvy BOINC client usage
 - Make sure you have installed the [NVIDIA driver](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver).
 - Install the NVIDIA-Docker version 2.0 by following the instructions [here](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)).
 - Run the following command:
-  - Linux: `IMG=boinc/client:multi-gpu ./quickstart.sh`
+  - Linux: `IMG=boinc/client:multi-gpu ./quickstart.sh --docker`
   - Windows: `quickstart.bat --docker --image boinc/client:multi-gpu`
  
 #### NVIDIA-savvy BOINC client usage
 - Make sure you have installed the [NVIDIA driver](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver).
 - Install the NVIDIA-Docker version 2.0 by following the instructions [here](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)).
 - Run the following command:
-  - Linux: `IMG=boinc/client:nvidia ./quickstart.sh`
+  - Linux: `IMG=boinc/client:nvidia ./quickstart.sh --docker`
   - Windows: `quickstart.bat --docker --image boinc/client:nvidia`
 
 #### VirtualBox-savvy BOINC client usage
 
 - Install the `virtualbox-dkms` package on the host.
 - Run the following command:
-  - Linux: `IMG=boinc/client:virtualbox ./quickstart.sh`
+  - Linux: `IMG=boinc/client:virtualbox ./quickstart.sh --docker`
   - Windows: `quickstart.bat --docker --image boinc/client:virtualbox`
 
 #### ARMv7 32-bit savvy BOINC client usage
 - Make sure you have [Docker installed on your Raspberry Pi](https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/) or you are using a [Docker friendly OS](https://blog.hypriot.com/).
 - Run the following command.
-  - Linux: `IMG=boinc/client:arm32v7 ./quickstart.sh`
+  - Linux: `IMG=boinc/client:arm32v7 ./quickstart.sh --docker`
   - Windows: `quickstart.bat --docker --image boinc/client:arm32v7`
 
 #### ARMv8 64-bit savvy BOINC client usage
 - Make sure you are using a [64-bit OS on your Raspberry Pi](https://wiki.ubuntu.com/ARM/RaspberryPi#arm64) and have [Docker installed on your Raspberry Pi](https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/).
 - Run the following command.
-  - Linux: `IMG=boinc/client:arm64v8 ./quickstart.sh`
+  - Linux: `IMG=boinc/client:arm64v8 ./quickstart.sh --docker`
   - Windows: `quickstart.bat --docker --image boinc/client:arm64v8`
 
 ---
@@ -565,7 +573,7 @@ If BOINC is already installed, you can simply run the following:
 
 For native installations, Ubuntu and Kali support the option to choose to install the `boinc-client-nvidia-cuda` package:
 
-`PROJECT_URL=https://www.gpugrid.net/ WEAK_KEY=557786_557339997aa264af08d60b87d63b87bf ./quickstart.sh --native`
+`PROJECT_URL=https://www.gpugrid.net/ WEAK_KEY=557786_557339997aa264af08d60b87d63b87bf ./quickstart.sh`
 
 For other distributions, refer to the [Manual Installation](#manual-installation) instructions, and then run the following:
 
@@ -575,7 +583,8 @@ For other distributions, refer to the [Manual Installation](#manual-installation
 
 ## Updates
 
-- Should have improved RPC auth for MacOS users.
+- Changed functionality of `quickstart.sh`, where native installation is default, and `--docker` must be supplied explicitly.
+- Improved Homebrew installation for MacOS.
 - Updated instructions for automated native Windows install for less tech-savvy people:
   - Right-Click > Run as Administrator will execute native installation as opposed to Docker installation, same as if run without arguments.
   - `quickstart.bat` now requires the `--docker` argument for Windows Docker installations.

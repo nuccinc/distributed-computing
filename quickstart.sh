@@ -8,7 +8,7 @@ PROJECT_URL="${PROJECT_URL:-http://boinc.bakerlab.org/rosetta/}"
 # Ability to add custom weak key via environment variable:
 WEAK_KEY="${WEAK_KEY:-2108683_fdd846588bee255b50901b8b678d52ec}"
 # Ability to add custom command line options via environment variable:
-if [[ ($1 = "--docker") || (-z $1) ]]; then
+if [[ $1 = "--docker" ]]; then
   BOINC_CMD_LINE_OPTIONS="${BOINC_CMD_LINE_OPTIONS:---allow_remote_gui_rpc --attach_project ${PROJECT_URL} ${WEAK_KEY}}"
 fi
 # Ability to set custom Docker volume via environment variable:
@@ -76,14 +76,13 @@ EOF
 ### FUNCTIONS:
 show_help() {
 echo -e '
-Usage: ./quickstart.sh [--native|--docker]
+Usage: ./quickstart.sh [--docker]
 Installs BOINC client and attaches to NUCC United project.
 
---native    Automatically installs the BOINC client natively on supported operating systems.
 --docker    Installs the BOINC client via Docker (will install Docker if not installed).
 --help      Shows this help dialog.
 
-If run without parameters, "--docker" is implied.
+If run without parameters, the BOINC client will be installed natively on supported operating system.
 '
 }
 docker_install() {
@@ -216,13 +215,9 @@ native_install() {
   pkg_manager_config
   ${UPDATE_PKG_CACHE}
   if [[ $DISTRO_NAME = "macos" ]]; then
-    brew cask install boinc
-    CONFIG_DIR='/Library/Application Support/BOINC Data'
-    echo "$BOINC_GUI_RPC_PASSWORD" > "${CONFIG_DIR}/gui_rpc_auth.cfg"
-    echo "$CC_CONFIG" > "${CONFIG_DIR}/cc_config.xml"
-    echo '127.0.0.1' > "${CONFIG_DIR}/remote_hosts.cfg"
-    (/Applications/BOINCmanager.app/Contents/Resources/boinc -redirectio -dir "${CONFIG_DIR}/" --daemon --allow_remote_gui_rpc --attach_project "${PROJECT_URL}" "${WEAK_KEY}" &) >/dev/null 2>&1
-    open /Applications/BOINCManager.app
+    brew tap phx/nucc
+    HOMEBREW_BOINC_GUI_RPC_PASSWORD="$BOINC_GUI_RPC_PASSWORD"
+    brew cask install nucc
   elif [[ ($DISTRO_NAME = "ubuntu") || ($DISTRO_NAME = "kali") ]]; then
       echo -e '\nPlease select the appropriate BOINC client:\n'
       echo '1) boinc-client (DEFAULT)'
@@ -317,7 +312,10 @@ if [[ -z $BOINC_GUI_RPC_PASSWORD ]]; then
   echo -e 'This can be changed at any time by changing the value in gui_rpc_auth.cfg\n'
 fi
 
-if [[ $1 = "--native" ]]; then
+if [[ $1 = "--docker" ]]; then
+  docker_install
+  echo -e "\nIf have just now installing Docker, please run su - ${LOGNAME} to inherit docker group privileges."
+else
   # Distro Version Info:
   macos="$(uname -a | grep Darwin)"
   if [[ -z $macos ]]; then
@@ -341,9 +339,6 @@ if [[ $1 = "--native" ]]; then
     if [[ ($get_state = 'y') || ($get_state = 'yes') ]]; then
       boinccmd --get_state
     fi
+    echo -e "\nFeel free to launch a BOINC Manager or use the command 'boinccmd' to monitor your tasks.\n"
   fi
-  echo -e "\nFeel free to launch a BOINC Manager or use the command 'boinccmd' to monitor your tasks.\n"
-else
-  docker_install
-  echo -e "\nIf have just now installing Docker, please run su - ${LOGNAME} to inherit docker group privileges."
 fi
