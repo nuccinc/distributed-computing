@@ -6,7 +6,7 @@
 
 # NUCC Distributed Computing to Aid in COVID-19 Research
 
-**Latest Update: April 17, 2020**
+**Latest Update: April 18, 2020**
 
 Join [The National Upcycled Computing Collective (NUCC)](https://www.nuccinc.org/) in a collaborative effort to combine our resources in order to aid in COVID-19 research.
 This project draws heavily from [BOINC's default Docker configurations](https://github.com/BOINC/boinc-client-docker).
@@ -541,7 +541,7 @@ or if you feel like your powerful GPU could be put to better use in a project th
 
 ## Connecting to Additional NUCC Projects
 
-You can connect to different projects on MacOS and Linux by setting the `$PROJECT_URL` and `$WEAK_KEY` environment variables when running [`quickstart.sh`](quickstart.sh).
+You can connect to different projects on MacOS and Linux by runnning `PROJECT_URL=[PROJECT_URL] WEAK_KEY=[WEAK_KEY] ./quickstart.sh`.
 
 On Windows, you can manually edit [`quickstart.bat`](quickstart.bat) to set the `%PROJECT_URL%` and `%WEAK_KEY%` variables.
 
@@ -583,6 +583,7 @@ For other distributions, refer to the [Manual Installation](#manual-installation
 
 ## Updates
 
+- Added better instructions for connecting to additional projects.
 - Changed functionality of `quickstart.sh`, where native installation is default, and `--docker` must be supplied explicitly.
 - Improved Homebrew installation for MacOS.
 - Updated instructions for automated native Windows install for less tech-savvy people:
