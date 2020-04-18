@@ -541,7 +541,9 @@ or if you feel like your powerful GPU could be put to better use in a project th
 
 ## Connecting to Additional NUCC Projects
 
-You can connect to different projects on MacOS and Linux by runnning `PROJECT_URL=[PROJECT_URL] WEAK_KEY=[WEAK_KEY] ./quickstart.sh`.
+You can connect to different projects on MacOS and Linux by runnning the following:
+
+- `PROJECT_URL=[PROJECT_URL] WEAK_KEY=[WEAK_KEY] ./quickstart.sh`
 
 On Windows, you can manually edit [`quickstart.bat`](quickstart.bat) to set the `%PROJECT_URL%` and `%WEAK_KEY%` variables.
 
