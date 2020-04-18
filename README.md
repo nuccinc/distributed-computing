@@ -73,12 +73,6 @@ cd nucc
 ./quickstart.sh
 ```
 
-### MacOS via Homebrew:
-```
-brew tap phx/nucc
-brew cask install nucc
-```
-
 ---
 
 ## Automated Linux and MacOS Docker Installation
