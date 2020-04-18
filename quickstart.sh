@@ -133,7 +133,7 @@ docker_install() {
 }
 not_supported() {
   echo -e '\n[ERROR] This script is not currently supported for your operating system.'
-  echo -e 'Please see https://boinc.berkeley.edu/wiki/Installing_BOINC to install manually.'
+  echo -e 'Please see https://boinc.berkeley.edu/wiki/Installing_BOINC to install manually.\n'
   exit 1
 }
 distro_check() {
