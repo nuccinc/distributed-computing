@@ -216,7 +216,9 @@ native_install() {
   ${UPDATE_PKG_CACHE}
   if [[ $DISTRO_NAME = "macos" ]]; then
     brew tap phx/nucc
-    HOMEBREW_BOINC_GUI_RPC_PASSWORD="$BOINC_GUI_RPC_PASSWORD"
+    export HOMEBREW_BOINC_GUI_RPC_PASSWORD="$BOINC_GUI_RPC_PASSWORD"
+    export HOMEBREW_PROJECT_URL="$PROJECT_URL"
+    export HOMEBREW_WEAK_KEY="$WEAK_KEY"
     brew cask install nucc
   elif [[ ($DISTRO_NAME = "ubuntu") || ($DISTRO_NAME = "kali") ]]; then
       echo -e '\nPlease select the appropriate BOINC client:\n'
