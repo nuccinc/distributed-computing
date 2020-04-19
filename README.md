@@ -6,7 +6,7 @@
 
 # NUCC Distributed Computing to Aid in COVID-19 Research
 
-**Latest Update: April 18, 2020**
+**Latest Update: April 19, 2020**
 
 Join [The National Upcycled Computing Collective (NUCC)](https://www.nuccinc.org/) in a collaborative effort to combine our resources in order to aid in COVID-19 research.
 This project draws heavily from [BOINC's default Docker configurations](https://github.com/BOINC/boinc-client-docker).
@@ -89,12 +89,10 @@ You can run a custom image by running `IMG=boinc/client[tag-name] ./quickstart.s
 - CentOS/RHEL/Amazon Linux
 - Fedora 30+
 - Arch
-- Kali 2018+ (based on Debian Stretch)
-  - Docker auto-installation appears to be currently broken for Kali.
-    - Only run `quickstart.sh --docker` on Kali if you already have Docker installed.
+- Kali 2018
 
 ```
-git clone http://github.com/phx/nucc.git
+git clone http://github.com/phx/nucc
 cd nucc
 ./quickstart.sh --docker
 ```
@@ -136,7 +134,7 @@ If you disable the firewall completely, the `boinc` container should spin up imm
 Alternatively, if you have `git` installed, launch an elevated (Administrator) command promt and run the following:
 
 ```
-git clone https://github.com/phx/nucc.git
+git clone https://github.com/phx/nucc
 cd nucc
 quickstart.bat
 ```
@@ -154,7 +152,7 @@ Download the zip file of the repository, unzip it, and run `quickstart.bat --doc
 Alternatively, if you have `git` installed, launch an elevated (Administrator) command promt and run the following:
 
 ```
-git clone https://github.com/phx/nucc.git
+git clone https://github.com/phx/nucc
 cd nucc
 quickstart.bat --docker
 ```
@@ -579,6 +577,8 @@ For other distributions, refer to the [Manual Installation](#manual-installation
 
 ## Updates
 
+- Fixed logic causing Linux native installations to fail.
+- Fixed auto-installation for Docker on Kali Linux.
 - Added better instructions for connecting to additional projects.
 - Changed functionality of `quickstart.sh`, where native installation is default, and `--docker` must be supplied explicitly.
 - Improved Homebrew installation for MacOS.
