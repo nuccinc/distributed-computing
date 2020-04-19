@@ -222,12 +222,12 @@ native_install() {
     export HOMEBREW_WEAK_KEY="$WEAK_KEY"
     brew cask reinstall nucc
   elif [[ ($DISTRO_NAME = "ubuntu") || ($DISTRO_NAME = "kali") ]]; then
-      echo -e '\nPlease select the appropriate BOINC client:\n'
-      echo '1) boinc-client (DEFAULT)'
-      echo '2) boinc-client-nvidia-cuda (NVIDIA CUDA support)'
-      echo '3) boinc-client-opencl (AMD/ATI OpenCL support)'
-      echo
-      read -rp 'Selection Number: ' boinc_client
+    echo -e '\nPlease select the appropriate BOINC client:\n'
+    echo '1) boinc-client (DEFAULT)'
+    echo '2) boinc-client-nvidia-cuda (NVIDIA CUDA support)'
+    echo '3) boinc-client-opencl (AMD/ATI OpenCL support)'
+    echo
+    read -rp 'Selection Number: ' boinc_client
     if [[ $boinc_client -eq 1 ]]; then
       packages='boinc-client'
     elif [[ $boinc_client -eq 2 ]]; then
@@ -244,24 +244,24 @@ native_install() {
       ${UPDATE_PKG_CACHE}
     fi
     packages='boinc-client'
-    echo -e '\nThe following will allow you to install BOINC local management utilities:'
-    read -rp 'Do you intend to manage projects from this local machine from a GUI or TUI interface? [y/n] ' local_mgmt
-    echo
-    if [[ ($local_mgmt = 'y') || ($local_mgmt = 'yes') ]]; then
-      if [[ ($DISTRO_NAME != "fedora") && ($DISTRO_NAME != "centos") ]]; then
-        echo -e 'Please select your preferred BOINC Manager:\n'
-        echo '1) boinc-manager - GUI interface to control and monitor the BOINC core client'
-        echo '2) boinctui - Fullscreen terminal user interface (TUI) for BOINC core client'
-        echo '3) BOTH'
-        echo
-        read -rp 'Selection Number: ' boinc_manager
-        if [[ $boinc_manager -eq 1 ]]; then
-          packages="${packages} boinc-manager"
-        elif [[ $boinc_manager -eq 2 ]]; then
-          packages="${packages} boinctui"
-        elif [[ $boinc_manager -eq 3 ]]; then
-          packages="${packages} boinc-manager boinctui"
-        fi
+  fi
+  echo -e '\nThe following will allow you to install BOINC local management utilities:'
+  read -rp 'Do you intend to manage projects from this local machine from a GUI or TUI interface? [y/n] ' local_mgmt
+  echo
+  if [[ ($local_mgmt = 'y') || ($local_mgmt = 'yes') ]]; then
+    if [[ ($DISTRO_NAME != "fedora") && ($DISTRO_NAME != "centos") ]]; then
+      echo -e 'Please select your preferred BOINC Manager:\n'
+      echo '1) boinc-manager - GUI interface to control and monitor the BOINC core client'
+      echo '2) boinctui - Fullscreen terminal user interface (TUI) for BOINC core client'
+      echo '3) BOTH'
+      echo
+      read -rp 'Selection Number: ' boinc_manager
+      if [[ $boinc_manager -eq 1 ]]; then
+        packages="${packages} boinc-manager"
+      elif [[ $boinc_manager -eq 2 ]]; then
+        packages="${packages} boinctui"
+      elif [[ $boinc_manager -eq 3 ]]; then
+        packages="${packages} boinc-manager boinctui"
       else
         packages="${packages} boinc-manager"
       fi
