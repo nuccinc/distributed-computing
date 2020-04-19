@@ -92,11 +92,14 @@ docker_install() {
     read -rp "Would you like to install it now? [y/n] " ans
     if [[ $ans = "y" ]]; then
       if [[ -n $(uname -a | grep -iE '(linux)|(darwin)') ]]; then
-        if ! command -v 'curl' &> /dev/null; then
-          echo -e '\nPlease install curl and run this script again.\n'
+        if ! command -v 'curl' &>/dev/null && ! command -v 'wget' &>/dev/null; then
+          echo -e '\nPlease install curl or wget and run this script again.\n'
           exit
+        elif ! command -v 'curl' &>/dev/null; then
+          wget --no-check-certificate -O - 'https://raw.githubusercontent.com/phx/dockerinstall/master/install_docker.sh' 2>/dev/null | bash
+        else
+          curl -fskSL 'https://raw.githubusercontent.com/phx/dockerinstall/master/install_docker.sh' | bash
         fi
-        curl -fsSL 'https://raw.githubusercontent.com/phx/dockerinstall/master/install_docker.sh' | bash
       else
         echo -e "\nYour operating system is not currently supported by the Docker auto-installer."
         echo -e "Please download and install Docker before proceeding."
