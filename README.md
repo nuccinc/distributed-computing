@@ -585,7 +585,6 @@ For other distributions, refer to the [Manual Installation](#manual-installation
 - Updated instructions for automated native Windows install for less tech-savvy people:
   - Right-Click > Run as Administrator will execute native installation as opposed to Docker installation, same as if run without arguments.
   - `quickstart.bat` now requires the `--docker` argument for Windows Docker installations.
-- Docker installation for Kali appears to be broken. Only run `quickstart.sh --docker` on Kali if you already have Docker installed.
 - Automated native installation for Arch will come last (sorry, but you guys should already know what you're doing)
 - Will eventually additional parameters to `quickstart.bat` in the future to specify custom project URL and weak key for both native and Docker-based installations.
 
