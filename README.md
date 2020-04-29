@@ -6,7 +6,7 @@
 
 # NUCC Distributed Computing to Aid in COVID-19 Research
 
-**Latest Update: April 19, 2020**
+**Latest Update: April 29, 2020**
 
 Join [The National Upcycled Computing Collective (NUCC)](https://www.nuccinc.org/) in a collaborative effort to combine our resources in order to aid in COVID-19 research.
 This project draws heavily from [BOINC's default Docker configurations](https://github.com/BOINC/boinc-client-docker).
@@ -577,6 +577,7 @@ For other distributions, refer to the [Manual Installation](#manual-installation
 
 ## Updates
 
+- BSD documentation is currently down due to AWS account issues -- should be back up shortly.
 - Fixed logic causing Linux native installations to fail.
 - Fixed auto-installation for Docker on Kali Linux.
 - Added better instructions for connecting to additional projects.
@@ -585,6 +586,8 @@ For other distributions, refer to the [Manual Installation](#manual-installation
 - Updated instructions for automated native Windows install for less tech-savvy people:
   - Right-Click > Run as Administrator will execute native installation as opposed to Docker installation, same as if run without arguments.
   - `quickstart.bat` now requires the `--docker` argument for Windows Docker installations.
+
+## To-Do:
 - Automated native installation for Arch will come last (sorry, but you guys should already know what you're doing)
 - Will eventually additional parameters to `quickstart.bat` in the future to specify custom project URL and weak key for both native and Docker-based installations.
 
