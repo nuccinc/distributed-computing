@@ -6,7 +6,7 @@
 
 # NUCC Distributed Computing to Aid in COVID-19 Research
 
-**Latest Update: April 29, 2020**
+**Latest Update: April 30, 2020**
 
 Join [The National Upcycled Computing Collective (NUCC)](https://www.nuccinc.org/) in a collaborative effort to combine our resources in order to aid in COVID-19 research.
 This project draws heavily from [BOINC's default Docker configurations](https://github.com/BOINC/boinc-client-docker).
@@ -577,7 +577,7 @@ For other distributions, refer to the [Manual Installation](#manual-installation
 
 ## Updates
 
-- BSD documentation is currently down due to AWS account issues -- should be back up shortly.
+- BSD documentation is back online.
 - Fixed logic causing Linux native installations to fail.
 - Fixed auto-installation for Docker on Kali Linux.
 - Added better instructions for connecting to additional projects.
