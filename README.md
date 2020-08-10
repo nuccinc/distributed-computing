@@ -578,7 +578,8 @@ For other distributions, refer to the [Manual Installation](#manual-installation
 ## Updates
 
 - Migrated from [https://github.com/phx/nucc](https://github.com/phx/nucc) to official NUCC account
-  -  Please submit an issue if you have any problems after the repository migrations
+  - All code written and resently migrated to official NUCC repository by [phoenix](https://github.com/phx). 
+  - Please submit an issue if you have any problems after the repository migrations
 - BSD documentation is back online.
 - Fixed logic causing Linux native installations to fail.
 - Fixed auto-installation for Docker on Kali Linux.
