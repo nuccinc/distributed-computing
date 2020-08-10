@@ -6,7 +6,7 @@
 
 # NUCC Distributed Computing to Aid in COVID-19 Research
 
-**Latest Update: April 30, 2020**
+**Latest Update: August 10, 2020**
 
 Join [The National Upcycled Computing Collective (NUCC)](https://www.nuccinc.org/) in a collaborative effort to combine our resources in order to aid in COVID-19 research.
 This project draws heavily from [BOINC's default Docker configurations](https://github.com/BOINC/boinc-client-docker).
@@ -23,7 +23,7 @@ Copy/paste the following one-liner to get started immediately on MacOS or Linux:
 
 ### The fastest and easiest way to contribute on MacOS if you already have Homebrew installed:
 
-`brew tap phx/nucc && brew install nucc`
+`brew tap nuccinc/nucc && brew install nucc`
 
 ### The fastest and easiest way to contribute if you already have BOINC installed natively:
 - Windows:
@@ -68,7 +68,7 @@ Example: `boinccmd --passwd <yourpassword> --project_attach http://boinc.bakerla
   - Kali
 
 ```
-git clone https://github.com/phx/nucc
+git clone https://github.com/nuccinc/distributed-computing
 cd nucc
 ./quickstart.sh
 ```
@@ -92,7 +92,7 @@ You can run a custom image by running `IMG=boinc/client[tag-name] ./quickstart.s
 - Kali 2018
 
 ```
-git clone http://github.com/phx/nucc
+git clone http://github.com/nuccinc/distributed-computing
 cd nucc
 ./quickstart.sh --docker
 ```
@@ -134,7 +134,7 @@ If you disable the firewall completely, the `boinc` container should spin up imm
 Alternatively, if you have `git` installed, launch an elevated (Administrator) command promt and run the following:
 
 ```
-git clone https://github.com/phx/nucc
+git clone https://github.com/nuccinc/distributed-computing
 cd nucc
 quickstart.bat
 ```
@@ -152,7 +152,7 @@ Download the zip file of the repository, unzip it, and run `quickstart.bat --doc
 Alternatively, if you have `git` installed, launch an elevated (Administrator) command promt and run the following:
 
 ```
-git clone https://github.com/phx/nucc
+git clone https://github.com/nuccinc/distributed-computing
 cd nucc
 quickstart.bat --docker
 ```
@@ -577,6 +577,8 @@ For other distributions, refer to the [Manual Installation](#manual-installation
 
 ## Updates
 
+- Migrated from [https://github.com/phx/nucc](https://github.com/phx/nucc) to official NUCC account
+  -  Please submit an issue if you have any problems after the repository migrations
 - BSD documentation is back online.
 - Fixed logic causing Linux native installations to fail.
 - Fixed auto-installation for Docker on Kali Linux.

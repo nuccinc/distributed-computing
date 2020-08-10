@@ -219,7 +219,7 @@ native_install() {
   pkg_manager_config
   ${UPDATE_PKG_CACHE}
   if [[ $DISTRO_NAME = "macos" ]]; then
-    brew tap phx/nucc
+    brew tap nuccinc/distributed-computing
     export HOMEBREW_BOINC_GUI_RPC_PASSWORD="$BOINC_GUI_RPC_PASSWORD"
     export HOMEBREW_PROJECT_URL="$PROJECT_URL"
     export HOMEBREW_WEAK_KEY="$WEAK_KEY"
